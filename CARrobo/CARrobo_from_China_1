@@ -1,5 +1,6 @@
+#include <Arduino.h>
 // For robocar from China
-// V 1.0
+// V 1.0 for biatlon clockwise
 const int ENA = 3;
 const int in1 = 5;
 const int in2 = 6;
@@ -27,8 +28,8 @@ void loop()
   int SL = digitalRead(SensorLeft);
   int SM = digitalRead(SensorMiddle);
   int SR = digitalRead(SensorRight);
-  int turn = 155; // скорость для поворота
-  int motion = 65; // скорость движения прямо   назад
+  int turn = 135; // скорость для поворота
+  int motion = 55; // скорость движения прямо   назад
   // код для диагностики
   Serial.print("Left: ");
   Serial.print(SL);
@@ -106,7 +107,7 @@ void loop()
     digitalWrite(in4, HIGH);
     delay(500);
   }
-  // Если все на чёрном - вправо!
+  // Если все на чёрном - чуть вправо и прямо!
   else if (SL == HIGH && SM == HIGH && SR == HIGH) 
   {
     analogWrite(ENA, turn); // Вправо!
@@ -116,16 +117,23 @@ void loop()
     digitalWrite(in3, LOW);
     digitalWrite(in4, HIGH);
     delay(300);
-  }
-  // Если все на белом - влево!
-  else
-  {
-    analogWrite(ENA, turn); // Влево!
-    digitalWrite(in1, LOW);
-    digitalWrite(in2, HIGH);
-    analogWrite(ENB, turn);
+    analogWrite(ENA, motion); // Прямо!
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2, LOW);
+    analogWrite(ENB, motion);
     digitalWrite(in3, HIGH);
     digitalWrite(in4, LOW);
+    delay(300);
+  }
+  // Если все на белом - вправо!
+  else
+  {
+    analogWrite(ENA, turn); // Вправо!
+    digitalWrite(in1, HIGH);
+    digitalWrite(in2,LOW);
+    analogWrite(ENB, turn);
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, HIGH);
     delay(300);
   }
 }
