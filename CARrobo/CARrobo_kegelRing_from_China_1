@@ -1,1 +1,86 @@
+// For robocar from China
+// V 1.0 for kegelring end sumo
+// #include <Arduino.h>
+#include <NewPing.h>
+const int ENA = 3;
+const int in1 = 5;
+const int in2 = 6;
+const int ENB = 9; 
+const int in3 = 7;
+const int in4 = 8;
+const int SensorLeft = 10;
+const int SensorMiddle= 11;
+const int SensorRight = 12;
+const int echo = 2;
+const int trig = 4;
+NewPing sonar (trig, echo, 400);
 
+void setup() 
+{
+    Serial.begin(9600);
+    pinMode(in1, OUTPUT);
+    pinMode(in2, OUTPUT);
+    pinMode(in3, OUTPUT);
+    pinMode(in4, OUTPUT);
+    pinMode(ENA, OUTPUT);
+    pinMode(ENB, OUTPUT);
+}
+
+void loop() 
+{
+    /*Serial.println(sonar.ping_cm()); // Отладка
+    delay(150);*/
+    int SM = digitalRead(SensorMiddle);
+    // Если расстояние до объекта < 20 см. и на SM 0
+    if (sonar.ping_cm() < 40 && SM == 0)
+    {
+        analogWrite(ENA, 155); // Вперёд!
+        digitalWrite(in1, HIGH);
+        digitalWrite(in2, LOW);
+        analogWrite(ENB, 155);
+        digitalWrite(in3, HIGH);
+        digitalWrite(in4, LOW);
+    }
+    else if (sonar.ping_cm() < 40 && SM == 1)
+    {
+        analogWrite(ENA, 155); // Назад!
+        digitalWrite(in1, LOW);
+        digitalWrite(in2, HIGH);
+        analogWrite(ENB, 155);
+        digitalWrite(in3, LOW);
+        digitalWrite(in4, HIGH);
+        delay(500);
+    }
+    else // Иначе ищем цель
+    {
+        analogWrite(ENA, 155);
+        digitalWrite(in1, LOW);
+        digitalWrite(in2, HIGH);
+        analogWrite(ENB, 155);
+        digitalWrite(in3, HIGH);
+        digitalWrite(in4, LOW);
+        delay(300);
+        analogWrite(ENA, 155);
+        digitalWrite(in1, LOW);
+        digitalWrite(in2, LOW);
+        analogWrite(ENB, 155);
+        digitalWrite(in3, LOW);
+        digitalWrite(in4, LOW);
+        delay(500);
+    }
+    // Ищем препятствие
+    /*analogWrite(ENA, 155);
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, HIGH);
+    analogWrite(ENB, 155);
+    digitalWrite(in3, HIGH);
+    digitalWrite(in4, LOW);
+    delay(300);
+    analogWrite(ENA, 155);
+    digitalWrite(in1, LOW);
+    digitalWrite(in2, LOW);
+    analogWrite(ENB, 155);
+    digitalWrite(in3, LOW);
+    digitalWrite(in4, LOW);
+    delay(300);*/
+}
