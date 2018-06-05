@@ -50,7 +50,7 @@ void loop()
         digitalWrite(in4, HIGH);
         delay(1000);
     }
-    else if (SM == 1) // Назад!
+    else if (SM == HIGH) // Назад!
     {
         digitalWrite(in1, LOW);
         digitalWrite(in2, HIGH);
