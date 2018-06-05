@@ -1,6 +1,5 @@
 // For robocar from China
 // V 1.0 for kegelring end sumo
-#include <Arduino.h>
 #include <NewPing.h>
 const int ENA = 3;
 const int in1 = 5;
