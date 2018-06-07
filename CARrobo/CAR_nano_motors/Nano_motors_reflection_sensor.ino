@@ -1,4 +1,4 @@
-// Reflection sensor test for Nano motors
+// Reflection sensor test for Nano motors board
 // V 1.0
 const int ENA = 10;
 const int in2 = 12;
