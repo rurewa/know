@@ -1,3 +1,5 @@
+// Test driver motors for Nano motors board
+// V 1.0
 const int ENA = 10;
 const int in2 = 12;
 const int ENB = 9;
