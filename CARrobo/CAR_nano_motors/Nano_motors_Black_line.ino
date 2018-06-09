@@ -16,8 +16,8 @@ void setup()
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
   // скорость моторов
-  analogWrite(ENA, 85);
-  analogWrite(ENB, 85);
+  analogWrite(ENA, 105);
+  analogWrite(ENB, 105);
 }
 
 void loop()
