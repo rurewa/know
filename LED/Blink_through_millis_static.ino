@@ -1,4 +1,5 @@
 // Blink_through_millis_static.ino
+// V 1.0
 
 void blink() 
 {
@@ -16,6 +17,7 @@ void setup()
   pinMode(9, OUTPUT);
 }
  
-void loop() { 
+void loop() 
+{ 
   blink();
 }
