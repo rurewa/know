@@ -1,4 +1,5 @@
-// Переменные unsigned long для расширенного хранения чисел
+// Мигаем светодиодом при помощи функции времени и оператора while
+// V 1.0
 unsigned long CurrentTime; 
 unsigned long HighTime;
 unsigned long LowTime;
