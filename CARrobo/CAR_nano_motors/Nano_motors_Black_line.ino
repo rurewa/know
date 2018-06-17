@@ -1,5 +1,6 @@
 // Black line movement for Nano motors board
 // V 1.0
+#include <Arduino.h>
 const int ENA = 10;
 const int MotorRight = 12;
 const int ENB = 9; 
@@ -16,24 +17,25 @@ void setup()
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
   // скорость моторов
-  analogWrite(ENA, 105);
-  analogWrite(ENB, 105);
+  analogWrite(ENA, 135);
+  analogWrite(ENB, 135);
 }
 
 void loop()
 {
-  int diy = 150; // чтобы не дёргался на одном месте 
+  int diy = 200; // чтобы не дёргался на одном месте 
   int SL = digitalRead(SensorLeft);
   int SM = digitalRead(SensorMiddle);
   int SR = digitalRead(SensorRight);
   // это для диагностики датчиков
   // ----------------------------------------------
-  Serial.print("Left: "); 
+  /*Serial.print("Left: "); 
   Serial.print(SL); 
   Serial.print(" Middle: "); 
   Serial.print(SM);
   Serial.print(" Right: ");
   Serial.println(SR);
+  delay(150);*/
   // -----------------------------------------------
   // Если M на чёрном, а L и R на белом - прямо!
   if (SL == LOW && SM == HIGH && SR == LOW) 
@@ -66,7 +68,7 @@ void loop()
     digitalWrite(MotorRight, LOW);
     digitalWrite(MotorLeft, HIGH);
   }
-  // Если все на чёрном - влево!
+  // Если все на чёрном -вперёд и влево!
   else if (SL == HIGH && SM == HIGH && SR == HIGH) 
   {
     digitalWrite(MotorRight, HIGH);
