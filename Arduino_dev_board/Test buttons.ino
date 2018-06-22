@@ -18,14 +18,20 @@ void setup()
 
 void loop() 
 {
-   val1 = analogRead(inPin8)> 700 ? 0 : 1;
-   val2 = analogRead(inPin9)> 700 ? 0 : 1;
+   val1 = analogRead(inPin8);
+   val2 = analogRead(inPin9);
+   Serial.print("AnalogOne: ");
+   Serial.print(val1, DEC);
+   Serial.print("  AnalogTwo: ");
+   Serial.print(val2, DEC);
+   val1 = analogRead(inPin8) > 700 ? LOW : HIGH;
+   val2 = analogRead(inPin9) > 700 ? LOW : HIGH;
    analogWrite(8, val1);
    analogWrite(9, val2);
-   Serial.print("Button ONE: ");
-   Serial.print(val1, DEC);
+   Serial.print("  Button ONE: ");
+   Serial.print(val1);
    Serial.print(" || ");
-   Serial.print("Button TWO: ");
-   Serial.println(val2, DEC);
+   Serial.print("  Button TWO: ");
+   Serial.println(val2);
    delay(150);
 }
