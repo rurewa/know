@@ -1,6 +1,6 @@
 // Arduino_dev_board v 1.0
 // V 1.0
-// Lesson buttons
+// Lesson buttons 1
 const int led1 = 8;
 const int led2 = 9;
 const int inPin8 = A7;
