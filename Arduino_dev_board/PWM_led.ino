@@ -5,7 +5,6 @@ const int led = 9;
 
 void setup() 
 {
-    Serial.begin(9600);
     pinMode(led, OUTPUT);
 }
 
