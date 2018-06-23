@@ -1,4 +1,6 @@
 // Arduino_dev_board v 1.0
+// V 1.0
+// Led wave
 
 void setup() 
 {
