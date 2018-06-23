@@ -25,21 +25,21 @@ void loop()
    val2 = analogRead(inPin2) > 700 ? HIGH : LOW;
    Serial.println(val1);
    if (val1 == HIGH)
-   {
+     {
        digitalWrite(led1, HIGH);
        delay(50);
-   }
+     }
    else
-   {
+     {
        digitalWrite(led1, LOW);
-   }
+     }
    if (val2 == HIGH)
-   {
+     {
        digitalWrite(led2, HIGH);
        delay(50);
-   }
+     }
    else
-   {
+     {
        digitalWrite(led2, LOW);
-   }
+     }
 }
