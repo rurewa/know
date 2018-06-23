@@ -10,7 +10,6 @@ int val2;
 
 void setup() 
 {
-    Serial.begin(9600);
     pinMode(led1, OUTPUT);
     pinMode(led2, OUTPUT);
     pinMode(inPin1, INPUT);
