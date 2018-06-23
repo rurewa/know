@@ -1,3 +1,5 @@
+// Bluetooth Robocar for Chine 1
+// V 1.0
 int MotorRight1=5;
 int MotorRight2=6; 
 int MotorLeft1=10; 
