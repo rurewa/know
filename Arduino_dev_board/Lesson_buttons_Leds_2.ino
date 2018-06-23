@@ -23,12 +23,12 @@ void loop()
 {
    val1 = analogRead(inPin8) > 700 ? LOW : HIGH;
    val2 = analogRead(inPin9) > 700 ? LOW : HIGH;
-   if(digitalRead(val1)==HIGH) //если кнопка нажата ... 
+   if(digitalRead(val1) == HIGH) //если кнопка нажата ... 
     {     
         digitalWrite(led1,!analogRead(val1));  //включаем светодиод (возможент эффект залипания кнопки)
         delay(100); // небольная защита от дребезга кнопки 
     } 
-   if(digitalRead(val2)==HIGH) //если кнопка нажата ... 
+   if(digitalRead(val2) == HIGH) //если кнопка нажата ... 
     {     
         digitalWrite(led2,!analogRead(val2));  //включаем светодиод (возможент эффект залипания кнопки)
         delay(100); // небольная защита от дребезга кнопки 
