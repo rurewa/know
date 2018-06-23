@@ -1,3 +1,5 @@
+// Button 4 two motors 1
+// V 1.0
 // Пины драйвера моторов
 const int in1 = 16;
 const int in2 = 17;
