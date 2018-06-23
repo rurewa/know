@@ -1,4 +1,5 @@
-// Переменные unsigned long для расширенного хранения чисел
+// Управление светодиодом при помощи функции времени
+// V 1.0
 unsigned long per1; 
 unsigned long per2;
 unsigned long per3;
