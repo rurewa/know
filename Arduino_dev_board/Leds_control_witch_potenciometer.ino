@@ -1,4 +1,3 @@
-#include <Arduino.h>
 // Arduino_dev_board v 1.0
 // Leds control witch potenciometer
 // V 1.0
