@@ -1,7 +1,6 @@
 // Arduino_dev_board v 1.0
 // Massive whitch PWM fade brightness
 // V 1.0
-int timer = 100;
 // Массив с номерами пинов (8 и 12 без ШИМ!)
 int ledPins[] = {8, 9, 10, 11, 12};
 int pinCount = 5; // Длина массива
