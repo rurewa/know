@@ -8,7 +8,7 @@ int pinCount = 5; // Длина массива
 
 void setup() 
 {
-    // Элементы массива нумеруются от 0 до 5 или (pinCount -1)
+    // Элементы массива нумеруются от 0 до 4 или (pinCount -1)
     for (int thisPin = 0; thisPin < pinCount; thisPin++)
     {
         // Используем оператор for для определения
