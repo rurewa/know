@@ -6,13 +6,13 @@ int xValue, yValue;
  
 void setup() 
 {
+  Serial.begin(9600); 
   pinMode(enA, OUTPUT);
   pinMode(enB, OUTPUT);
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
-  Serial.begin(9600);
 }
  
 void loop() 
