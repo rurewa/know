@@ -1,38 +1,22 @@
-// Программа управления сервоприводом
-// при помощи джойстика
+// Joystick & servo
+// V 1.0
 
 #include <Servo.h>  // Подключаем библиотеку
 Servo myservo;  // Создаём объект сервопривода
-const int led = 13; // Назначаем для светодиода D13
-const int SWz = 2;  // Назначаем для кнокпи джойстика D2
-const int VRx = 1;  // Назначаем для VRx A1
-int data = 0; // Переменная для хранения значений джойстика
-int button = 0; // Переменная для хранения значений кнопки
-
-void setup()
+int valY;
+ 
+void setup() 
 {
-  myservo.attach(9);  // Сервопривод на D9
-  pinMode(led, OUTPUT); //
-  // Кнопка как Вход с подключением внутреннего 
-  // подтягивающего регистора
-  pinMode(SWz, INPUT_PULLUP); 
+  Serial.begin(9600);
+  myservo.attach(5); // Сервопривод на D5
 }
+
 void loop()
 {
-  // Считываем в переменную значения
-  data = analogRead(VRx);
-  // Преобразуем значение в нужный диапазон
-  data = map (data, 0, 1023, 0, 179);
-  // Управляем валом сервопривода
-  myservo.write(data); 
-  // Считываем значение с кнопки джойстика
-  button = digitalRead(SWz);
-  if (button == !LOW) // Если не нажата
-  {
-    digitalWrite(led, LOW); // Светодиод выключен
-  }
-  else  // Иначе
-  {
-    digitalWrite(led, HIGH);  // Светодиод включен
-  }
+  valY = map (analogRead(A1), 0, 1024, 0, 179);
+  Serial.print("valY: ");
+  Serial.println(valY, DEC);
+  Serial.print("\t");
+  delay(70);
+  myservo.write(valY);
 }
