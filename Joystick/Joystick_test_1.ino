@@ -24,7 +24,7 @@ void loop()
   Serial.print(valueY);
   // Считываем в переменную значения с пин 2
   int buttonZ = digitalRead(2);
-  buttonZ = buttonZ ^ 1;
+  buttonZ = !buttonZ;
   // Посылаем сообщение в монитор порта
   Serial.print(" | SW: ");
   Serial.println(buttonZ);
