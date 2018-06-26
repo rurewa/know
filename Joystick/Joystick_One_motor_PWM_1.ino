@@ -1,4 +1,3 @@
-#include <Arduino.h>
 // Joystick one motor PWM 1
 // V 1.0
 int ENA = 3, in1 = 4, in2 = 6;
