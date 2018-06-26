@@ -1,4 +1,3 @@
-#include <Arduino.h>
 /* Подключение модуля: 
  *  8pin - DIO(data) 
  *  9pin - CLK(clock)
