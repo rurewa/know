@@ -1,10 +1,8 @@
-#include <Arduino.h>
 // 16X2 1602A LCD Display with I2C 
 // with sonar, pot and servo
 // v 1.0
 // UNO: SDA - A4, SCL - A5
 // MEGA: SDA - pin20, SCL - pin21
-#include <Arduino.h>
 #include <NewPing.h> // Библиотека для HC-SR04
 #include <Servo.h> // Библиотека для серво
 #include <Wire.h> // Библиотека для устройств I2C
