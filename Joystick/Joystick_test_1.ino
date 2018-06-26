@@ -1,4 +1,3 @@
-#include <Arduino.h>
 // Joystick test
 // V 1.0
 
