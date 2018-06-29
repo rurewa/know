@@ -1,12 +1,11 @@
 // Arduino_dev_board v 1.0
 // Motor PWM
 // V 1.0
-// константы
 
 void setup() 
 {
   Serial.begin(9600);
-  pinMode(3, OUTPUT);
+  pinMode(3, OUTPUT); // Motor
 }
 
 void loop() 
