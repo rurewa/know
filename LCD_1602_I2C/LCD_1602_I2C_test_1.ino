@@ -12,7 +12,7 @@ void setup()
   lcd.init();                     
   lcd.backlight();// Включаем подсветку дисплея
   lcd.setCursor(2, 0); // 2-я ячейка, 0-я строка
-  lcd.print("Hello Word!");
+  lcd.print("Hello World!");
   lcd.setCursor(8, 1); // 8-я ячейка, 2-я строка
   lcd.print("LCD 1602");
 }
