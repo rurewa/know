@@ -1,5 +1,5 @@
 // Arduino_dev_board v 1.0
-// Massive revers wave leds 1
+// Massive buttons revers wave leds 1
 // V 1.0
 int ledPins[] = {8, 9, 10, 11, 12};
 int pinCount = 5; // Длина массива
