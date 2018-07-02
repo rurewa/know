@@ -1,5 +1,5 @@
 // Arduino_dev_board v 1.0
-// Revers wave leds 1
+// Revers wave buttons leds 1
 // V 1.0
 const int inPin1 = 7;
 const int inPin2 = 6;
