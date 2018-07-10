@@ -28,7 +28,7 @@ void loop()
         case HIGH:
         // код выполняется если  val1 = HIGH
         digitalWrite(led1, HIGH);
-        Serial.println("val1 ON");
+        Serial.println("led1 ON");
     break;    
     }
     switch (val2)
@@ -36,7 +36,7 @@ void loop()
         case HIGH:
         // код выполняется если  val2 = HIGH
         digitalWrite(led2, HIGH);
-        Serial.println("val2 ON");
+        Serial.println("led2 ON");
     break; 
     }
 }
