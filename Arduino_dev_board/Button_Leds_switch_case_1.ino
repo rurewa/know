@@ -1,3 +1,5 @@
+#include <Arduino.h>
+
 // Arduino_dev_board v 1.0
 // V 1.0
 // Lesson buttons 1 witch switch case
@@ -26,17 +28,28 @@ void loop()
    switch (val1)
     {
         case HIGH:
-        // код выполняется если  val1 = HIGH
-        digitalWrite(led1, HIGH);
-        Serial.println("led1 ON");
-    break;    
+            // код выполняется если  val1 = HIGH
+            digitalWrite(led1, HIGH);
+            Serial.println("led1 ON");
+            break;    
+        case LOW:
+            // код выполняется если  val1 = HIGH
+            digitalWrite(led1, LOW);
+            Serial.println("led1 OFF");
+            break;    
     }
+
     switch (val2)
     {
         case HIGH:
-        // код выполняется если  val2 = HIGH
-        digitalWrite(led2, HIGH);
-        Serial.println("led2 ON");
-    break; 
+            // код выполняется если  val2 = HIGH
+            digitalWrite(led2, HIGH);
+            Serial.println("led2 ON");
+            break; 
+        case LOW:
+            // код выполняется если  val2 = HIGH
+            digitalWrite(led2, LOW);
+            Serial.println("led2 OFF");
+            break; 
     }
 }
