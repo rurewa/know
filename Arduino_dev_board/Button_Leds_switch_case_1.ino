@@ -33,7 +33,7 @@ void loop()
             Serial.println("led1 ON");
             break;    
         case LOW:
-            // код выполняется если  val1 = HIGH
+            // код выполняется если  val1 = LOW
             digitalWrite(led1, LOW);
             Serial.println("led1 OFF");
             break;    
@@ -47,7 +47,7 @@ void loop()
             Serial.println("led2 ON");
             break; 
         case LOW:
-            // код выполняется если  val2 = HIGH
+            // код выполняется если  val2 = LOW
             digitalWrite(led2, LOW);
             Serial.println("led2 OFF");
             break; 
