@@ -1,4 +1,4 @@
-<span class="pre">LilyPadUSB</span></code></td>
+</td>
 <td><a class="reference external" href="http://arduino.cc/en/Main/ArduinoBoardLilyPadUSB?utm_source=platformio&amp;utm_medium=docs">Arduino LilyPad USB</a></td>
 <td>No</td>
 <td>ATMEGA32U4</td>
