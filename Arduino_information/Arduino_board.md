@@ -1,4 +1,5 @@
-</td>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">LilyPadUSB</span></code></td>
 <td><a class="reference external" href="http://arduino.cc/en/Main/ArduinoBoardLilyPadUSB?utm_source=platformio&amp;utm_medium=docs">Arduino LilyPad USB</a></td>
 <td>No</td>
 <td>ATMEGA32U4</td>
@@ -261,3 +262,5 @@
 <td>16MHz</td>
 <td>28KB</td>
 <td>2.50KB</td>
+</tr>
+</tbody>
