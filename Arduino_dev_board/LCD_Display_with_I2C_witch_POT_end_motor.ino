@@ -16,7 +16,7 @@ void setup()
   Serial.begin(9600);
   lcd.init(); // Инициализация LCD
   lcd.backlight();// Включаем подсветку дисплея
-  lcd.begin(16, 2);  // Задаем размерность экрана*/
+  lcd.begin(16, 2);  // Задаем размерность экрана
   pinMode(motor, OUTPUT); // Motor
 }
 void loop()
