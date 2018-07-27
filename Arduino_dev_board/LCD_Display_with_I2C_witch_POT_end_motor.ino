@@ -17,7 +17,7 @@ void setup()
   lcd.init(); // Инициализация LCD
   lcd.backlight();// Включаем подсветку дисплея
   lcd.begin(16, 2);  // Задаем размерность экрана*/
-  pinMode(3, OUTPUT); // Motor
+  pinMode(motor, OUTPUT); // Motor
 }
 void loop()
 {
