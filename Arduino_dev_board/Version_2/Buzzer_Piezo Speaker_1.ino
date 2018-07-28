@@ -15,7 +15,7 @@ void threeDots()
     tone(buzzer, note, 100);
     delay(200);
     // Завершение генерации сигнала и выключение светодиода
-    noTone(led);
+    noTone(buzzer);
   }
   delay(300); //
 }
@@ -31,7 +31,7 @@ void threeDashes()
     tone(buzzer, note, 300);
     delay(500);
     // Завершение генерации сигнала и выключение светодиода
-    noTone(led);
+    noTone(buzzer);
   }
   delay(300); //
 }
