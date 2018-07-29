@@ -1,7 +1,5 @@
 #include "LedControl.h"
-// Led matrix MAX7219
-// V 1.0
-LedControl lc=LedControl(12,11,10,1);
+LedControl lc=LedControl(5,6,7,1);
 // pin 12 DIN
 // pin 11 CLK
 // pin 10 CS
@@ -16,15 +14,15 @@ void setup()
 }
 void loop()
 {
-  for (int row=0; row<8; row++)
+  for (int row=0; row<8; row++) // Приращение в рядах
   {
-    for (int col=0; col<8; col++)
+    for (int col=0; col<8; col++) // Приращение в колонках
     {
       lc.setLed(0,col,row,true); // Включает светодиоды в колонке, строке
       delay(25);
     }
   }
-
+// В обратную сторону
   for (int row=0; row<8; row++)
   {
     for (int col=0; col<8; col++)
