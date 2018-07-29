@@ -3,7 +3,6 @@
 // UNO: SDA - A4, SCL - A5
 // MEGA: SDA - pin20, SCL - pin21
 #include <Arduino.h>
-#include <Wire.h>
 #include <LiquidCrystal_I2C.h> // Библиотека для работы с I2C экраном
 #include <NewPing.h>
 LiquidCrystal_I2C lcd(0x27,16,2);  // Устанавливаем дисплей
@@ -28,5 +27,5 @@ void loop()
   lcd.print("Distantion:"); // Тест на 1-й строке экрана
   lcd.setCursor(7, 1); // курсор на 7-й символ 2-й строки
   lcd.print(sonar.ping_cm()); // Значения на 2-й строке экрана
-  delay(30);
+  delay(40);
 }
