@@ -1,4 +1,3 @@
-#include <Arduino.h>
 // Controlling RGB LEDs using arrays for Arduino dev board 2.0
 // V1.0
 
