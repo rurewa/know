@@ -93,7 +93,7 @@ void loop()
   {
     ledMode++; // Приращиваем к переменной статуса светодтиода
   }
-  lastButton = currentButton;
+  lastButton = currentButton; // Обновление предыдущего состояния кнопки
   if (ledMode == 8)
   {
   ledMode = 0; //
