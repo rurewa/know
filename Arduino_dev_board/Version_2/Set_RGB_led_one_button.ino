@@ -16,15 +16,15 @@ void setup()
 }
 
 boolean debounce (boolean last)
+{
+  boolean current = digitalRead(button); // Считываем состояние кнопки
+  if (last != current) // Если изменилось
   {
-    boolean current = digitalRead(button);
-    if (last != current)
-    {
-      delay(5);
-      current = digitalRead(button);
-      return current;
-    }
+    delay(5); // Немного ждём
+    current = digitalRead(button); // Снова считываем состояние кнопки
   }
+  return current; // Возвращаем состояние кнопки
+}
 
 void setMode(int mode)
 {
@@ -89,14 +89,14 @@ void setMode(int mode)
 void loop()
 {
   currentButton = debounce(lastButton); // Чтение состояние кнопки
-  if (lastButton == LOW && currentButton == HIGH)
+  if (lastButton == LOW && currentButton == HIGH) // Если кнопка нажата
   {
-    ledMode++; // Приращение к переменной статуса светодтиода
+    ledMode++; // Приращиваем к переменной статуса светодтиода
   }
   lastButton = currentButton;
   if (ledMode == 8)
   {
-  ledMode = 0;
+  ledMode = 0; //
   }
-  setMode (ledMode);
+  setMode (ledMode); // Изменяем режим светодиода
 }
