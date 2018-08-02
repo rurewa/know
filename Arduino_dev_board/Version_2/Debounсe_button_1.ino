@@ -5,7 +5,6 @@
 
   http://www.arduino.cc/en/Tutorial/Debounce
 */
-
 const int buttonPin = 13;
 const int ledPin = 8;
 // Переменные состояния светодиода и кнопки
