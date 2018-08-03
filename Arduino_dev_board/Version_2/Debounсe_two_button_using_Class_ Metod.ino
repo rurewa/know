@@ -13,7 +13,7 @@ class Button // Класс, содержащий переменные состо
     boolean buttonState2;      // Текущее состояние кнопки 2
     boolean buttonPrevState1;  // Предыдущее состояние кнопки 1
     boolean buttonPrevState2;  // Предыдущее состояние кнопки 1
-    boolean ledState; // Состояние светодиод (вкл/выкл)
+    boolean ledState; // Состояние светодиода (вкл/выкл)
   void checkState(); // Метод проверки состояния кнопки
 };
 
