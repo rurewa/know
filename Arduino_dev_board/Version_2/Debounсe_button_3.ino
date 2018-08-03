@@ -4,7 +4,7 @@
 const int led = 8;
 const int inPin = 13;
 
-class Button // Класс
+class Button // Класс, содержащий переменные состояний кнопки и метод обработки их обработки
 {
   public:
     boolean buttonState;      // Текущее состояние кнопки
@@ -34,5 +34,5 @@ void setup()
 
 void loop()
 {
-  button1.scanState();
+  button1.scanState(); // Для объекта button1 циклично работает метод scanState()
 }
