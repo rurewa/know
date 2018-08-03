@@ -6,26 +6,27 @@ const int inPin = 13;
 
 class Button // Класс, содержащий переменные состояний кнопки и метод обработки их обработки
 {
-  public:
+  public: // Модификатор. Доступ открыт всем, кто видит определение данного класса
     boolean buttonState;      // Текущее состояние кнопки
     boolean buttonPrevState;  // Предыдущее состояние кнопки
-    boolean ledState;
+    boolean ledState; // Состояние светодиод (вкл/выкл)
     void scanState(); // Метод проверки состояния кнопки
 };
 
 void Button::scanState() // Метод, содержащийся в классе Button
 {
   buttonState = digitalRead(inPin); // Записываем состояние кнопки в переменную buttonState
-  if (buttonPrevState == HIGH && buttonState == LOW)
+  if (buttonPrevState == LOW && buttonState == HIGH)
   {
     // Предыдущее состояние кнопки - отжата, а текущее - нажата
+    delay(20); // Небольшая задержка
     ledState = !ledState;        // Инвертируем состояние светодиода
     digitalWrite(led, ledState); // Управляем светодиодом
   }
   buttonPrevState = buttonState; // Присваиваем предыдущему состоянию кнопки текущее
 }
 
-Button button1; // Объект кнопки
+Button button; // Объект кнопки
 
 void setup()
 {
@@ -34,5 +35,5 @@ void setup()
 
 void loop()
 {
-  button1.scanState(); // Для объекта button1 циклично работает метод scanState()
+  button.scanState(); // Для объекта button1 циклично работает метод scanState()
 }
