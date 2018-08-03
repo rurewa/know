@@ -1,29 +1,29 @@
-// Debounсe button 2 using Class & Metod for Arduino dev board 2.0
+// Debounсe button using Class & Metod for Arduino dev board 2.0
 // V 1.0
 
 const int led = 8;
 const int inPin = 13;
 
-class Button // Класс, содержащий переменные состояний кнопки и метод обработки их обработки
+class Button // Класс, содержащий переменные состояний кнопки и метод их обработки
 {
   public: // Модификатор. Доступ открыт всем, кто видит определение данного класса
     boolean buttonState;      // Текущее состояние кнопки
     boolean buttonPrevState;  // Предыдущее состояние кнопки
-    boolean ledState; // Состояние светодиод (вкл/выкл)
-    void scanState(); // Метод проверки состояния кнопки
+    boolean ledState; // Состояние светодиода (вкл/выкл)
+    void checkState(); // Метод, содержащий функцию проверки состояния кнопки
 };
 
-void Button::scanState() // Метод, содержащийся в классе Button
+void Button::checkState() // Метод, содержащийся в классе Button
 {
   buttonState = digitalRead(inPin); // Записываем состояние кнопки в переменную buttonState
   if (buttonPrevState == LOW && buttonState == HIGH)
   {
-    // Предыдущее состояние кнопки - отжата, а текущее - нажата
+    // Если предыдущее состояние кнопки - отжата, а текущее - нажата
     delay(20); // Небольшая задержка для стабилизирования сигнала
     ledState = !ledState;        // Инвертируем состояние светодиода
     digitalWrite(led, ledState); // Управляем светодиодом
   }
-  buttonPrevState = buttonState; // Присваиваем предыдущему состоянию кнопки текущее
+  buttonPrevState = buttonState; // Изменяем предыдущее состояние кнопки для повторения цикла
 }
 
 Button button; // Объект кнопки
@@ -35,5 +35,5 @@ void setup()
 
 void loop()
 {
-  button.scanState(); // Для объекта button1 циклично работает метод scanState()
+  button.checkState(); // Для объекта button циклично работает метод checkState()
 }
