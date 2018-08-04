@@ -1,4 +1,3 @@
-#include <Arduino.h>
 #include <Button.h>
 // Debounse button
 // V 1.0
