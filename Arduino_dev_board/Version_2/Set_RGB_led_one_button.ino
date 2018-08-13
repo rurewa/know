@@ -91,7 +91,7 @@ void loop()
   currentButton = debounce(lastButton); // Чтение состояние кнопки
   if (lastButton == LOW && currentButton == HIGH) // Если кнопка нажата
   {
-    ledMode++; // Приращиваем к переменной статуса светодтиода
+    ledMode++; // Приращиваем к переменной статуса светодиода
   }
   lastButton = currentButton; // Обновление предыдущего состояния кнопки
   if (ledMode == 8)
