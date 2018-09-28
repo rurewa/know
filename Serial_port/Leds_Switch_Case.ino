@@ -35,6 +35,13 @@ void loop()
           delay(50);
         }
         break;
+        default: // Значение по-умолчанию
+        static int val = 0;
+        while (val < 1)
+        {
+          ++val;
+          Serial.println("Enter to number: ");
+        }  
     }    
   }  
 }
