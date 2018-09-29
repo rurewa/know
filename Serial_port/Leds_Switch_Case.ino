@@ -12,6 +12,8 @@ void setup()
 
 void loop() 
 {
+  static bool msg_shown = false;
+
   if (Serial.available() > 0) // Если в монитор порта поступило значение больше, чем 0
   {
     int data = Serial.read(); // Объявляем переменную data и записываем в неё значение, введённое в монитор порта
@@ -36,11 +38,10 @@ void loop()
         }
         break;
         default: // Значение по-умолчанию
-        static int val = 0;
-        while (val < 1)
+        while (!msg_shown)
         {
-          ++val;
-          Serial.println("Enter to number: ");
+          msg_shown = true;
+          Serial.println("Press '1' / '2'");
         }  
     }    
   }  
