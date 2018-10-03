@@ -37,7 +37,7 @@ void loop()
           delay(50);
         }
         break;
-        default: // Значение по-умолчанию
+        default: // Значение по умолчанию
         while (!msg_shown)
         {
           msg_shown = true;
