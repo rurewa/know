@@ -34,7 +34,7 @@ void Motor3_X()
     }
 }
 
-void Motor4_X()
+void Motor4_Y()
 {
   valueY = map (analogRead(A1), 0, 1023, -127, 127);
 
@@ -66,5 +66,5 @@ void setup()
 void loop() 
 {  
   Motor3_X();
-  Motor4_X();  
+  Motor4_Y();  
 }
