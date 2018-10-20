@@ -2,6 +2,9 @@
 #include <AFMotor.h> // Фирменная библиотека Adafruit Motor Shield
 // https://github.com/adafruit/Adafruit-Motor-Shield-library
 
+// Для экскаватора
+// V 1.0
+
 int8_t valueX = 0, valueY= 0; // Два джойстика
 
 AF_DCMotor Motor3(3); // Объект мотора 3
