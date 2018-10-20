@@ -57,11 +57,11 @@ void Motor4_Y()
 }
 
 void setup()
-   {
+{
         // Останавливаем моторы 3 и 4
-        Motor3.run(RELEASE);
-        Motor4.run(RELEASE);
-   }
+  Motor3.run(RELEASE);
+  Motor4.run(RELEASE);
+}
 
 void loop() 
 {  
