@@ -5,40 +5,55 @@
 // Для экскаватора
 // V 1.1
 
-int8_t valueX = 0, valueY= 0; // Два джойстика
+int8_t valueX = 0, valueY= 0, value2X = 0; // Два джойстика
 
-AF_DCMotor Motor3(3); // Объект мотора 3
-AF_DCMotor Motor4(4); // Объект мотора 4
+AF_DCMotor Motor2(2); // Объект мотора 2 из библиотеки
+AF_DCMotor Motor3(3); // Объект мотора 3 из библиотеки
+AF_DCMotor Motor4(4); // Объект мотора 4 из библиотеки
 
-void Motor3_X()
+void Motor2_X() // Мотор2 по X
 {
-  // Считываем значения с аналоговых пинов и 
-  // преобразуем их из диапазона 0-1023 в диапазон 0-127
-  valueX = map (analogRead(A0), 0, 1023, -127, 127);
+  value2X = map (analogRead(A2), 0, 1023, -127, 127);
 
-  // Джойстик по оси X
-  // Если положение джойстика находится по центру
-  if (valueX >= -10 && valueX <= 10)  
+  if (value2X >= -10 && valueX <= 10)  
     {
-      Motor3.run(RELEASE); // Останавливаем мотор
+      Motor2.run(RELEASE);
     }
-  if (valueX > 11) // Если положение джойстика по X больше 11  
+  if (value2X > 11)
     {
-      Motor3.run(FORWARD); // Крутим мотор3 вперёд
-      Motor3.setSpeed(valueX); // Со скоростью от 11 до 127 по ШИМ
+      Motor2.run(FORWARD);
+      Motor2.setSpeed(valueX);
     }
-  if (valueX < -11) // Если положение джойстика по X меньше 11
+  if (value2X < -11)
     {
-      Motor3.run(BACKWARD); // Крутим мотор3 назад
-      Motor3.setSpeed(-valueX); // Со скоростью от -11 до -127 по ШИМ
+      Motor2.run(BACKWARD);
+      Motor2.setSpeed(-valueX);
     }
 }
 
-void Motor4_Y()
+void Motor3_X() // Мотор по X
+{
+  valueX = map (analogRead(A0), 0, 1023, -127, 127);
+
+  if (valueX >= -10 && valueX <= 10)  
+    {
+      Motor3.run(RELEASE);
+    }
+  if (valueX > 11)
+    {
+      Motor3.run(FORWARD);
+      Motor3.setSpeed(valueX);
+    }
+  if (valueX < -11)
+    {
+      Motor3.run(BACKWARD);
+      Motor3.setSpeed(-valueX);
+    }
+}
+
+void Motor4_Y() // Мотор по Y
 {
   valueY = map (analogRead(A1), 0, 1023, -127, 127);
-
-  // Джойстик по оси Y
 
   if (valueY >= -10 && valueY <= 10)  
     {
@@ -46,19 +61,18 @@ void Motor4_Y()
     }
   if (valueY > 11)  
     {
-      Motor4.run(FORWARD); // Крутим мотор4 вперёд
+      Motor4.run(FORWARD);
       Motor4.setSpeed(valueY);
     }
   if (valueY < -11)  
     {
-      Motor4.run(BACKWARD); // Крутим мотор4 назад
+      Motor4.run(BACKWARD);
       Motor4.setSpeed(-valueY);
     }
 }
 
 void setup()
 {
-        // Останавливаем моторы 3 и 4
   Motor3.run(RELEASE);
   Motor4.run(RELEASE);
 }
