@@ -79,6 +79,7 @@ void setup()
 
 void loop() 
 {  
+  Motor2_X();
   Motor3_X();
   Motor4_Y();  
 }
