@@ -5,81 +5,82 @@
 // Для экскаватора
 // V 1.1
 
-int8_t valueX = 0, valueY= 0, value2X = 0; // Два джойстика
+int8_t value1X = 0, value3X= 0, value4Y = 0; // Три джойстика
 
-AF_DCMotor Motor2(2); // Объект мотора 2 из библиотеки
+AF_DCMotor Motor1(1); // Объект мотора 2 из библиотеки
 AF_DCMotor Motor3(3); // Объект мотора 3 из библиотеки
 AF_DCMotor Motor4(4); // Объект мотора 4 из библиотеки
 
-void Motor2_X() // Мотор2 по X
+void Motor1_X() // Мотор2 по X
 {
-  value2X = map (analogRead(A2), 0, 1023, -127, 127);
+  value1X = map (analogRead(A0), 0, 1023, -127, 127);
 
-  if (value2X >= -10 && valueX <= 10)  
+  if (value1X >= -10 && value1X <= 10)  
     {
-      Motor2.run(RELEASE);
+      Motor1.run(RELEASE);
     }
-  if (value2X > 11)
+  if (value1X > 11)
     {
-      Motor2.run(FORWARD);
-      Motor2.setSpeed(valueX);
+      Motor1.run(FORWARD);
+      Motor1.setSpeed(value1X);
     }
-  if (value2X < -11)
+  if (value1X < -11)
     {
-      Motor2.run(BACKWARD);
-      Motor2.setSpeed(-valueX);
+      Motor1.run(BACKWARD);
+      Motor1.setSpeed(-value1X);
     }
 }
 
 void Motor3_X() // Мотор по X
 {
-  valueX = map (analogRead(A0), 0, 1023, -127, 127);
+  value3X = map (analogRead(A1), 0, 1023, -127, 127);
 
-  if (valueX >= -10 && valueX <= 10)  
+  if (value3X >= -10 && value3X <= 10)  
     {
       Motor3.run(RELEASE);
     }
-  if (valueX > 11)
+  if (value3X > 11)
     {
       Motor3.run(FORWARD);
-      Motor3.setSpeed(valueX);
+      Motor3.setSpeed(value3X);
     }
-  if (valueX < -11)
+  if (value3X < -11)
     {
       Motor3.run(BACKWARD);
-      Motor3.setSpeed(-valueX);
+      Motor3.setSpeed(-value3X);
     }
 }
 
 void Motor4_Y() // Мотор по Y
 {
-  valueY = map (analogRead(A1), 0, 1023, -127, 127);
+  value4Y = map (analogRead(A2), 0, 1023, -127, 127);
 
-  if (valueY >= -10 && valueY <= 10)  
+  if (value4Y >= -10 && value4Y <= 10)  
     {
       Motor4.run(RELEASE);
     }
-  if (valueY > 11)  
+  if (value4Y > 11)  
     {
       Motor4.run(FORWARD);
-      Motor4.setSpeed(valueY);
+      Motor4.setSpeed(value4Y);
     }
-  if (valueY < -11)  
+  if (value4Y < -11)  
     {
       Motor4.run(BACKWARD);
-      Motor4.setSpeed(-valueY);
+      Motor4.setSpeed(-value4Y);
     }
 }
 
 void setup()
 {
+  Motor1.run(RELEASE);
   Motor3.run(RELEASE);
   Motor4.run(RELEASE);
 }
 
 void loop() 
 {  
-  Motor2_X();
+  Motor1_X();
   Motor3_X();
   Motor4_Y();  
 }
