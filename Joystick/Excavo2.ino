@@ -3,7 +3,7 @@
 // https://github.com/adafruit/Adafruit-Motor-Shield-library
 
 // Для экскаватора
-// V 1.1
+// V 1.2
 
 int8_t value1X = 0, value3X= 0, value4Y = 0; // Три джойстика
 
