@@ -18,7 +18,7 @@ AF_DCMotor Motor4(4); // Объект мотора 4 из библиотеки
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 
-void RunMotor(int aPin, AF_DCMotor &aMotor, int aLine = -1, const char *aName = NULL) { // Мотор по оси X
+void RunMotor(int aPin, AF_DCMotor &aMotor, int aLine = -1, const char *aName = NULL) { 
   int __v = map(analogRead(aPin), 0, 1023, -127, 127);
 
   if (aLine > 0 && aName && *aName) {
