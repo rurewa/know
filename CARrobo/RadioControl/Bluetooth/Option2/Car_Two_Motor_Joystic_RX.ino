@@ -40,18 +40,18 @@ void loop() {
   // Y-axis used for forward and backward control
   if (yAxis < 470) {
     // Set Motor A backward
-    digitalWrite(M1, HIGH);
+    digitalWrite(M1, LOW);
     // Set Motor B backward
-    digitalWrite(M2, HIGH);
+    digitalWrite(M2, LOW);
     // Преобразование уменьшающихся показаний оси Y для перехода назад от 470 в 0 в значение от 0 до 255 для сигнала ШИМ для увеличения скорости двигателя
     motorSpeedA = map(yAxis, 470, 0, 0, 255);
     motorSpeedB = map(yAxis, 470, 0, 0, 255);
   }
   else if (yAxis > 550) {
     // Set Motor A forward
-    digitalWrite(M1, LOW);
+    digitalWrite(M1, HIGH);
     // Set Motor B forward
-    digitalWrite(M2, LOW);
+    digitalWrite(M2, HIGH);
     // Преобразование увеличенных показаний оси Y для перехода от 550 до 1023 в значение от 0 до 255 для сигнала ШИМ для увеличения скорости двигателя
     motorSpeedA = map(yAxis, 550, 1023, 0, 255);
     motorSpeedB = map(yAxis, 550, 1023, 0, 255);
