@@ -1,5 +1,5 @@
 // Arduino_dev_board v 2.0
-// V 1.0
+// V 1.1
 // Test buttons & leds
 
 void setup()
