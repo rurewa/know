@@ -72,4 +72,4 @@ void loop()
     digitalWrite(11, HIGH);
     digitalWrite(12, HIGH);
   }
-  }
+}
