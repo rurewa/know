@@ -108,7 +108,7 @@ void loop() {
         hornOn();
         break;
       case 'v':
-        hornOff()    ;
+        hornOff();
         break;
       default:
         break;
