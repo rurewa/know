@@ -11,15 +11,11 @@ const int M1 =  12;     // Motor A2 (left motor)
 const int E2 =  11;     // Motor B1 PWM
 const int M2 =  13;     // Motor B2 (right motor)
 
-<<<<<<< HEAD
 int SPEED = 155;  // Speed PWM 0 - 255
 
 /*const int ledR = 3;
 const int ledG = 5;
 const int ledB = 6;*/
-=======
-int SPEED = 135;  // Speed PWM 0 - 255
->>>>>>> master
 
 void go() { // Вперёд
   digitalWrite(M1, LOW);
@@ -54,7 +50,6 @@ void stop() { // Стоп
   analogWrite(E2, 0);
 }
 
-<<<<<<< HEAD
 void hornOn() { // Сигнал включён
   digitalWrite(4, HIGH);
 }
@@ -76,11 +71,6 @@ void setup() {
   pinMode(M2, OUTPUT);
   pinMode(4, OUTPUT);
   pinMode(3, OUTPUT);
-=======
-void setup() {
-  pinMode(M1, OUTPUT);
-  pinMode(M2, OUTPUT);
->>>>>>> master
   Serial.begin(9600);
 }
 
@@ -91,7 +81,6 @@ void loop() {
     delay(10);
     Serial.print(data);
     Serial.print("\n");
-<<<<<<< HEAD
     switch (data)
     {
       case 'F': // Вперёд
@@ -123,22 +112,6 @@ void loop() {
         break;
       default:
         break;
-=======
-    if(data == 'F') {
-      go();
-    }
-    else if(data == 'B') {
-      back();
-    }
-    else if(data == 'S') {
-      stop();
-    }
-    else if(data == 'L') {
-      turnLeft();
-    }
-    else if(data == 'R') {
-      turnRight();
->>>>>>> master
     }
   }
 }
