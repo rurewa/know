@@ -42,5 +42,11 @@ void loop()
     while(Test1000ms.callback()){
       digitalWrite(13, LOW);
       Serial.println(1000);
+
+    if (Test5000ms.callback()) {
+      digitalWrite(13, HIGH);
+      if (Test1000ms.callback()) {
+      digitalWrite(13, LOW);
+      }
     }
 }
