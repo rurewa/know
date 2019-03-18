@@ -15,7 +15,8 @@ void loop() {
   analogWrite(led, brightness);
   //  Выполняется прибавление на 5 пока не достигает brightness 255
   brightness += fadeAmount; // Идеинтично brightness = brightness + fadeAmount
-  // Когда brightness достигает 255, выполняется вычитание до 0
+  // Когда brightness < 255 происходит приращение на 5. Когда brightness >=255
+  // происходит выполнение brightness += -fadeAmount
   if (brightness <= 0 || brightness >= 255) {
     fadeAmount = -fadeAmount;
   }
