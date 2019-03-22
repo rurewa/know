@@ -1,18 +1,18 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // Робот с использованием L298P Motor Shield от Keyes управляемый Bluetooth
-// и джойстиком
+// и пультом с кнопками
 // Код приёмника
 // V 1.0
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 
 #include <Arduino.h>
 
-int E1 = 10;      // Motor A1 PWM
-int M1 =  12;     // Motor A2 (left motor)
-int E2 =  11;     // Motor B1 PWM
-int M2 =  13;     // Motor B2 (right motor)
+const int E1 = 10;      // Motor A1 PWM
+const int M1 =  12;     // Motor A2 (left motor)
+const int E2 =  11;     // Motor B1 PWM
+const int M2 =  13;     // Motor B2 (right motor)
 
-int SPEED = 245;  // Speed PWM 0 - 255
+int SPEED = 135;  // Speed PWM 0 - 255
 
 void go() {
   digitalWrite(M1, LOW);
@@ -54,10 +54,11 @@ void setup() {
 }
 
 void loop() {
-  char state = 0;  
+  char state = 0;
   while (Serial.available() > 0) {
     state = Serial.read();
   }
+  //Serial.println(state);
   delay(10);
 
   if (bitRead(state, 0)) {
@@ -77,3 +78,6 @@ void loop() {
   }
   state ^= state; // очищаем переменную перед следующим циклом
 }
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
+// END FILE
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
