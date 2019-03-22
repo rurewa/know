@@ -56,20 +56,20 @@ void stop() { // Стоп
   analogWrite(E2, 0);
 }
 
-void hornOn() { // Сигнал включён
-  digitalWrite(15, HIGH);
-}
-
-void hornOff() { // Сигнал выключен
-  digitalWrite(15, LOW);
-}
-
 void EyesOn() { // Глаза включены
   digitalWrite(14, HIGH);
 }
 
 void EyesOff() { // Глаза выключены
   digitalWrite(14, LOW);
+}
+
+void hornOn() { // Голос включён
+  digitalWrite(15, HIGH);
+}
+
+void hornOff() { // Голос выключен
+  digitalWrite(15, LOW);
 }
 
 void setup() {
