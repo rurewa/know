@@ -14,7 +14,7 @@ Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 #define MAX_PULSE_WIDTH       2350
 #define FREQUENCY             60
 
-uint8_t servonum = 0; // номер пина сервопривода
+uint8_t servonum = 0; // our servo # counter
 
 const int E1 = 10;      // Motor A1 PWM
 const int M1 =  12;     // Motor A2 (left motor)
@@ -57,11 +57,11 @@ void stop() { // Стоп
 }
 
 void hornOn() { // Сигнал включён
-  digitalWrite(4, HIGH);
+  digitalWrite(15, HIGH);
 }
 
 void hornOff() { // Сигнал выключен
-  digitalWrite(4, LOW);
+  digitalWrite(15, LOW);
 }
 
 void EyesOn() { // Глаза включены
@@ -122,10 +122,10 @@ void loop() {
       case 'w': // Глаза выключены
         EyesOff();
         break;
-      case 'V':
+      case 'V': // Голос включён
         hornOn();
         break;
-      case 'v':
+      case 'v': // Голос выключен
         hornOff();
         break;
       case 'X':
