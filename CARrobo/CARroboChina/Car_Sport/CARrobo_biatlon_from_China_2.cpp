@@ -67,7 +67,7 @@ void loop() {
     else if((!SLeft) && (!SMiddle) && (SRight)) { turnRight(); Serial.println("RIGHT: "); } // Если L и M на белом - вправо!
     else if((SLeft) && (!SMiddle) && (!SRight)) { turnLeft(); Serial.println("LEFT: "); } // Если M и R на белом - влево!
     else if((!SLeft) && (!SMiddle) && (!SRight)) { turnGoRight(); Serial.println("FOWARD & LEFT: "); } // Если все на белом - вперёд и влево!
-    else { go(); Serial.println("FOWARD: ");} // Если все на чёрном - вперёд!
+    else { go(); Serial.println("FOWARD: "); } // Если все на чёрном - вперёд!
     delay(150);
   }
   while(true);
