@@ -64,10 +64,10 @@ void loop()
     bool SR = digitalRead(SensorRight); // Правый датчик
     if((!SL) && (SM) && (!SR)) { _foward(); Serial.print("FOWARD: ");} // Если M на чёрном, а L и R на белом - прямо!
     else if((SL) && (!SM) && (!SR)) { _left(); Serial.print("LEFT: ");} // Если M и R на белом - влево!
-    else if ((!SL) && (SM) && (SR)) { _right(); Serial.print("RIGHT: ");} // Если M и L на белом - вправо!
-    else if ((SL) && (SM) && (!SR)) { _left(); Serial.print("LEFT: ");} // Если M и L на чёрном - влево!
-    else if ((!SL) && (SM) && (SR)) { _right(); Serial.print("RIGHT: ");} // Если M и R на чёрном - вправо!
-    else if ((SL) && (SM) && (SR)) { _foward_left(); Serial.print("FOWARD & LEFT: ");} // Если все на чёрном - вперёд и влево!
+    else if((!SL) && (SM) && (SR)) { _right(); Serial.print("RIGHT: ");} // Если M и L на белом - вправо!
+    else if((SL) && (SM) && (!SR)) { _left(); Serial.print("LEFT: ");} // Если M и L на чёрном - влево!
+    else if((!SL) && (SM) && (SR)) { _right(); Serial.print("RIGHT: ");} // Если M и R на чёрном - вправо!
+    else if((SL) && (SM) && (SR)) { _foward_left(); Serial.print("FOWARD & LEFT: ");} // Если все на чёрном - вперёд и влево!
     else { _foward_right(); Serial.print("FOWARD & RIGHT: ");} // Если все на белом - вперёд и вправо!
   }
   while(true);
