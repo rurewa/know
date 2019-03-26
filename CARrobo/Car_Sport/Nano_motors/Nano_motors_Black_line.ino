@@ -1,87 +1,74 @@
 // Black line movement for Nano motors board
-// V 1.0
+// V 2.0
 #include <Arduino.h>
-const int ENA = 10;
+int ENA = 10;
 const int MotorRight = 12;
-const int ENB = 9; 
+int ENB = 9;
 const int MotorLeft = 11;
 const int SensorLeft = 8;
 const int SensorMiddle= 7;
 const int SensorRight = 6;
 
+int diy = 100; // чтобы не дёргался на одном месте
+
+void _foward() {
+  digitalWrite(MotorRight, HIGH);
+  digitalWrite(MotorLeft, HIGH);
+}
+
+void _left() {
+  digitalWrite(MotorRight, HIGH);
+  digitalWrite(MotorLeft, LOW);
+}
+
+void _right() {
+  digitalWrite(MotorRight, LOW);
+  digitalWrite(MotorLeft, HIGH);
+}
+
+void _foward_left() {
+  digitalWrite(MotorRight, HIGH);
+  digitalWrite(MotorLeft, HIGH);
+  delay(diy);
+  digitalWrite(MotorRight, HIGH);
+  digitalWrite(MotorLeft, LOW);
+  delay(diy);
+}
+
+void _foward_right() {
+  digitalWrite(MotorRight, HIGH);
+  digitalWrite(MotorLeft, HIGH);
+  delay(diy);
+  digitalWrite(MotorRight, LOW);
+  digitalWrite(MotorLeft, HIGH);
+  delay(diy);
+}
+
 void setup()
 {
   Serial.begin(9600);
-  pinMode(MotorRight, OUTPUT); 
+  pinMode(MotorRight, OUTPUT);
   pinMode(MotorLeft, OUTPUT);
   pinMode(ENA, OUTPUT);
   pinMode(ENB, OUTPUT);
   // скорость моторов
-  analogWrite(ENA, 135);
-  analogWrite(ENB, 135);
+  analogWrite(ENA, 75);
+  analogWrite(ENB, 75);
 }
 
 void loop()
 {
-  int diy = 200; // чтобы не дёргался на одном месте 
-  int SL = digitalRead(SensorLeft);
-  int SM = digitalRead(SensorMiddle);
-  int SR = digitalRead(SensorRight);
-  // это для диагностики датчиков
-  // ----------------------------------------------
-  /*Serial.print("Left: "); 
-  Serial.print(SL); 
-  Serial.print(" Middle: "); 
-  Serial.print(SM);
-  Serial.print(" Right: ");
-  Serial.println(SR);
-  delay(150);*/
-  // -----------------------------------------------
-  // Если M на чёрном, а L и R на белом - прямо!
-  if (SL == LOW && SM == HIGH && SR == LOW) 
-  {
-    digitalWrite(MotorRight, HIGH);
-    digitalWrite(MotorLeft, HIGH);
+  do {
+    bool SL = digitalRead(SensorLeft); // Левый датчик
+    bool SM = digitalRead(SensorMiddle); // Средний датчик
+    bool SR = digitalRead(SensorRight); // Правый датчик
+    if((!SL) && (SM) && (!SR)) { _foward(); Serial.print("FOWARD: ");} // Если M на чёрном, а L и R на белом - прямо!
+    else if((SL) && (!SM) && (!SR)) { _left(); Serial.print("LEFT: ");} // Если M и R на белом - влево!
+    else if ((!SL) && (SM) && (SR)) { _right(); Serial.print("RIGHT: ");} // Если M и L на белом - вправо!
+    else if ((SL) && (SM) && (!SR)) { _left(); Serial.print("LEFT: ");} // Если M и L на чёрном - влево!
+    else if ((!SL) && (SM) && (SR)) { _right(); Serial.print("RIGHT: ");} // Если M и R на чёрном - вправо!
+    else if ((SL) && (SM) && (SR)) { _foward_left(); Serial.print("FOWARD & LEFT: ");} // Если все на чёрном - вперёд и влево!
+    else { _foward_right(); Serial.print("FOWARD & RIGHT: ");} // Если все на белом - вперёд и вправо!
   }
-  // Если R и M на белом - влево!
-  else if (SL == HIGH && SM == LOW && SR == LOW) 
-  {
-    digitalWrite(MotorRight, HIGH);
-    digitalWrite(MotorLeft, LOW);
-  }
-  
-  // Если L и M на белом - вправо!
-  else if (SL == LOW && SM == LOW && SR == HIGH)
-  {
-    digitalWrite(MotorRight, LOW);
-    digitalWrite(MotorLeft, HIGH);
-  }
-  // Если L и M на чёрном - влево!
-  else if (SL == HIGH && SM == HIGH && SR == LOW)
-  {
-    digitalWrite(MotorRight, HIGH);
-    digitalWrite(MotorLeft, LOW);
-  }
-  // Если R и M на чёрном - вправо!
-  else if (SL == LOW && SM == HIGH && SR == HIGH) 
-  {
-    digitalWrite(MotorRight, LOW);
-    digitalWrite(MotorLeft, HIGH);
-  }
-  // Если все на чёрном -вперёд и влево!
-  else if (SL == HIGH && SM == HIGH && SR == HIGH) 
-  {
-    digitalWrite(MotorRight, HIGH);
-    digitalWrite(MotorLeft, HIGH);
-    delay(diy);
-    digitalWrite(MotorRight, HIGH);
-    digitalWrite(MotorLeft, LOW);
-    delay(diy);
-  }
-  // Если все на белом - вправо!
-  else
-  {
-    digitalWrite(MotorRight, LOW);
-    digitalWrite(MotorLeft, HIGH);
-  }
+  while(true);
 }
