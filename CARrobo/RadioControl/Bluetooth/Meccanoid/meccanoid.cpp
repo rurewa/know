@@ -6,15 +6,11 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <Wire.h>
-#include <Adafruit_PWMServoDriver.h>
+#include "MeccaBrain.h" // Библиотека сервопривода
 
-Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
+#define STEP 8 // Шаг для сервопривода
 
-#define MIN_PULSE_WIDTH       650
-#define MAX_PULSE_WIDTH       2350
-#define FREQUENCY             60
-
-uint8_t servonum = 0; // our servo # counter
+MeccaBrain servo(16); // Пин для сервопривода
 
 const int E1 = 10;      // Motor A1 PWM
 const int M1 =  12;     // Motor A2 (left motor)
@@ -64,12 +60,36 @@ void EyesOff() { // Глаза выключены
   digitalWrite(14, LOW);
 }
 
-void hornOn() { // Голос включён
+void hornOn() { // Сигнал включён
   digitalWrite(15, HIGH);
 }
 
-void hornOff() { // Голос выключен
+void hornOff() { // Сигнал выключен
   digitalWrite(15, LOW);
+}
+
+void servoMeccanoON()  { // Сервопривод
+  servo.communicate();
+  servo.setServoColor(0, 0xF4); //
+  servo.setServoColor(1, 0xF2); //
+
+  for (int i=0; i<239; i = i+ STEP) {
+    servo.communicate();
+    servo.setServoPosition(0, i);
+    servo.setServoPosition(1, 239 - i);
+  }
+}
+
+void servoMeccanoOFF()  { // Сервопривод
+  servo.communicate();
+  servo.setServoColor(1, 0xF4); //
+  servo.setServoColor(0, 0xF2); //
+
+  for (int i=239; i>0; i= i-STEP) {
+    servo.communicate();
+    servo.setServoPosition(0, i);
+    servo.setServoPosition(1, 239 - i);
+  }
 }
 
 void setup() {
@@ -79,17 +99,10 @@ void setup() {
   pinMode(4, OUTPUT);
   pinMode(14, OUTPUT);
   pinMode(6, OUTPUT);
-  pwm.begin();
-  pwm.setPWMFreq(FREQUENCY);  // Analog servos run at ~60 Hz updates
-}
-
-int pulseWidth(int angle) // Сервопривод
-{
-  int pulse_wide, analog_value;
-  pulse_wide   = map(angle, 0, 180, MIN_PULSE_WIDTH, MAX_PULSE_WIDTH);
-  analog_value = int(float(pulse_wide) / 1000000 * FREQUENCY * 4096);
-  //Serial.println(analog_value);
-  return analog_value;
+  pinMode(5, OUTPUT);
+  for (int i=0; i<51; i++) { // Сервопривод
+    servo.communicate();
+  }
 }
 
 void loop() {
@@ -129,10 +142,10 @@ void loop() {
         hornOff();
         break;
       case 'X':
-        pwm.setPWM(0, 0, pulseWidth(180));
+        servoMeccanoON(); // Руку поднял
         break;
       case 'x':
-        pwm.setPWM(0, 0, pulseWidth(0));
+        servoMeccanoOFF(); // Руку опустил
         break;
       default:
         break;
