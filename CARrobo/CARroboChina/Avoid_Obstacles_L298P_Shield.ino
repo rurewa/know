@@ -6,10 +6,10 @@
 #include <Arduino.h>
 #include <NewPing.h>
 
-const unsigned int ECHO_PIN = 14;
-const unsigned int TRIG_PIN = 15;
+const unsigned int ECHO_PIN = 8;
+const unsigned int TRIG_PIN = 7;
 
-NewPing sonar(TRIG_PIN, ECHO_PIN, 200);
+NewPing sonar(TRIG_PIN, ECHO_PIN, 200); // Максимальное расстояние видимости
 
 int E1 = 10;     // Motor A1
 int M1 =  12;     // Motor A2 (left motor)
@@ -17,7 +17,7 @@ int M1 =  12;     // Motor A2 (left motor)
 int E2 =  11;     // Motor B1
 int M2 =  13;     // Motor B2 (right motor)
 
-int SPEED = 185;  // Speed PWM 0 - 255
+int SPEED = 165;  // Speed PWM 0 - 255
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 void Backward(int time) {
@@ -66,13 +66,12 @@ void setup() {
   //Setup Channel B
   pinMode(13, OUTPUT);  //Motor B1
   pinMode(TRIG_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
 }
 
 void loop() {
   int distance = sonar.ping_cm();
 
-  if ((distance > 1) && (distance < 30)) {
+  if((distance > 1) && (distance < 30)) {
 
     digitalWrite(4, HIGH);
     Stop(500);
@@ -87,3 +86,6 @@ void loop() {
   }
   delay(100);
 }
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
+// END FILE
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
