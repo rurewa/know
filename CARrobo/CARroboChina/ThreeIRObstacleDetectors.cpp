@@ -9,9 +9,9 @@ const int M1 =  12;     // Motor A2 (left motor)
 const int E2 =  11;     // Motor B1 PWM
 const int M2 =  13;     // Motor B2 (right motor)
 
-int SPEED = 185;  // Speed PWM 0 - 255
+int SPEED = 125;  // Speed PWM 0 - 255
 
-// Временные константы служат для точного задания времени на поворот, разворот, движение вперед
+// Временные константы служат для точного задания времени на поворот, разворот, движение вперёд
 // в миллисекундах.
 /*const int time_90 = 190;
 const int time_10 = 20;
@@ -19,7 +19,7 @@ const int time_180 = 380;
 const int time_10cm = 100;*/
 
 // Номера портов, к которым подключены датчики препятствия.
-int  Left = 17, Middle = 18, Right = 19;
+const int  Left = 17, Middle = 18, Right = 19;
 
 void go() { // Вперёд
   digitalWrite(M1, LOW);
@@ -42,50 +42,28 @@ void turnRight() { // Вправо
   analogWrite(E2, SPEED);
 }
 
-void avtoroute() {  // Поведение
-  bool d_Left, d_Middle, d_Right;
-  d_Left = digitalRead(Left); d_Middle = digitalRead(Middle); d_Right = digitalRead(Right);
-  // Ищем правую сторону.
-  // Если ни один датчик не сработал.
-  if(d_Left && d_Middle && d_Right) {
-    turnRight(); //поворот вправо.
-    Serial.print(" Right: ");
-    delay(3); //time_10cm/5);
-    go(); // едем вперед.
-    Serial.print(" Foward: ");
-    delayMicroseconds(500);
-  }
-  else {
-    //Если сработал один из передних датчиков.
-    if(((!d_Left) || (!d_Middle)) && (d_Right)) {
-      // поворачиваем направо на 90 градусов.
-      turnRight();
-      Serial.print(" Right: ");
-      //delay(time_10);
-      delayMicroseconds(500);
-    }
-    else
-    //Если сработал один из передних датчиков и правый.
-    if(((!d_Left) || (!d_Middle)) && (!d_Right)) {
-      // поворачиваем налево на 90 градусов.
-      turnLeft();
-      Serial.print("Left: ");
-      //delay(time_10);
-      delayMicroseconds(500);
-    }
-    else { // Отклоняемся от правой стороны
-      // Если сработал правый датчик.
-      turnLeft(); //подворот влево.
-      Serial.print("Left: ");
-      delay(3); //time_90/5);
-      go(); // едем вперед.
-      Serial.print(" Foward: ");
-      delayMicroseconds(500);
-    }
-  }
-// Регулировка скорости робота.
-//  delayMicroseconds(100);
+/*void backWard() {
+  digitalWrite(M1, HIGH);
+  analogWrite(E1, SPEED);
+  digitalWrite(M2, HIGH);
+  analogWrite(E2, SPEED);
+}*/
 
+void avtoroute() {  // Поведение
+  do {
+    bool d_Left, d_Middle, d_Right;
+    d_Left = digitalRead(Left); d_Middle = digitalRead(Middle); d_Right = digitalRead(Right);
+    if((d_Left) && (d_Middle) && (!d_Right)) { turnLeft(); Serial.println("LEFT: "); } // Если R сработал - влево!
+    else if((!d_Left) && (d_Middle) && (d_Right)) { turnRight(); Serial.println("RIGHT: "); } // Если L сработал - вправо!
+    else if((d_Left) && (!d_Middle) && (d_Right)) { turnLeft(); Serial.println("LEFT: "); } // Если M сработал - влево!
+    else if((!d_Left) && (d_Middle) && (!d_Right)) { go(); Serial.println("FOWARD: "); } // Если M не сработал - вперёд!
+    else if((!d_Left) && (!d_Middle) && (d_Right)) { turnRight(); Serial.println("RIGHT: "); } // Если L и M сработали - вправо!
+    else if((d_Left) && (!d_Middle) && (!d_Right)) { turnLeft(); Serial.println("LEFT: "); } // Если M и R сработали - влево!
+    else if((!d_Left) && (!d_Middle) && (!d_Right)) { turnRight(); Serial.println("RIGHT: "); } // Если все сработали - вправо!
+    else { go(); Serial.println("FOWARD: ");} // Если все не сработали - вперёд!
+    delay(150);
+  }
+  while(true);
 }
 
 void setup() {
@@ -95,7 +73,7 @@ void setup() {
 }
 // Основная программа.
 void loop() {
-  avtoroute();
+  avtoroute(); // Поведение
   // Код проверки датчиков
   /*bool d_Left, d_Middle, d_Right;
   d_Left = digitalRead(Left); d_Middle = digitalRead(Middle); d_Right = digitalRead(Right);
@@ -104,8 +82,8 @@ void loop() {
   Serial.print(" Middle: ");
   Serial.print(d_Middle);
   Serial.print(" Right: ");
-  Serial.println(d_Right);
-  delay(50);*/
+  Serial.println(d_Right);*/
+  //delay(50);
 }
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // END FILE
