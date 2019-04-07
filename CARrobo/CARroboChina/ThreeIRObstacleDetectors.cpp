@@ -42,12 +42,24 @@ void turnRight() { // Вправо
   analogWrite(E2, SPEED);
 }
 
-/*void backWard() {
+/*void backWard() { // Назад
   digitalWrite(M1, HIGH);
   analogWrite(E1, SPEED);
   digitalWrite(M2, HIGH);
   analogWrite(E2, SPEED);
 }*/
+
+void testIR() { // Проверка датчиков
+  bool d_Left, d_Middle, d_Right;
+  d_Left = digitalRead(Left); d_Middle = digitalRead(Middle); d_Right = digitalRead(Right);
+  Serial.print("Left: ");
+  Serial.print(d_Left);
+  Serial.print(" Middle: ");
+  Serial.print(d_Middle);
+  Serial.print(" Right: ");
+  Serial.println(d_Right);
+  delay(50);
+}
 
 void avtoroute() {  // Поведение
   do {
@@ -71,19 +83,10 @@ void setup() {
   pinMode(M1, OUTPUT);
   pinMode(M2, OUTPUT);
 }
-// Основная программа.
+
 void loop() {
   avtoroute(); // Поведение
-  // Код проверки датчиков
-  /*bool d_Left, d_Middle, d_Right;
-  d_Left = digitalRead(Left); d_Middle = digitalRead(Middle); d_Right = digitalRead(Right);
-  Serial.print("Left: ");
-  Serial.print(d_Left);
-  Serial.print(" Middle: ");
-  Serial.print(d_Middle);
-  Serial.print(" Right: ");
-  Serial.println(d_Right);*/
-  //delay(50);
+  // testIR(); // Проверка датчиков
 }
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // END FILE
