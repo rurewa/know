@@ -17,19 +17,19 @@ void led10() {
 }
 
 void ledsOFF() {
+  for (int i=8; i<=10; i++) {
+    digitalWrite(i, LOW);
+  }
+}
+
+void led_off() {
   digitalWrite(8, LOW);
-  digitalWrite(9, LOW);
-  digitalWrite(10, LOW);
 }
 
 void foo() {
-  int button1 = 13;
-  int button2 = 16;
-  int button3 = 17;
+  bool state13 = false, state16 = false, state17 = false; // Кнопки
+  int button1 = 13, button2 = 16, button3 = 17;
   int Flag = 0; // Просто флаг
-  bool state13 = false; // Состояние кнопки на пин 13
-  bool state16 = false; // Состояние кнопки на пин 16
-  bool state17 = false; // Состояние кнопки на пин 17
 
   state13 = digitalRead(button1); // Записываем состояние в переменную
   state16 = digitalRead(button2);
@@ -39,9 +39,8 @@ void foo() {
   else if (state16 == true) Flag = 1;
   else if (state17 == true) Flag = 2;
   else if (state13 == false && state16 == false && state17 == false) Flag = 3; // Если все кнопки не нажаты
-  else Flag = 3;
 
-  switch(Flag)
+  switch(Flag) // Сравниваем переменную с несколькими значениями
   {
     case 0:
       led8(); // Включаем 8 светодиод
