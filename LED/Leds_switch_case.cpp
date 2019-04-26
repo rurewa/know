@@ -26,6 +26,10 @@ void led_off() {
   digitalWrite(8, LOW);
 }
 
+void led_off() {
+  digitalWrite(8, LOW);
+}
+
 void foo() {
   bool state13 = false, state16 = false, state17 = false; // Кнопки
   int button1 = 13, button2 = 16, button3 = 17;
