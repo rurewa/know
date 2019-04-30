@@ -6,7 +6,11 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <Wire.h>
-#include "MeccaBrain.h" // Библиотека сервопривода
+#include "MeccaBrain.h" // Библиотека микроконтроллера
+
+const int chainPin2 = 14; // Пин светодиодов глаз
+
+MeccaBrain chain2(chainPin2); // Светодиоды глаз
 
 #define STEP 8 // Шаг для сервопривода
 
@@ -52,12 +56,13 @@ void stop() { // Стоп
   analogWrite(E2, 0);
 }
 
-void EyesOn() { // Глаза включены
-  digitalWrite(14, HIGH);
+void setEyesColor(byte red, byte green, byte blue, byte fadetime) { // Глаза включены
+  chain2.setLEDColor(red, green, blue, fadetime);
+  chain2.communicate();
 }
 
 void EyesOff() { // Глаза выключены
-  digitalWrite(14, LOW);
+
 }
 
 void hornOn() { // Сигнал включён
@@ -96,12 +101,12 @@ void setup() {
   Serial.begin(9600);
   pinMode(M1, OUTPUT);
   pinMode(M2, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(14, OUTPUT);
+  pinMode(4, OUTPUT); // Buzzer
+  pinMode(14, OUTPUT); // RGB leds
   pinMode(6, OUTPUT);
   pinMode(5, OUTPUT);
-  for (int i=0; i<51; i++) { // Сервопривод
-    servo.communicate();
+  for (int i = 0; i < 50; i++) {
+    chain2.communicate();
   }
 }
 
@@ -130,7 +135,12 @@ void loop() {
         turnRight();
         break;
       case 'W': // Глаза включены
-        EyesOn();
+        for(int j=0; j<512; j++) {
+            byte red = (j >> 4) & 0x07;
+            byte green = (j >> 2) & 0x07;
+            byte blue = j & 0x07;
+            setEyesColor(red, green, blue, 0);
+          }
         break;
       case 'w': // Глаза выключены
         EyesOff();
