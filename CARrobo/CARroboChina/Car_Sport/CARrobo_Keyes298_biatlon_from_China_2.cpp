@@ -49,6 +49,15 @@ void turnGoRight() { // Стоп и назад
   delay(diy);
 }
 
+void ir_test(int time) { // Функция диагностики датчиков отражения
+  byte SensorLeft = 14, SensorMiddle = 15, SensorRight = 16;
+  bool sLeft, sMiddly, sRight;
+  Serial.print(sLeft = !digitalRead(SensorLeft));
+  Serial.print(sMiddly = !digitalRead(SensorMiddle));
+  Serial.println(sRight = !digitalRead(SensorRight));
+  delay(time);
+}
+
 void setup() {
   Serial.begin(9600);
   pinMode(M1, OUTPUT);
