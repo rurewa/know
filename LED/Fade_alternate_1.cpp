@@ -10,15 +10,14 @@ void setup() {
 }
 
 void loop() {
-  static int brightness = 0; // Яркость светодиода
+  static int brightness = 0; // Начальная яркость
   static int fadeAmount = 5; // Шаг изменения ШИМ
-  analogWrite(led, brightness);
-  //  Выполняется прибавление на 5 пока не достигает brightness 255
-  brightness += fadeAmount; // Идеинтично brightness = brightness + fadeAmount
-  // Когда brightness < 255 происходит приращение на 5. Когда brightness >=255
-  // происходит выполнение brightness += -fadeAmount
+  analogWrite(led, brightness); // Управление светодиодом
+  brightness += fadeAmount; // Циклично +5 или -5
+  // Когда brightness <= 255, происходит приращение на 5. Когда brightness >=255
+  // происходит выполнение brightness += -fadeAmount (-5)
   if (brightness <= 0 || brightness >= 255) {
-    fadeAmount = -fadeAmount;
+    fadeAmount = -fadeAmount; // -5
   }
   delay(50);
 }
