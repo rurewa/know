@@ -8,9 +8,9 @@ const int BLED = 9;
 const int GLED = 10;
 const int RLED = 11;
 const int BUTTON = 3;
-int MODE_AM = 4; // Количество режимов
-int  ledMode =  0; // Режимы для выбора цвета
-int buttonState = 0; // Состояние кнопки (нажата/не нажата)
+const int MODE_AM = 5; // Количество режимов
+int ledMode =  0; // Режимы для выбора цвета
+bool buttonState = 0; // Состояние кнопки (нажата/не нажата)
 
 void colourRed() { // Красный
   digitalWrite(BLED, LOW);
@@ -43,17 +43,17 @@ void colourOff() { //  Выключить все цвета
 
 void setup() {
   for (int ledPin=9; ledPin<=11; ledPin++) {
-    pinMode(ledPin, OUTPUT);
+    pinMode(ledPin, OUTPUT); // Настраиваем пины на Выход
   }
   for (int leds=9; leds<=11; leds++) {
-    digitalWrite(leds, HIGH);
+    digitalWrite(leds, HIGH); // Выключем светодиоды
   }
   Serial.begin(9600);
 }
 
 void loop() {
   buttonState = digitalRead(BUTTON);
-  if (buttonState == HIGH) // Если кнопка нажата
+  if (buttonState == true) // Если кнопка нажата
   // Увеличиваем ledMode, пока не выйдет за границы 4 (обнуляем)
   if (++ledMode >= MODE_AM) ledMode = 0;
   switch (ledMode)
@@ -74,7 +74,7 @@ void loop() {
   default:
     break;
   }
-  Serial.println(ledMode);
+  Serial.println(ledMode); // Для диагностики
 }
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // END FILE
