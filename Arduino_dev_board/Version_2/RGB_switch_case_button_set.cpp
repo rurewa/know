@@ -1,16 +1,19 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
-// RGB - светильник, управляемый одной кнопкой - триггером
+// RGB - светильник, управляемый одной кнопкой-триггером. Для Arduino Dev Board
 // V 1.0
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
+#include <Button_Simple.h>
 
 const int BLED = 9;
 const int GLED = 10;
 const int RLED = 11;
-const int BUTTON = 3;
-const int MODE_AM = 5; // Количество режимов
+const int BUTTON = 13;
+const int MODE_AM = 4; // Количество режимов (0..4)
 int ledMode =  0; // Режимы для выбора цвета
 bool buttonState = 0; // Состояние кнопки (нажата/не нажата)
+
+Button_Simple button(13);
 
 void colourRed() { // Красный
   digitalWrite(BLED, LOW);
@@ -36,17 +39,17 @@ void colourWhite() { // Белый
   digitalWrite(RLED, LOW);
 }
 void colourOff() { //  Выключить все цвета
-  digitalWrite(BLED, HIGH);
-  digitalWrite(GLED, HIGH);
-  digitalWrite(RLED, HIGH);
+  digitalWrite(BLED, LOW);
+  digitalWrite(GLED, LOW);
+  digitalWrite(RLED, LOW);
 }
 
 void setup() {
-  for (int ledPin=9; ledPin<=11; ledPin++) {
+  for (int ledPin=8; ledPin<=12; ledPin++) {
     pinMode(ledPin, OUTPUT); // Настраиваем пины на Выход
   }
-  for (int leds=9; leds<=11; leds++) {
-    digitalWrite(leds, HIGH); // Выключем светодиоды
+  for (int leds=9; leds<=12; leds++) {
+    digitalWrite(leds, LOW); // Выключем светодиоды
   }
   Serial.begin(9600);
 }
@@ -54,7 +57,7 @@ void setup() {
 void loop() {
   buttonState = digitalRead(BUTTON);
   if (buttonState == true) // Если кнопка нажата
-  // Увеличиваем ledMode, пока не выйдет за границы 4 (обнуляем)
+  // Счётчик увеличивает ledMode и обнуляет, когда значение достигает 3
   if (++ledMode >= MODE_AM) ledMode = 0;
   switch (ledMode)
   {
@@ -67,11 +70,8 @@ void loop() {
   case 3:
     colourBlue();
     break;
-  case 4:
-    colourOff();
-    break;
-    break;
   default:
+    colourOff();
     break;
   }
   Serial.println(ledMode); // Для диагностики
