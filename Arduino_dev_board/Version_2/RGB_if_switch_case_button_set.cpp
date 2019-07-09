@@ -3,7 +3,6 @@
 // V 1.0
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
-#include <Button_Simple.h>
 
 const int BLED = 9;
 const int GLED = 10;
