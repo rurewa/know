@@ -55,7 +55,7 @@ void loop() {
       }
     }
   // Если текущее состояние кнопки false, то предыдущее состояние, по логике, было true!
-  if (currentState == false) { lastState = currentState; } // Флаг true!
+  if (currentState == false) { lastState = currentState; } // Флаг true! Теперь флаги синхронизировались
 }
 
 void blueMode()
