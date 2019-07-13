@@ -35,7 +35,7 @@ void loop() {
         while (MODE++ >= COUNT) { MODE = 0; } // Запускаем счётчик с ограничителем
         // Предыдущее состояние должно стать true! Поэтому меняем значение, чтобы приращение не повторялось,
         // а осуществился переход к следующему блоку кода
-        lastState = currentState;
+        lastState = currentState; // Флаг true!
         Serial.println(MODE); // Это следующий блок кода
         switch(MODE)
         {
@@ -55,7 +55,7 @@ void loop() {
       }
     }
   // Если текущее состояние кнопки false, то предыдущее состояние, по логике, было true!
-  if (currentState == false) { lastState = currentState; }
+  if (currentState == false) { lastState = currentState; } // Флаг true!
 }
 
 void blueMode()
