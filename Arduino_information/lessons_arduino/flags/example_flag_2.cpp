@@ -9,16 +9,14 @@ bool foundEnd = false; // Флаг завершения строительств
 // Стены
 bool wallStart = false; // Флаг начала строительства стен
 bool wallEnd = false; // Флаг завершения строительства стен
-
 // Крыша
 bool roofStart = false; // Флаг начала строительства крыши
 bool roofEnd =  false; // Флаг завершения строительства крыши
-
 // Флаги синхронизации
 bool flagFound = true;
 bool flagWalls = true;
 bool flagRoof = true;
-
+// Прототипы функций
 void printFound();
 void printWalls();
 void printRoof();
