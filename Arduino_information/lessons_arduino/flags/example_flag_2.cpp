@@ -1,6 +1,6 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // Учебный пример использования флагов в программировании. Строим дом.
-// V 1.1
+// V 1.0
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 // Фундамент
@@ -28,28 +28,26 @@ void setup() {
 void loop() {
   // Начало строительства фундамента
   foundStart = true; // Поменяли значение флага, т.к. начали строительство
-  // Проверяем, начато ли строительство?
-  if (foundStart == true) {
-     // Проверяем, завершено ли строительство? Если оно не завершено..
-     while(foundEnd != foundStart) {
-        foundEnd = true; // Завершаем. Теперь флаги синхронизированы
-        printFound();
+  if (foundStart == true) { // Проверяем, начато ли строительство?
+     while(foundEnd != foundStart) { //Пока фундамент не построен
+        foundEnd = true; // Строим. Теперь флаги синхронизированы
+        printFound(); // Выводим на экран результат
     }
   }
   // Проверка завершения строительства фундамента
   if (foundStart == false) {
      while (flagFound == true) {
         flagFound = false; // Синхронизируем флаги
-        printFound();
+        printFound(); // Выводим на экран результат
      }
   }
 
   // Начало строительства стен
-  wallStart = foundEnd;
-  if (wallStart == true) {
-     while (wallEnd != wallStart) {
-       wallEnd = true;
-       printWalls();
+  wallStart = foundEnd; // Проверка состояния готовности фундамента
+  if (wallStart == true) { // Если фундамент готов
+     while (wallEnd != wallStart) { // Пока стены не построены
+       wallEnd = true; // Строим стены. Теперь флаги синхронизированы
+       printWalls(); // Выводим на экран результат
     }
   }
   // Проверка завершения строительства стен
@@ -61,14 +59,14 @@ void loop() {
   }
 
   // Начало строительства крыши
-  roofStart  = wallEnd;
+  roofStart = wallEnd;
   if (roofStart == true) {
      while (roofEnd != roofStart) {
        roofEnd = true;
        printRoof();
     }
   }
-  // Проверка завершения строительства стен
+  // Проверка завершения строительства крыши
   if (roofStart == false) {
      while (flagRoof == true) {
        flagRoof =  false;
@@ -78,29 +76,29 @@ void loop() {
 }
 
 void printFound() {
-  Serial.print("foundStart: ");
-  Serial.print(foundStart);
-  Serial.print("  ");
-  Serial.print("foundEnd: ");
-  Serial.print(foundEnd);
+    Serial.print("foundStart: ");
+    Serial.print(foundStart);
+    Serial.print("  ");
+    Serial.print("foundEnd: ");
+    Serial.print(foundEnd);
 }
 
 void printWalls() {
-  Serial.println("  ");
-  Serial.print("wallStart: ");
-  Serial.print(wallStart);
-  Serial.print("  ");
-  Serial.print("wallllEnd: ");
-  Serial.print(wallEnd);
+    Serial.println("  ");
+    Serial.print("wallStart: ");
+    Serial.print(wallStart);
+    Serial.print("  ");
+    Serial.print("wallllEnd: ");
+    Serial.print(wallEnd);
 }
 
 void printRoof() {
-  Serial.println("  ");
-  Serial.print("roofStart: ");
-  Serial.print(roofStart);
-  Serial.print("  ");
-  Serial.print("roofsEnd: ");
-  Serial.print(roofEnd);
+    Serial.println("  ");
+    Serial.print("roofStart: ");
+    Serial.print(roofStart);
+    Serial.print("  ");
+    Serial.print("roofsEnd: ");
+    Serial.print(roofEnd);
 }
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // END FILE
