@@ -1,27 +1,23 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
-// Балансирующий робот на mpu6050
+// Балансирующий робот на ADXL345
 // V 1.0
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <Wire.h> // Библиотека шины IC2
 #include <Adafruit_ADXL345_U.h> // Библиотека гироскопа
-#include "DualVNH5019MotorShield.h" // Библиотека двигателей
+#include "motor.h"
+
 // Объект гироскопа
 Adafruit_ADXL345_Unified accel = Adafruit_ADXL345_Unified();
-// Объект моторов
-DualVNH5019MotorShield md;
 
 float AccelX = 0;
 float AccelY = 0;
 float AccelZ = 0;
 
+void axel_test();
 
 void setup(void) {
-  pinMode(3, INPUT);
-  pinMode(5, INPUT);
-  pinMode(11, INPUT);
-  pinMode(13, INPUT);
-  md.init(); // Инициация двигателей
+  setup_motor_system(2, 4, 9, 7, 8, 10);
   Serial.begin(9600);
   /* Инициализация акселероментра */
   if(!accel.begin())   {
@@ -32,47 +28,35 @@ void setup(void) {
 }
 
 void loop(void) {
-  /* Get a new sensor event */
+  /* Получаем новые данных с датчика */
   sensors_event_t accelEvent;
   accel.getEvent(&accelEvent);
 
-  md.setM1Speed(-200); // Мотор 1
-  md.setM2Speed(-200); // Мотор 2
-  delay(100);
-  md.setM1Speed(200); // Мотор 1
-  md.setM2Speed(200); // Мотор 2
-  delay(100);
-
   AccelX = accelEvent.acceleration.x;
-
-  /*if ((AccelX > -7.5) && (AccelX < 2)) { // Back
+  AccelY = accelEvent.acceleration.y;
+  AccelZ = accelEvent.acceleration.z;
+  //axel_test();
+  if ((AccelX > -7.5) && (AccelX < -6)) { // Back
     Serial.println("Back");
-    md.setM1Speed(-200); // Мотор 1
-    md.setM2Speed(-200); // Мотор 2
-    delay(50);
-    md.setM1Speed(200); // Мотор 1
-    md.setM2Speed(200); // Мотор 2
-    delay(50);
+    backward();
   }
-  else if ((AccelX < -7.5) && (AccelX > -16)) { // Forward
+  else if ((AccelX < -7.5) && (AccelX > -9)) { // Forward
     Serial.println("Forward");
-    md.setM1Speed(200); // Мотор 1
-    md.setM2Speed(200); // Мотор 2
-    delay(50);
-    md.setM1Speed(-200); // Мотор 1
-    md.setM2Speed(-200); // Мотор 2
-    delay(50);
+    forward();
   }
-
   else {
     Serial.println("Stop");
-    md.setM1Speed(0); // Мотор 1
-    md.setM2Speed(0); // Мотор 2
+    _stop();
   }
+}
 
+void axel_test() {
   Serial.print(AccelX);
-  Serial.print("  | ");
-  delay(1000);*/
+  Serial.print(" | ");
+  Serial.print(AccelY);
+  Serial.print(" | ");
+  Serial.println(AccelZ);
+  delay(500);
 }
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // END FILE
