@@ -5,13 +5,6 @@
 // V 1.0
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <LedControl.h>
-// Test № 3 led matrix 7219 for Arduino dev board 2.0
-// V 1.0
-/*
- pin 5 is connected to the DataIn
- pin 6 is connected to the CLK
- pin 7 is connected to LOAD
- */
 
 LedControl lc=LedControl(5, 6, 7, 1);
 unsigned long delaytime=20;
