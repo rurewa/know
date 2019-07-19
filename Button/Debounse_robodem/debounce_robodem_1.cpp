@@ -5,7 +5,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Button_Simple.h>
 
-Button_Simple button(11);
+Button_Simple button(11); // Пин кнопки
 
 void setup() {
   pinMode(3, OUTPUT);
@@ -13,10 +13,10 @@ void setup() {
 }
 
 void loop() {
-  static int click = 0;
-  button.scan();
-  while (button.clicked()) {
-    if (++click >= 2) { click = 0; }
+  static int click = 0; // Состояние режима 1/0
+  button.scan(); // Инициализация библиотеки
+  while (button.clicked()) { // Если нажали
+    if (++click >= 2) { click = 0; } // Счётчик с ограничителем (0/1)
   }
   if (click == 1) { digitalWrite(3, HIGH); }
   else { digitalWrite(3, LOW); }
