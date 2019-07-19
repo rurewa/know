@@ -23,32 +23,32 @@ void setup()
 void loop() 
 
 { 
-  if(digitalRead(buttonR)==HIGH&&flag==0)  //если кнопка нажата    
+  if (digitalRead(buttonR) == HIGH && flag==0)  //если кнопка нажата    
                                           // и перемення flag равна 0 , то ... 
   { 
-    digitalWrite(RLED,!digitalRead(RLED)); 
-    flag=1; 
+    digitalWrite(RLED, !digitalRead(RLED)); 
+    flag = 1; 
       //это нужно для того что бы с каждым нажатием кнопки 
       //происходило только одно действие 
       // плюс защита от "дребезга"  100% 
   } 
-    if(digitalRead(buttonR)==LOW&&flag==1) //если кнопка НЕ нажата 
+    if (digitalRead(buttonR) == LOW && flag == 1) //если кнопка НЕ нажата 
                                         //и переменная flag равна - 1 ,то ... 
     {  
       flag=0;   //обнуляем переменную flag 
     } 
 
 { 
-  if(digitalRead(buttonG)==HIGH&&flag==0)  //если кнопка нажата    
+  if (digitalRead(buttonG) == HIGH  && flag == 0)  //если кнопка нажата    
                                           // и перемення flag равна 0 , то ... 
   { 
-    digitalWrite(GLED,!digitalRead(GLED)); 
-    flag=1; 
+    digitalWrite(GLED, !digitalRead(GLED)); 
+    flag = 1; 
        //это нужно для того что бы с каждым нажатием кнопки 
        //происходило только одно действие 
        // плюс защита от "дребезга"  100% 
   } 
-    if(digitalRead(buttonG)==LOW&&flag==1) //если кнопка НЕ нажата 
+    if(digitalRead(buttonG == LOW & &flag == 1) //если кнопка НЕ нажата 
                                         //и переменная flag равна - 1 ,то ... 
     {  
       flag=0;   //обнуляем переменную flag 
@@ -57,16 +57,16 @@ void loop()
   if(digitalRead(buttonB)==HIGH&&flag==0)  //если кнопка нажата    
                                           // и перемення flag равна 0 , то ... 
   { 
-    digitalWrite(BLED,!digitalRead(BLED)); 
-    flag=1; 
+    digitalWrite(BLED, !digitalRead(BLED)); 
+    flag = 1; 
        //это нужно для того что бы с каждым нажатием кнопки 
        //происходило только одно действие 
        // плюс защита от "дребезга"  100% 
   } 
-    if(digitalRead(buttonB)==LOW&&flag==1) //если кнопка НЕ нажата 
+    if(digitalRead(buttonB) == LOW && flag == 1) //если кнопка НЕ нажата 
                                         //и переменная flag равна - 1 ,то ... 
     {  
-      flag=0;   //обнуляем переменную flag 
+      flag = 0;   //обнуляем переменную flag 
     }     
 }
 }
