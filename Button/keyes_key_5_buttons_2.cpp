@@ -6,7 +6,7 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 //#define TEST_ON //-- Расширенная диагностика
 #define BRepos 1022 //-- 5 V, ни одна кнопка не нажата
-//-- Valeurs relevées lorsque TEST_ON
+
 const int _B1 = 0; // Кнопка 1
 const int B2min = 141; // Кнопка 2
 const int B2max = 142;
