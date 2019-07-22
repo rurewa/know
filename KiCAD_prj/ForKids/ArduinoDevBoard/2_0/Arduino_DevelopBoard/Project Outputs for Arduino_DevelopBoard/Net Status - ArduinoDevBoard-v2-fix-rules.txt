@@ -1,0 +1,42 @@
+Net Status Report
+Filename     : D:\Robodem\Altium\Projects\Robodem_Child\Arduino_DevelopBoard\ArduinoDevBoard-v2-fix-rules.PcbDoc
+Date         : 27.07.2018
+Time         : 12:58:36
+Time Elapsed : 00:00:00
+
+Nets, Layer, Length
+    +12V, Signal Layers Only, 151.6274mm
+    +5V, Signal Layers Only, 218.7312mm
+    GND, Signal Layers Only, 0mm
+    NetD1_1, Signal Layers Only, 2.807mm
+    NetD1_2, Signal Layers Only, 8.7754mm
+    NetDD1_10, Signal Layers Only, 15.936mm
+    NetDD1_11, Signal Layers Only, 10.9444mm
+    NetDD1_12, Signal Layers Only, 9.5745mm
+    NetDD1_13, Signal Layers Only, 12.2148mm
+    NetDD1_14, Signal Layers Only, 13.2972mm
+    NetDD1_15, Signal Layers Only, 14.1846mm
+    NetDD1_16, Signal Layers Only, 22.4249mm
+    NetDD1_19, Signal Layers Only, 32.872mm
+    NetDD1_20, Signal Layers Only, 21.7356mm
+    NetDD1_21, Signal Layers Only, 35.8421mm
+    NetDD1_22, Signal Layers Only, 20.4911mm
+    NetDD1_23, Signal Layers Only, 22.8107mm
+    NetDD1_24, Signal Layers Only, 18.9492mm
+    NetDD1_26, Signal Layers Only, 19.2139mm
+    NetDD1_5, Signal Layers Only, 24.1018mm
+    NetDD1_6, Signal Layers Only, 24.7279mm
+    NetDD1_7, Signal Layers Only, 10.9137mm
+    NetDD1_8, Signal Layers Only, 16.8971mm
+    NetDD1_9, Signal Layers Only, 16.8971mm
+    NetHL1_1, Signal Layers Only, 8.2782mm
+    NetHL2_1, Signal Layers Only, 34.228mm
+    NetHL2_2, Signal Layers Only, 6.46mm
+    NetHL3_1, Signal Layers Only, 27.5935mm
+    NetHL3_2, Signal Layers Only, 6.46mm
+    NetHL4_1, Signal Layers Only, 21.6504mm
+    NetHL4_2, Signal Layers Only, 6.46mm
+    NetHL5_1, Signal Layers Only, 8.4853mm
+    NetR1_1, Signal Layers Only, 14.6569mm
+    NetVT1_C, Signal Layers Only, 25.0711mm
+count : 34

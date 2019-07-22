@@ -1,0 +1,23 @@
+Bill of Material for 
+On 14.06.2018 at 16:15:38
+
+ Comment             Pattern     Quantity  Components
+------------------------------------------------------------------------------
+ *                   KLS7-TS6601-5.0-180    2    SB1, SB2                                          
+ *                   Led Diode 5mm    5    HL1, HL2, HL3, HL4, HL5                           
+ *                   PLS-2            1    X7                                                
+ *                   PLS-4            2    X8, X10                                           
+ *                   PLS-5            1    X9                                                
+ 100R                Resistor-0.25W    6    R1, R6, R8, R9, R10, R13     =Power               
+ 10k                 Resistor-0.25W    2    R11, R12                     =Power               
+ 15EDGVC-3.5-2P      15EDGVC-3.5-2P    2    X1, X2                                            
+ 15EDGVC-3.5-3P      15EDGVC-3.5-3P    1    X6                                                
+ 1k                  3296W_Resistor    1    R4                           3296                 
+ 1k                  Resistor-0.25W    1    R2                           =Power               
+ 1N4007              Diode (DO41)     1    VD1                          1A, 1000V            
+ 4.7K                Resistor-0.25W    1    R3                           =Power               
+ ADUINO-NANO-V3.0-328 ARDUINO_NANO_V3.0    1    DD1                                               
+ Jumper              PLS-2            2    JP1, JP2                                          
+ L78M05              D-PAK            1    D1                           L78M05               
+ PLS-4               PLS-4            3    X3, X4, X5                                        
+ TIP122              TO220            1    VT1                          PNP Transistor       

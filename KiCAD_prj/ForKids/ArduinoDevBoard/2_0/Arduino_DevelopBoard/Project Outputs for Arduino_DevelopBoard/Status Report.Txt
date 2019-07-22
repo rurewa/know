@@ -1,0 +1,11 @@
+Output: Simple BOM
+Type  : SimpleBOM
+From  : Variant [[No Variations]] of Project [Arduino_DevelopBoard.PrjPcb]
+   Generated File[ArduinoDevelopBoard-v2.BOM]
+   Generated File[ArduinoDevelopBoard-v2.CSV]
+
+
+Files Generated   : 2
+Documents Printed : 0
+
+Finished Output Generation At 16:15:38 On 14.06.2018

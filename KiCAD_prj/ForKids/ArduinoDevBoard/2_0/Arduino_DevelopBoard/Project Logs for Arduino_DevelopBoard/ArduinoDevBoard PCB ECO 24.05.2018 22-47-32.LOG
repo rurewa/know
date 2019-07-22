@@ -1,0 +1,14 @@
+Removed Pin From Net: NetName=+5V Pin=D?-2
+Removed Pin From Net: NetName=NetDD1_27 Pin=DD1-27
+Removed Pin From Net: NetName=NetDD1_27 Pin=Jumper2-1
+Removed Pin From Net: NetName=+5V Pin=Jumper2-2
+Removed Member From Class: ClassName=ArduinoDevelopBoard Member=Jumper2
+Added Component: Designator=Jumper?(PLS-2)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetDD1_27 Pin=D?-2
+Added Pin To Net: NetName=+5V Pin=DD1-27
+Added Pin To Net: NetName=NetDD1_27 Pin=Jumper?-1
+Added Pin To Net: NetName=+5V Pin=Jumper?-2
+Change Net Name : Old Net Name=NetDD1_27 New Net Name=NetD?_2
+Added Member To Class: ClassName=ArduinoDevelopBoard Member=Component Jumper? Jumper
+Added Room: Name=ArduinoDevelopBoard

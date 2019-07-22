@@ -1,0 +1,20 @@
+----------------------------------------------------------------------------------------------------------------------------------
+NCDrill File Report For: ArduinoDevBoard-v2-panel.PcbDoc   10.09.2018  15:31:21
+----------------------------------------------------------------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : ArduinoDevBoard-v2-panel.TXT
+
+Tool       Hole Size               Hole Tolerance               Hole Type       Hole Count   Plated         Tool Travel
+----------------------------------------------------------------------------------------------------------------------------------
+T1      30mil (0.762mm)                                           Round             30        PTH        21.99inch (558.46mm)
+T2      32mil (0.8mm)                                             Round             105       PTH        37.57inch (954.32mm)
+T3      39mil (1mm)                                               Round             210       PTH        49.19inch (1249.45mm)
+T4      43mil (1.1mm)                                             Round             9         PTH        5.79inch (147.00mm)
+T5      47mil (1.2mm)                                             Round             6         PTH        6.30inch (160.00mm)
+T6      55mil (1.4mm)                                             Round             42        PTH        26.13inch (663.66mm)
+T7      55mil (1.4mm)                                             Round             6         NPTH       13.70inch (347.97mm)
+----------------------------------------------------------------------------------------------------------------------------------
+Totals                                                                              408
+
+Total Processing Time (hh:mm:ss) : 00:00:00

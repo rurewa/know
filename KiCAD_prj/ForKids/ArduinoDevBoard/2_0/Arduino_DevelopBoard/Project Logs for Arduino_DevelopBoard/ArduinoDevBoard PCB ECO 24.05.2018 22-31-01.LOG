@@ -1,0 +1,12 @@
+Removed Pin From Net: NetName=NetD1_1 Pin=D1-1
+Removed Pin From Net: NetName=+5V Pin=D1-2
+Removed Pin From Net: NetName=GND Pin=D1-3
+Removed Member From Class: ClassName=ArduinoDevelopBoard Member=D1
+Added Component: Designator=D?(D-PAK)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetD1_1 Pin=D?-1
+Added Pin To Net: NetName=+5V Pin=D?-2
+Added Pin To Net: NetName=GND Pin=D?-3
+Change Net Name : Old Net Name=NetD1_1 New Net Name=NetD?_1
+Added Member To Class: ClassName=ArduinoDevelopBoard Member=Component D? L78M05
+Added Room: Name=ArduinoDevelopBoard

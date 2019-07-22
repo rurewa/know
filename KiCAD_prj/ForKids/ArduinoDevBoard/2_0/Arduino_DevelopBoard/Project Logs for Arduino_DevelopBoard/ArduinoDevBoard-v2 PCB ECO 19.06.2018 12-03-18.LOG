@@ -1,0 +1,39 @@
+Removed Pin From Net: NetName=GND Pin=HL2-2
+Removed Pin From Net: NetName=GND Pin=HL3-2
+Removed Pin From Net: NetName=GND Pin=HL4-2
+Added Component: Designator=JP3(PLS-2)
+Add component. Clean all parameters for all variants
+Added Component: Designator=JP4(PLS-2)
+Add component. Clean all parameters for all variants
+Added Component: Designator=JP5(PLS-2)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R5(Resistor-0.25W)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Power"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10k"; VariantName = "[No Variations]"
+Added Component: Designator=SB3(KLS7-TS6601-5.0-180)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Model"; Value = ""; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=JP3-2
+Added Pin To Net: NetName=GND Pin=JP4-2
+Added Pin To Net: NetName=GND Pin=JP5-2
+Added Pin To Net: NetName=GND Pin=R5-1
+Added Pin To Net: NetName=+5V Pin=SB3-3
+Added Pin To Net: NetName=NetDD1_16 Pin=DD1-16
+Added Pin To Net: NetName=NetDD1_16 Pin=R5-2
+Added Pin To Net: NetName=NetDD1_16 Pin=SB3-1
+Added Net: Name=NetDD1_16
+Added Pin To Net: NetName=NetHL2_2 Pin=HL2-2
+Added Pin To Net: NetName=NetHL2_2 Pin=JP3-1
+Added Net: Name=NetHL2_2
+Added Pin To Net: NetName=NetHL3_2 Pin=HL3-2
+Added Pin To Net: NetName=NetHL3_2 Pin=JP4-1
+Added Net: Name=NetHL3_2
+Added Pin To Net: NetName=NetHL4_2 Pin=HL4-2
+Added Pin To Net: NetName=NetHL4_2 Pin=JP5-1
+Added Net: Name=NetHL4_2
+Added Member To Class: ClassName=ArduinoDevelopBoard-v2 Member=Component JP3 Jumper
+Added Member To Class: ClassName=ArduinoDevelopBoard-v2 Member=Component JP4 Jumper
+Added Member To Class: ClassName=ArduinoDevelopBoard-v2 Member=Component JP5 Jumper
+Added Member To Class: ClassName=ArduinoDevelopBoard-v2 Member=Component R5 10k
+Added Member To Class: ClassName=ArduinoDevelopBoard-v2 Member=Component SB3 *
