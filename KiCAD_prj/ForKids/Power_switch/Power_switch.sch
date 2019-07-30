@@ -179,82 +179,36 @@ Connection ~ 6235 4240
 $Comp
 L Connector:Conn_01x04_Female J2
 U 1 1 5D4B160D
-P 7785 2695
-F 0 "J2" H 7813 2671 50  0000 L CNN
-F 1 "Conn_01x04_Female" V 7485 2540 50  0001 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 7785 2695 50  0001 C CNN
-F 3 "~" H 7785 2695 50  0001 C CNN
-	1    7785 2695
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:Conn_01x04_Female J6
-U 1 1 5D4B914A
-P 7785 3150
-F 0 "J6" H 7813 3126 50  0000 L CNN
-F 1 "Conn_01x04_Female" V 7950 2745 50  0001 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 7785 3150 50  0001 C CNN
-F 3 "~" H 7785 3150 50  0001 C CNN
-	1    7785 3150
+P 7800 2535
+F 0 "J2" H 7828 2511 50  0000 L CNN
+F 1 "Conn_01x04_Female" V 7500 2380 50  0001 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 7800 2535 50  0001 C CNN
+F 3 "~" H 7800 2535 50  0001 C CNN
+	1    7800 2535
 	1    0    0    -1  
 $EndComp
 $Comp
 L Connector:Conn_01x04_Female J7
 U 1 1 5D4BA084
-P 7785 3595
-F 0 "J7" H 7813 3571 50  0000 L CNN
-F 1 "Conn_01x04_Female" V 7875 3640 50  0001 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 7785 3595 50  0001 C CNN
-F 3 "~" H 7785 3595 50  0001 C CNN
-	1    7785 3595
+P 7800 3590
+F 0 "J7" H 7828 3566 50  0000 L CNN
+F 1 "Conn_01x04_Female" V 7890 3635 50  0001 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 7800 3590 50  0001 C CNN
+F 3 "~" H 7800 3590 50  0001 C CNN
+	1    7800 3590
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7585 3795 7585 3695
-Connection ~ 7585 2695
-Wire Wire Line
-	7585 2695 7585 2595
-Connection ~ 7585 2795
-Wire Wire Line
-	7585 2795 7585 2695
-Connection ~ 7585 2895
-Wire Wire Line
-	7585 2895 7585 2795
-Connection ~ 7585 3050
-Wire Wire Line
-	7585 3050 7585 2895
-Connection ~ 7585 3150
-Wire Wire Line
-	7585 3150 7585 3050
-Connection ~ 7585 3250
-Wire Wire Line
-	7585 3250 7585 3150
-Connection ~ 7585 3350
-Wire Wire Line
-	7585 3350 7585 3250
-Connection ~ 7585 3495
-Wire Wire Line
-	7585 3495 7585 3350
-Connection ~ 7585 3595
-Wire Wire Line
-	7585 3595 7585 3495
-Connection ~ 7585 3695
-Wire Wire Line
-	7585 3695 7585 3595
 $Comp
 L power:Earth #PWR02
 U 1 1 5D3CEC6B
-P 7585 3875
-F 0 "#PWR02" H 7585 3625 50  0001 C CNN
-F 1 "Earth" H 7585 3725 50  0001 C CNN
-F 2 "" H 7585 3875 50  0001 C CNN
-F 3 "~" H 7585 3875 50  0001 C CNN
-	1    7585 3875
+P 7600 3900
+F 0 "#PWR02" H 7600 3650 50  0001 C CNN
+F 1 "Earth" H 7600 3750 50  0001 C CNN
+F 2 "" H 7600 3900 50  0001 C CNN
+F 3 "~" H 7600 3900 50  0001 C CNN
+	1    7600 3900
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	7585 3875 7585 3795
-Connection ~ 7585 3795
 Wire Wire Line
 	6235 3490 7185 3490
 $Comp
@@ -464,4 +418,50 @@ Wire Wire Line
 	3380 3490 3735 3490
 Wire Wire Line
 	3380 4240 4235 4240
+$Comp
+L Connector:Conn_01x04_Female J6
+U 1 1 5D4B914A
+P 7800 3140
+F 0 "J6" H 7828 3116 50  0000 L CNN
+F 1 "Conn_01x04_Female" V 7965 2735 50  0001 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 7800 3140 50  0001 C CNN
+F 3 "~" H 7800 3140 50  0001 C CNN
+	1    7800 3140
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7600 3900 7600 3790
+Connection ~ 7600 3140
+Connection ~ 7600 3240
+Wire Wire Line
+	7600 3240 7600 3140
+Connection ~ 7600 3340
+Wire Wire Line
+	7600 3340 7600 3240
+Connection ~ 7600 3490
+Wire Wire Line
+	7600 3490 7600 3340
+Connection ~ 7600 3590
+Wire Wire Line
+	7600 3590 7600 3490
+Connection ~ 7600 3690
+Wire Wire Line
+	7600 3690 7600 3590
+Connection ~ 7600 3790
+Wire Wire Line
+	7600 3790 7600 3690
+Wire Wire Line
+	7600 2435 7600 2535
+Connection ~ 7600 2535
+Wire Wire Line
+	7600 2535 7600 2635
+Connection ~ 7600 2635
+Wire Wire Line
+	7600 2635 7600 2735
+Connection ~ 7600 2735
+Wire Wire Line
+	7600 2735 7600 3040
+Connection ~ 7600 3040
+Wire Wire Line
+	7600 3040 7600 3140
 $EndSCHEMATC
