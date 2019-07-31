@@ -35,5 +35,5 @@ void loop()
   delay(100);
   lc.setLed(0, indexLeds[rowIndex], indexLeds[colIndex], false);
   delay(100);
-  //lc.setLed(0, 1, 2, true); // 0 - номер экрана, 1 - столбец (0-7), 2 - ряд, true - экран включён
+  //lc.setLed(0, 1, 2, true); // 0 - номер экрана, 1 - столбец (0-7), 2 - ряд (0-7), true - экран включён
 }
