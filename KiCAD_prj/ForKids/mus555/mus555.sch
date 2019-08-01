@@ -149,12 +149,12 @@ Wire Wire Line
 $Comp
 L power:GNDREF #PWR0102
 U 1 1 5CC2759A
-P 8450 3500
-F 0 "#PWR0102" H 8450 3250 50  0001 C CNN
-F 1 "GNDREF" H 8550 3350 50  0000 C CNN
-F 2 "" H 8450 3500 50  0001 C CNN
-F 3 "" H 8450 3500 50  0001 C CNN
-	1    8450 3500
+P 8450 3700
+F 0 "#PWR0102" H 8450 3450 50  0001 C CNN
+F 1 "GNDREF" H 8550 3550 50  0000 C CNN
+F 2 "" H 8450 3700 50  0001 C CNN
+F 3 "" H 8450 3700 50  0001 C CNN
+	1    8450 3700
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -171,12 +171,12 @@ $EndComp
 $Comp
 L Connector:Screw_Terminal_01x02 J1
 U 1 1 5CC2D610
-P 8850 2900
-F 0 "J1" H 8930 2892 50  0000 L CNN
-F 1 "Screw_Terminal_01x02" H 8930 2801 50  0000 L CNN
-F 2 "Connector_Phoenix_MC:PhoenixContact_MCV_1,5_2-G-3.5_1x02_P3.50mm_Vertical" H 8850 2900 50  0001 C CNN
-F 3 "~" H 8850 2900 50  0001 C CNN
-	1    8850 2900
+P 9200 2900
+F 0 "J1" H 9280 2892 50  0000 L CNN
+F 1 "Screw_Terminal_01x02" H 9280 2801 50  0000 L CNN
+F 2 "Connector_Phoenix_MC:PhoenixContact_MCV_1,5_2-G-3.5_1x02_P3.50mm_Vertical" H 9200 2900 50  0001 C CNN
+F 3 "~" H 9200 2900 50  0001 C CNN
+	1    9200 2900
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
@@ -201,15 +201,6 @@ Wire Wire Line
 	3800 4750 3800 4800
 Wire Wire Line
 	7700 4650 7700 4900
-Wire Wire Line
-	8450 3250 8450 3300
-Wire Wire Line
-	8650 3000 8650 3300
-Wire Wire Line
-	8650 3300 8450 3300
-Connection ~ 8450 3300
-Wire Wire Line
-	8450 3300 8450 3400
 $Comp
 L Device:C C1
 U 1 1 5CCD5F44
@@ -288,15 +279,12 @@ L power:PWR_FLAG #FLG0102
 U 1 1 5CBEA93A
 P 8450 3400
 F 0 "#FLG0102" H 8450 3475 50  0001 C CNN
-F 1 "PWR_FLAG" V 8450 3528 50  0000 L CNN
+F 1 "PWR_FLAG" H 8275 3560 50  0000 L CNN
 F 2 "" H 8450 3400 50  0001 C CNN
 F 3 "~" H 8450 3400 50  0001 C CNN
 	1    8450 3400
 	0    1    1    0   
 $EndComp
-Connection ~ 8450 3400
-Wire Wire Line
-	8450 3500 8450 3400
 Wire Wire Line
 	7250 5300 7450 5300
 Wire Wire Line
@@ -320,8 +308,6 @@ F 3 "http://www.ti.com/lit/ds/symlink/ne555.pdf" H 7550 3500 50  0001 C CNN
 	-1   0    0    -1  
 $EndComp
 Wire Wire Line
-	8650 2900 8450 2900
-Wire Wire Line
 	6700 2900 6700 2950
 Wire Wire Line
 	7050 3500 6700 3500
@@ -336,23 +322,18 @@ Connection ~ 7550 2900
 Wire Wire Line
 	7550 2900 6700 2900
 Wire Wire Line
-	8450 2800 8450 2900
-Connection ~ 8450 2900
-Wire Wire Line
 	8450 2900 8350 2900
 $Comp
 L Device:C C4
 U 1 1 5CCD55A7
 P 8450 3100
-F 0 "C4" H 8500 3200 50  0000 L CNN
-F 1 "104" H 8500 3000 50  0000 L CNN
+F 0 "C4" H 8470 3190 50  0000 L CNN
+F 1 "104" H 8480 3020 50  0000 L CNN
 F 2 "Capacitor_THT:C_Disc_D4.7mm_W2.5mm_P5.00mm" H 8488 2950 50  0001 C CNN
 F 3 "~" H 8450 3100 50  0001 C CNN
 	1    8450 3100
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	8450 2950 8450 2900
 Wire Wire Line
 	8050 3700 8350 3700
 Wire Wire Line
@@ -554,4 +535,44 @@ F 3 "~" H 6350 4300 50  0001 C CNN
 	1    6350 4100
 	0    -1   -1   0   
 $EndComp
+Wire Wire Line
+	8450 3250 8450 3400
+Wire Wire Line
+	9000 3000 9000 3600
+Wire Wire Line
+	8450 2800 8450 2900
+Wire Wire Line
+	8450 3600 8450 3700
+Connection ~ 8450 3600
+Connection ~ 8450 3400
+Wire Wire Line
+	8450 3400 8450 3600
+Wire Wire Line
+	8450 3600 8750 3600
+Wire Wire Line
+	9000 2900 8750 2900
+Connection ~ 8450 2900
+Wire Wire Line
+	8450 2900 8450 2950
+$Comp
+L Diode:1N4007 D1
+U 1 1 5D3D4FB4
+P 8750 3200
+F 0 "D1" V 8704 3279 50  0000 L CNN
+F 1 "1N4007" V 8795 3279 50  0000 L CNN
+F 2 "Diode_THT:D_DO-35_SOD27_P5.08mm_Vertical_AnodeUp" H 8750 3025 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 8750 3200 50  0001 C CNN
+	1    8750 3200
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8750 3050 8750 2900
+Connection ~ 8750 2900
+Wire Wire Line
+	8750 2900 8450 2900
+Wire Wire Line
+	8750 3350 8750 3600
+Connection ~ 8750 3600
+Wire Wire Line
+	8750 3600 9000 3600
 $EndSCHEMATC
