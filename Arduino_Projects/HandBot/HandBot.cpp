@@ -1,6 +1,6 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // Рука робота
-// V 1.0
+// V 1.1
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <Wire.h>
@@ -30,41 +30,18 @@ int pulseWidth(int angle) {
 }
 
 void loop() {
-  pwm.setPWM(4, 0, pulseWidth(0)); // 0 градусов
-  pwm.setPWM(5, 0, pulseWidth(0));
-  pwm.setPWM(6, 0, pulseWidth(0));
-  delay(1000);
-  pwm.setPWM(4, 0, pulseWidth(90)); // 90 градусов
-  pwm.setPWM(5, 0, pulseWidth(90));
-  pwm.setPWM(6, 0, pulseWidth(90));
-  delay(1000);
-
-  pwm.setPWM(4, 0, pulseWidth(0));
-  delay(1000);
-  pwm.setPWM(5, 0, pulseWidth(0));
-  delay(1000);
-  pwm.setPWM(6, 0, pulseWidth(0));
-  delay(1000);
-  pwm.setPWM(4, 0, pulseWidth(90));
-  delay(1000);
-  pwm.setPWM(5, 0, pulseWidth(90));
-  delay(1000);
-  pwm.setPWM(6, 0, pulseWidth(90));
-  delay(1000);
-
-  pwm.setPWM(4, 0, pulseWidth(0));
-  delay(1000);
-  pwm.setPWM(5, 0, pulseWidth(90));
-  delay(1000);
-  pwm.setPWM(6, 0, pulseWidth(0));
-  delay(1000);
-
-  pwm.setPWM(4, 0, pulseWidth(90));
-  delay(1000);
-  pwm.setPWM(5, 0, pulseWidth(0));
-  delay(1000);
-  pwm.setPWM(6, 0, pulseWidth(90));
-  delay(1000);
+  for (int i = 0; i < 110; ++i) {
+    pwm.setPWM(8, 0, pulseWidth(i));
+    pwm.setPWM(9, 0, pulseWidth(i));
+    pwm.setPWM(10, 0, pulseWidth(i));
+    delay(30);
+  }
+  for (int i = 110; i >= 0; --i) {
+    pwm.setPWM(8, 0, pulseWidth(i));
+    pwm.setPWM(9, 0, pulseWidth(i));
+    pwm.setPWM(10, 0, pulseWidth(i));
+    delay(30);
+  }
 }
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // END FILE
