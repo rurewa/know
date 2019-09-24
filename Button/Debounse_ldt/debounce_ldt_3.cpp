@@ -1,7 +1,7 @@
 #include <Arduino.h>
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
-// Учебный пример использования библиотеки антидребезга Button_Simple от компании РОБОДЕМ
-// V 2.0
+// Учебный пример использования библиотеки антидребезга Button_Simple
+// V 3.0
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Button_Simple.h>
 
@@ -17,7 +17,13 @@ void loop() {
   button.scan(); // Инициализация библиотеки
   if (button.clicked()) {
     is_on = !is_on;
-    digitalWrite(3, is_on ? HIGH : LOW);
+    if (is_on == true) {
+      digitalWrite(3, HIGH);
+    }
+    else {
+      digitalWrite(3, LOW);
+    }
+    //digitalWrite(3, is_on ? HIGH : LOW);
   }
   Serial.println(is_on);
 }
