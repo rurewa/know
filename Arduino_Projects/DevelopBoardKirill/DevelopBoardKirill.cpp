@@ -13,7 +13,7 @@ int8_t Joy2ValueX = 0; // Джойстик 2
 
 int sigSwhow1 = 9; // Сигнализация
 
-void blink();
+void blink(); // Функция мигация сигнальным светодиодом
 
 void setup() {
   Motor1.run(RELEASE); // Останов мотора 1
@@ -109,7 +109,7 @@ void loop() {
       //Serial.println(Joy2ValueX);
   }
 }
-
+// Функция мигация сигнальным светодиодом
 void blink() {
   // static меняет время жизни переменной на время работы программы
   static unsigned long blink_time = millis();
