@@ -11,7 +11,7 @@ AF_DCMotor Motor3(3); // Объект мотора 3
 int8_t Joy1ValueX = 0, Joy1ValueY= 0; // Джойстик 1 по X и Y
 int8_t Joy2ValueX = 0; // Джойстик 2
 
-int sigSwhow1 = 9; // Сигнализация
+int sigShow1 = 9; // Сигнализация
 
 void blink(); // Функция мигация сигнальным светодиодом
 
@@ -33,7 +33,7 @@ void loop() {
   if (Joy1ValueX >= -10 && Joy1ValueX <= 10)  {
       Motor1.run(RELEASE); // Останавливаем мотор
       if (Joy1ValueX >= -10 && Joy1ValueX <= 10) {
-        digitalWrite(sigSwhow1, LOW); // Сигнализация выключена
+        digitalWrite(sigShow1, LOW); // Сигнализация выключена
       }
       //Serial.println(Joy1ValueX); // Код для диагностики
   }
@@ -41,7 +41,7 @@ void loop() {
       Motor1.run(FORWARD); // Крутим мотор 1
       Motor1.setSpeed(Joy1ValueX); // Со скоростью от 11 до 255 по ШИМ
       if (Joy1ValueX > 11) {
-        //digitalWrite(sigSwhow1, HIGH); // Сигнализация включена
+        //digitalWrite(sigShow1, HIGH); // Сигнализация включена
         blink();
       }
       //Serial.println(Joy1ValueX);
@@ -50,7 +50,7 @@ void loop() {
       Motor1.run(BACKWARD); // Крутим мотор 1 в обратную сторону
       Motor1.setSpeed(-Joy1ValueX); // Со скоростью от -11 до -255 по ШИМ
       if (Joy1ValueX < -11) {
-        //digitalWrite(sigSwhow1, HIGH);
+        //digitalWrite(sigShow1, HIGH);
         blink();
       }
       //Serial.println(Joy1ValueX);
@@ -59,7 +59,7 @@ void loop() {
   if (Joy1ValueY >= -10 && Joy1ValueY <= 10)  {
       Motor2.run(RELEASE);
       if (Joy1ValueY >= -10 && Joy1ValueY <= 10) {
-        digitalWrite(sigSwhow1, LOW);
+        digitalWrite(sigShow1, LOW);
       }
       //Serial.println(Joy1ValueY);
   }
@@ -67,7 +67,7 @@ void loop() {
       Motor2.run(FORWARD);
       Motor2.setSpeed(Joy1ValueY);
       if (Joy1ValueY > 13) {
-        //digitalWrite(sigSwhow1, HIGH);
+        //digitalWrite(sigShow1, HIGH);
         blink();
       }
       //Serial.println(Joy1ValueY);
@@ -76,7 +76,7 @@ void loop() {
       Motor2.run(BACKWARD);
       Motor2.setSpeed(-Joy1ValueY);
       if (Joy1ValueY <= -13) {
-        //digitalWrite(sigSwhow1, HIGH);
+        //digitalWrite(sigShow1, HIGH);
         blink();
       }
       //Serial.println(Joy1ValueY);
@@ -86,7 +86,7 @@ void loop() {
   if (Joy2ValueX >= -10 && Joy2ValueX <= 10)  {
       Motor3.run(RELEASE);
       if (Joy2ValueX >= -10 && Joy2ValueX <= 10) {
-        digitalWrite(sigSwhow1, LOW);
+        digitalWrite(sigShow1, LOW);
       }
       //Serial.println(Joy2ValueX);
   }
@@ -94,7 +94,7 @@ void loop() {
       Motor3.run(FORWARD);
       Motor3.setSpeed(Joy2ValueX);
       if (Joy2ValueX > 13) {
-        //digitalWrite(sigSwhow1, HIGH);
+        //digitalWrite(sigShow1, HIGH);
         blink();
       }
       //Serial.println(Joy2ValueX);
@@ -103,7 +103,7 @@ void loop() {
       Motor3.run(BACKWARD);
       Motor3.setSpeed(-Joy2ValueX);
       if (Joy2ValueX < -13) {
-        //digitalWrite(sigSwhow1, HIGH);
+        //digitalWrite(sigShow1, HIGH);
         blink();
       }
       //Serial.println(Joy2ValueX);
