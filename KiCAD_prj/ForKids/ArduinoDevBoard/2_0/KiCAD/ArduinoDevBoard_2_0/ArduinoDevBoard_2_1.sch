@@ -101,7 +101,7 @@ U 1 1 5DFD83FF
 P 2400 3800
 F 0 "J2" H 2428 3776 50  0000 L CNN
 F 1 "Conn_01x04_Female" H 2428 3685 50  0001 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 2400 3800 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x04_P2.54mm_Vertical" H 2400 3800 50  0001 C CNN
 F 3 "~" H 2400 3800 50  0001 C CNN
 	1    2400 3800
 	-1   0    0    -1  
@@ -159,7 +159,7 @@ U 1 1 5DFDCB65
 P 8200 1400
 F 0 "J9" H 8228 1426 50  0000 L CNN
 F 1 "Conn_01x03_Female" H 8228 1335 50  0001 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 8200 1400 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x03_P2.54mm_Vertical" H 8200 1400 50  0001 C CNN
 F 3 "~" H 8200 1400 50  0001 C CNN
 	1    8200 1400
 	1    0    0    -1  
@@ -703,7 +703,7 @@ Wire Wire Line
 Text Notes 1500 1000 0    50   ~ 0
 Мотор
 Text Notes 3900 750  0    50   ~ 0
-Стабилизатор питания
+Стабилизатор напряжения
 Text Notes 7800 1150 0    50   ~ 0
 Датчик t\nDS18B20
 $Comp
@@ -1263,7 +1263,7 @@ U 1 1 5E0CC87F
 P 3950 3450
 F 0 "J13" H 3842 4243 50  0000 C CNN
 F 1 "Conn_01x15_Female" H 3842 4244 50  0001 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x15_P2.54mm_Vertical" H 3950 3450 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical" H 3950 3450 50  0001 C CNN
 F 3 "~" H 3950 3450 50  0001 C CNN
 	1    3950 3450
 	-1   0    0    -1  
@@ -1276,18 +1276,16 @@ Text GLabel 5400 2950 0    50   BiDi ~ 0
 TX
 Wire Wire Line
 	5400 2950 5500 2950
-Text GLabel 4250 2750 2    50   BiDi ~ 0
+Text GLabel 4250 2850 2    50   BiDi ~ 0
 RX
 Wire Wire Line
 	4250 2750 4150 2750
-Text GLabel 4250 2850 2    50   BiDi ~ 0
+Text GLabel 4250 2750 2    50   BiDi ~ 0
 TX
 Wire Wire Line
 	4250 2850 4150 2850
 Text GLabel 4250 3150 2    50   BiDi ~ 0
 D2
-Wire Wire Line
-	4250 2950 4150 2950
 Text GLabel 4250 3250 2    50   BiDi ~ 0
 D3
 Text GLabel 4250 3350 2    50   BiDi ~ 0
@@ -1345,15 +1343,7 @@ Wire Wire Line
 	4550 3150 4550 3050
 Wire Wire Line
 	4150 3050 4550 3050
-Text GLabel 6600 2950 2    50   BiDi ~ 0
-RST
-Wire Wire Line
-	6600 2950 6500 2950
 Text GLabel 6600 2850 2    50   BiDi ~ 0
-RST
-Wire Wire Line
-	6600 2850 6500 2850
-Text GLabel 4250 2950 2    50   BiDi ~ 0
 RST
 $Comp
 L Connector:Conn_01x15_Female J14
@@ -1361,7 +1351,7 @@ U 1 1 5E289CEE
 P 7450 3500
 F 0 "J14" H 7342 4293 50  0000 C CNN
 F 1 "Conn_01x15_Female" H 7342 4294 50  0001 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x15_P2.54mm_Vertical" H 7450 3500 50  0001 C CNN
+F 2 "Connector_PinSocket_2.54mm:PinSocket_1x15_P2.54mm_Vertical" H 7450 3500 50  0001 C CNN
 F 3 "~" H 7450 3500 50  0001 C CNN
 	1    7450 3500
 	-1   0    0    -1  
@@ -1476,4 +1466,8 @@ Wire Wire Line
 Connection ~ 5900 2400
 Wire Wire Line
 	5900 2400 5900 2450
+NoConn ~ 4150 2950
+Wire Wire Line
+	6600 2850 6500 2850
+NoConn ~ 6500 2950
 $EndSCHEMATC
