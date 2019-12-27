@@ -1343,10 +1343,8 @@ Wire Wire Line
 	4550 3150 4550 3050
 Wire Wire Line
 	4150 3050 4550 3050
-Text GLabel 6600 2950 2    50   BiDi ~ 0
+Text GLabel 6600 2850 2    50   BiDi ~ 0
 RST
-Wire Wire Line
-	6600 2950 6500 2950
 $Comp
 L Connector:Conn_01x15_Female J14
 U 1 1 5E289CEE
@@ -1469,5 +1467,7 @@ Connection ~ 5900 2400
 Wire Wire Line
 	5900 2400 5900 2450
 NoConn ~ 4150 2950
-NoConn ~ 6500 2850
+Wire Wire Line
+	6600 2850 6500 2850
+NoConn ~ 6500 2950
 $EndSCHEMATC
