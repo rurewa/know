@@ -4,42 +4,31 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 
-// Указываем размер массива
 const int ARRAY_SIZE = 5;
-// Объявляем массив из пяти элементов
-int ledPin[ARRAY_SIZE] = {8, 9, 10, 11, 12};
-int direction = 1; // Направление волны
-int currentLed = 0;
+const int ARRAY_PINS_LEDS[ARRAY_SIZE] = {8, 9, 10, 11, 12};
 
 void setup() {
-// Настраиваем пины светодиодов как ВЫХОД
-  for (int i = 0; i < ARRAY_SIZE; i++) {
-    pinMode(ledPin[i], OUTPUT);
+  for (int i = 0; i < ARRAY_SIZE; ++i) {
+    pinMode(ARRAY_PINS_LEDS[i], OUTPUT);
   }
 }
 
 void loop() {
-    changeLed(); // Вызываем функцию
-    delay(300);
-}
-// Объявляем функцию
-void changeLed() {
-  // выключаем все светодиоды
-  for (int i = 0; i < ARRAY_SIZE; i++) {
-    digitalWrite(ledPin[i], LOW);
+  static int currentLed = 0;
+  static int directWave = 1;
+
+  for (int x = 0; x < ARRAY_SIZE; ++x) {
+    digitalWrite(ARRAY_PINS_LEDS[x], LOW);
   }
-  // включаем текущий LED
-  digitalWrite(ledPin[currentLed], HIGH);
-  // увеличиваем значение
-  currentLed += direction; // Волна пошла
-  // меняем направление, если достигли конца
-  if (currentLed == ARRAY_SIZE - 1) {
-    direction = -1;
+  digitalWrite(ARRAY_PINS_LEDS[currentLed], HIGH);
+  currentLed += directWave;
+  if (currentLed == ARRAY_SIZE -1) {
+    directWave = -directWave;
   }
-  // Снова запускаем цикл
   if (currentLed == 0) {
-    direction = 1;
+    directWave = 1;
   }
+  delay(250);
 }
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // END FILE
