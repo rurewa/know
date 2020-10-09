@@ -6,14 +6,14 @@
 #include<NewPing.h>
 
 Servo myservo;
-const int trig = 4;
-const int echo = 6;
+const int TRIG = 4;
+const int ECHO = 6;
 
-NewPing sonar(trig, echo, 100);
+NewPing sonar(TRIG, ECHO, 100);
 
 void setup() {
   myservo.attach(9);
-  pinMode(trig, OUTPUT);
+  pinMode(TRIG, OUTPUT);
   Serial.begin(9600);  
 }
 
@@ -23,7 +23,8 @@ void loop() {
     myservo.write(180);
   }
   else {
-    myservo.write(10);
+    myservo.write(20);
+    delay(1000);
   }
   Serial.println(sonar.ping_cm());
 }
