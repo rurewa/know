@@ -1,5 +1,4 @@
 EESchema Schematic File Version 4
-LIBS:child_bases_2-cache
 EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
@@ -1337,10 +1336,10 @@ Connection ~ 5300 5350
 Wire Wire Line
 	5300 5350 6300 5350
 $Comp
-L Device:C C?
+L Device:C C8
 U 1 1 5FADE233
 P 5950 7200
-F 0 "C?" H 6050 7100 50  0000 R CNN
+F 0 "C8" H 6050 7100 50  0000 R CNN
 F 1 "100nF" H 6200 7300 50  0000 R CNN
 F 2 "" H 5988 7050 50  0001 C CNN
 F 3 "~" H 5950 7200 50  0001 C CNN
