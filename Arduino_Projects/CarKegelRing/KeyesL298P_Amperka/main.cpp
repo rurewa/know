@@ -10,28 +10,41 @@
 // Left motor
 const int SPEED_1 = 10;
 const int DIR_1 = 12;
-// Right otor
+// Right motor
 const int SPEED_2 = 11;
 const int DIR_2 = 13;
 // SPEED PWM motors
-const int SPEED_LEFT = 130;
-const int SPEED_RIGHT = 130;
+const int SPEED_LEFT = 40;
+const int SPEED_RIGHT = 40;
 
 void go(int SPEED_LEFT, int SPEED_RIGHT);
 void back(int SPEED_LEFT, int SPEED_RIGHT);
 void left(int SPEED_LEFT, int SPEED_RIGHT);
 void right(int SPEED_LEFT, int SPEED_RIGHT);
-void stops();
+void stops(int TIMES);
 
 void sensTest(int times); // Тест сенсоров черной линии
 
 void setup() {
-  go(SPEED_LEFT, SPEED_RIGHT);
-  //back(SPEED_LEFT, SPEED_RIGHT);
+  pinMode(SPEED_1, OUTPUT);
+  pinMode(DIR_1, OUTPUT);
+  pinMode(SPEED_2, OUTPUT);
+  pinMode(DIR_2, OUTPUT);
 }
 
 void loop() {
-
+  go(SPEED_LEFT, SPEED_RIGHT);
+  delay(1000);
+  stops(1000);
+  back(SPEED_LEFT, SPEED_RIGHT);
+  delay(1000);
+  stops(1000);
+  left(SPEED_LEFT, SPEED_RIGHT);
+  delay(1000);
+  stops(1000);
+  right(SPEED_LEFT, SPEED_RIGHT);
+  delay(1000);
+  stops(1000);
 }
 
 void go(int SPEED_LEFT, int SPEED_RIGHT) {
@@ -48,9 +61,10 @@ void back(int SPEED_LEFT, int SPEED_RIGHT) {
   analogWrite(SPEED_2, SPEED_RIGHT);
 }
 
-void stops() {
+void stops(int TIMES) {
   analogWrite(SPEED_1, 0);
   analogWrite(SPEED_2, 0);
+  delay(TIMES);
 }
 
 void left(int SPEED_LEFT, int SPEED_RIGHT) {
