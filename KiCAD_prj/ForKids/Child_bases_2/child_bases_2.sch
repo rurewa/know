@@ -823,7 +823,7 @@ L Device:R R8
 U 1 1 5F88B654
 P 4650 3700
 F 0 "R8" V 4550 3700 50  0000 C CNN
-F 1 "10K" V 4750 3700 50  0000 C CNN
+F 1 "47K" V 4750 3700 50  0000 C CNN
 F 2 "" V 4580 3700 50  0001 C CNN
 F 3 "~" H 4650 3700 50  0001 C CNN
 	1    4650 3700
@@ -922,8 +922,6 @@ $EndComp
 Wire Wire Line
 	4400 3200 4400 3350
 Connection ~ 4400 3350
-Text Notes 4450 4650 0    50   ~ 0
-* можно заменить на 2222
 $Comp
 L Device:Speaker LS2
 U 1 1 5F8C825E

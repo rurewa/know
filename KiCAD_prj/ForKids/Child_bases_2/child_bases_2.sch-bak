@@ -221,17 +221,6 @@ F 3 "~" H 7000 2350 50  0001 C CNN
 	1    7000 2350
 	0    1    1    0   
 $EndComp
-$Comp
-L power:Earth #PWR017
-U 1 1 5F982AF5
-P 9500 3150
-F 0 "#PWR017" H 9500 2900 50  0001 C CNN
-F 1 "Earth" H 9500 3000 50  0001 C CNN
-F 2 "" H 9500 3150 50  0001 C CNN
-F 3 "~" H 9500 3150 50  0001 C CNN
-	1    9500 3150
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	6700 2350 6850 2350
 Wire Wire Line
