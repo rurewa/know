@@ -2,7 +2,20 @@
 Screw_Terminal_01x02
 Connector_Phoenix_MC:PhoenixContact_MCV_1,5_2-G-3.5_1x02_P3.50mm_Vertical
 
-
 Разъём штырьковый, обыкновенный
 Conn_01x02_Female
 Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical
+
+Выключатель многоштырьковый
+
+Button_Switch_THT:Nidec_Copal_SH-7010C
+
+Резистор обыкновенный
+Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal
+
+
+Конденсатор электролитический
+Маленький - 3 mm
+Средний - 5 mm
+Большой - 
+
