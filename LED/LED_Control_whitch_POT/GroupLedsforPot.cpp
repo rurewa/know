@@ -15,8 +15,8 @@ void setup() {
 }
 
 void loop() {
-  const int PIN_POT = A7; // Пин потенциометра
-  int valPot = analogRead(PIN_POT); // Считываем с потенциометра
+  const int pinPot = A7; // Пин потенциометра
+  int valPot = analogRead(pinPot); // Считываем с потенциометра
   int countLed = 0; // Для значений текущего числа от 0 до 5
   countLed = map (valPot, 0, 1023, 0, 5); // Масштабируем значения
   for (int i = 0; i <= 5; i++) { // Перечисляем от 0 до 5
