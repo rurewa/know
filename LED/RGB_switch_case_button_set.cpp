@@ -1,80 +1,96 @@
+#include <Arduino.h>
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // RGB - светильник, управляемый одной кнопкой - триггером
 // V 1.0
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
-#include <Arduino.h>
+const int PIN_BLUE = 9;
+const int PIN_GREEN = 10;
+const int PIN_RED = 11;
 
-const int BLED = 9;
-const int GLED = 10;
-const int RLED = 11;
-const int BUTTON = 3;
-const int MODE_AM = 5; // Количество режимов
-int ledMode =  0; // Режимы для выбора цвета
-bool buttonState = 0; // Состояние кнопки (нажата/не нажата)
+const int PIN_BUTTON = 17;
 
-void colourRed() { // Красный
-  digitalWrite(BLED, LOW);
-  digitalWrite(GLED, LOW);
-  digitalWrite(RLED, HIGH);
-}
-
-void colourGreen() { // Зелёный
-  digitalWrite(BLED, LOW);
-  digitalWrite(GLED, HIGH);
-  digitalWrite(RLED, LOW);
-}
-
-void colourBlue() { // Голубой
-  digitalWrite(BLED, HIGH);
-  digitalWrite(GLED, LOW);
-  digitalWrite(RLED, LOW);
-}
-
-void colourWhite() { // Белый
-  digitalWrite(BLED, LOW);
-  digitalWrite(GLED, LOW);
-  digitalWrite(RLED, LOW);
-}
-void colourOff() { //  Выключить все цвета
-  digitalWrite(BLED, HIGH);
-  digitalWrite(GLED, HIGH);
-  digitalWrite(RLED, HIGH);
-}
+void colorRed();
+void colorGreen();
+void colorBlue();
+void colorWhite();
+void colorPink();
+void colorOff();
+void colorYellow();
 
 void setup() {
-  for (int ledPin=9; ledPin<=11; ledPin++) {
-    pinMode(ledPin, OUTPUT); // Настраиваем пины на Выход
-  }
-  for (int leds=9; leds<=11; leds++) {
-    digitalWrite(leds, HIGH); // Выключем светодиоды
-  }
+  pinMode(PIN_BLUE, OUTPUT);
+  pinMode(PIN_GREEN, OUTPUT);
+  pinMode(PIN_RED, OUTPUT);
   Serial.begin(9600);
 }
 
 void loop() {
-  buttonState = digitalRead(BUTTON);
-  if (buttonState == true) // Если кнопка нажата
-  // Увеличиваем ledMode, пока не выйдет за границы 4 (обнуляем)
-  if (++ledMode >= MODE_AM) ledMode = 0;
-  switch (ledMode)
-  {
-  case 1:
-    colourRed();
-    break;
-  case 2:
-    colourGreen();
-    break;
-  case 3:
-    colourBlue();
-    break;
-  case 4:
-    colourOff();
-    break;
-    break;
-  default:
-    break;
+  bool buttonState = digitalRead(PIN_BUTTON);
+  static int setMode = 4;
+  static int ledMode = 0;
+  if (buttonState == true) {
+    if (++ledMode >= setMode) {
+      ledMode = 0;
+    }
+    switch (ledMode)
+    {
+      case 1:
+        colorRed();
+        break;
+      case 2:
+        colorBlue();
+        break;
+      case 3:
+        colorGreen();
+        break;
+      default:
+        colorOff();
+        break;
+    }
   }
-  Serial.println(ledMode); // Для диагностики
+  Serial.println(ledMode);
+}
+
+void colorRed() {
+  digitalWrite(PIN_BLUE, LOW);
+  digitalWrite(PIN_RED, HIGH);
+  digitalWrite(PIN_GREEN, LOW);
+}
+
+void colorGreen() {
+  digitalWrite(PIN_BLUE, LOW);
+  digitalWrite(PIN_RED, LOW);
+  digitalWrite(PIN_GREEN, HIGH);
+}
+
+void colorBlue() {
+  digitalWrite(PIN_BLUE, HIGH);
+  digitalWrite(PIN_RED, LOW);
+  digitalWrite(PIN_GREEN, LOW);
+}
+
+void colorWhite() {
+  digitalWrite(PIN_BLUE, HIGH);
+  digitalWrite(PIN_RED, HIGH);
+  digitalWrite(PIN_GREEN, HIGH);
+}
+
+void colorOff() {
+  digitalWrite(PIN_BLUE, LOW);
+  digitalWrite(PIN_RED, LOW);
+  digitalWrite(PIN_GREEN, LOW);
+}
+
+void colorPink() {
+  digitalWrite(PIN_BLUE, HIGH);
+  digitalWrite(PIN_RED, HIGH);
+  digitalWrite(PIN_GREEN, LOW);
+}
+
+void colorYellow() {
+  digitalWrite(PIN_BLUE, LOW);
+  digitalWrite(PIN_RED, HIGH);
+  digitalWrite(PIN_GREEN, HIGH);
 }
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // END FILE
