@@ -1,0 +1,259 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Motor:Motor_DC M1
+U 1 1 5FA43A27
+P 2400 2500
+F 0 "M1" V 2200 2400 50  0000 L CNN
+F 1 "Motor_DC" V 2600 2350 50  0000 L CNN
+F 2 "" H 2400 2410 50  0001 C CNN
+F 3 "~" H 2400 2410 50  0001 C CNN
+	1    2400 2500
+	0    1    1    0   
+$EndComp
+$Comp
+L Switch:SW_DPST_x2 SW1
+U 1 1 5FA441AF
+P 1750 1800
+F 0 "SW1" V 1704 1712 50  0000 R CNN
+F 1 "SW_DPST_x2" V 1795 1712 50  0001 R CNN
+F 2 "" H 1750 1800 50  0001 C CNN
+F 3 "~" H 1750 1800 50  0001 C CNN
+	1    1750 1800
+	0    -1   1    0   
+$EndComp
+$Comp
+L Switch:SW_DPST_x2 SW1
+U 2 1 5FA44C4C
+P 1750 3150
+F 0 "SW1" V 1704 3062 50  0000 R CNN
+F 1 "SW_DPST_x2" V 1795 3062 50  0001 R CNN
+F 2 "" H 1750 3150 50  0001 C CNN
+F 3 "~" H 1750 3150 50  0001 C CNN
+	2    1750 3150
+	0    -1   1    0   
+$EndComp
+$Comp
+L Switch:SW_DPST_x2 SW2
+U 1 1 5FA45CB9
+P 2900 1800
+F 0 "SW2" V 2854 1712 50  0000 R CNN
+F 1 "SW_DPST_x2" V 2945 1712 50  0001 R CNN
+F 2 "" H 2900 1800 50  0001 C CNN
+F 3 "~" H 2900 1800 50  0001 C CNN
+	1    2900 1800
+	0    1    1    0   
+$EndComp
+$Comp
+L Switch:SW_DPST_x2 SW2
+U 2 1 5FA45CBF
+P 2900 3150
+F 0 "SW2" V 2854 3062 50  0000 R CNN
+F 1 "SW_DPST_x2" V 2945 3062 50  0001 R CNN
+F 2 "" H 2900 3150 50  0001 C CNN
+F 3 "~" H 2900 3150 50  0001 C CNN
+	2    2900 3150
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1750 1600 1750 1450
+Wire Wire Line
+	1750 1450 2350 1450
+Wire Wire Line
+	1750 3350 1750 3500
+Wire Wire Line
+	1750 3500 2350 3500
+Wire Wire Line
+	2900 3500 2900 3350
+$Comp
+L power:Earth #PWR0101
+U 1 1 5FA46E43
+P 2350 3650
+F 0 "#PWR0101" H 2350 3400 50  0001 C CNN
+F 1 "Earth" H 2350 3500 50  0001 C CNN
+F 2 "" H 2350 3650 50  0001 C CNN
+F 3 "~" H 2350 3650 50  0001 C CNN
+	1    2350 3650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 3650 2350 3500
+$Comp
+L power:+5V #PWR0102
+U 1 1 5FA47AB5
+P 2350 1250
+F 0 "#PWR0102" H 2350 1100 50  0001 C CNN
+F 1 "+5V" H 2365 1423 50  0000 C CNN
+F 2 "" H 2350 1250 50  0001 C CNN
+F 3 "" H 2350 1250 50  0001 C CNN
+	1    2350 1250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2350 1250 2350 1450
+Wire Wire Line
+	2900 1600 2900 1450
+Wire Wire Line
+	2900 1450 2350 1450
+Connection ~ 2350 1450
+Wire Wire Line
+	2900 3500 2350 3500
+Connection ~ 2350 3500
+Wire Wire Line
+	2900 2000 2900 2500
+Wire Wire Line
+	1750 2000 1750 2500
+Wire Wire Line
+	2100 2500 1750 2500
+Connection ~ 1750 2500
+Wire Wire Line
+	1750 2500 1750 2950
+Wire Wire Line
+	2600 2500 2900 2500
+Connection ~ 2900 2500
+Wire Wire Line
+	2900 2500 2900 2950
+Text Notes 1450 1200 0    118  ~ 0
+#1
+Text Notes 1800 4000 0    118  ~ 0
+Motor bridge
+$Comp
+L Transistor_BJT:PN2222A Q?
+U 1 1 5FA4F10B
+P 4800 2900
+F 0 "Q?" H 4990 2946 50  0000 L CNN
+F 1 "PN2222A" H 4990 2855 50  0000 L CNN
+F 2 "Package_TO_SOT_THT:TO-92_Inline" H 5000 2825 50  0001 L CIN
+F 3 "https://www.onsemi.com/pub/Collateral/PN2222-D.PDF" H 4800 2900 50  0001 L CNN
+	1    4800 2900
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5FA4F474
+P 4350 3200
+F 0 "R?" H 4280 3154 50  0000 R CNN
+F 1 "1K" H 4280 3245 50  0000 R CNN
+F 2 "" V 4280 3200 50  0001 C CNN
+F 3 "~" H 4350 3200 50  0001 C CNN
+	1    4350 3200
+	-1   0    0    1   
+$EndComp
+$Comp
+L Motor:Motor_DC M?
+U 1 1 5FA4FB55
+P 4900 2150
+F 0 "M?" H 5100 2100 50  0000 L CNN
+F 1 "Motor_DC" H 5100 2000 50  0000 L CNN
+F 2 "" H 4900 2060 50  0001 C CNN
+F 3 "~" H 4900 2060 50  0001 C CNN
+	1    4900 2150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Diode:1N4001 D?
+U 1 1 5FA53298
+P 4550 2200
+F 0 "D?" V 4504 2280 50  0000 L CNN
+F 1 "1N4001" V 4650 1850 50  0000 L CNN
+F 2 "Diode_THT:D_DO-41_SOD81_P10.16mm_Horizontal" H 4550 2025 50  0001 C CNN
+F 3 "http://www.vishay.com/docs/88503/1n4001.pdf" H 4550 2200 50  0001 C CNN
+	1    4550 2200
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	4550 2050 4550 1900
+Wire Wire Line
+	4550 1900 4900 1900
+Wire Wire Line
+	4550 2350 4550 2550
+Wire Wire Line
+	4550 2550 4900 2550
+Wire Wire Line
+	4900 2550 4900 2450
+Wire Wire Line
+	4900 2700 4900 2550
+Connection ~ 4900 2550
+$Comp
+L power:+5V #PWR?
+U 1 1 5FA5666B
+P 4900 1700
+F 0 "#PWR?" H 4900 1550 50  0001 C CNN
+F 1 "+5V" H 4915 1873 50  0000 C CNN
+F 2 "" H 4900 1700 50  0001 C CNN
+F 3 "" H 4900 1700 50  0001 C CNN
+	1    4900 1700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4900 1700 4900 1900
+Connection ~ 4900 1900
+Wire Wire Line
+	4900 1900 4900 1950
+$Comp
+L power:Earth #PWR?
+U 1 1 5FA58272
+P 4900 3700
+F 0 "#PWR?" H 4900 3450 50  0001 C CNN
+F 1 "Earth" H 4900 3550 50  0001 C CNN
+F 2 "" H 4900 3700 50  0001 C CNN
+F 3 "~" H 4900 3700 50  0001 C CNN
+	1    4900 3700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4600 2900 4350 2900
+Wire Wire Line
+	4900 3100 4900 3500
+Wire Wire Line
+	4350 3350 4350 3500
+Wire Wire Line
+	4350 3500 4900 3500
+Connection ~ 4900 3500
+Wire Wire Line
+	4900 3500 4900 3700
+$Comp
+L Device:R_POT RV?
+U 1 1 5FA5FDD0
+P 4350 2650
+F 0 "RV?" H 4280 2696 50  0000 R CNN
+F 1 "R_POT" H 4280 2605 50  0000 R CNN
+F 2 "" H 4350 2650 50  0001 C CNN
+F 3 "~" H 4350 2650 50  0001 C CNN
+	1    4350 2650
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 2800 4350 2900
+Connection ~ 4350 2900
+Wire Wire Line
+	4350 2900 4350 3050
+Wire Wire Line
+	4200 2650 3950 2650
+$Comp
+L power:+5V #PWR?
+U 1 1 5FA62BBC
+P 3950 1700
+F 0 "#PWR?" H 3950 1550 50  0001 C CNN
+F 1 "+5V" H 3965 1873 50  0000 C CNN
+F 2 "" H 3950 1700 50  0001 C CNN
+F 3 "" H 3950 1700 50  0001 C CNN
+	1    3950 1700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3950 1700 3950 2650
+$EndSCHEMATC
