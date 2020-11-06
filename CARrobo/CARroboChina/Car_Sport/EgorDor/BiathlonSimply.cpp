@@ -3,6 +3,7 @@
 // V 1.0
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
+#include <NewPing.h>
 
 const int ENA = 3;
 const int IN1 = 5;
@@ -13,6 +14,11 @@ const int ENB = 9;
 const int SENS_LEFT   = 14;
 const int SENS_CENTER = 15;
 const int SENS_RIGHT  = 16;
+
+const int PIN_ECHO = 17;
+const int PIN_TRIG = 18;
+
+NewPing sonar(PIN_TRIG,PIN_ECHO);
 
 const int SPEED_LEFT = 150;
 const int SPEED_RIGHT = 150;
@@ -32,9 +38,11 @@ void setup() {
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
   pinMode(ENB, OUTPUT);
+  pinMode(PIN_TRIG, OUTPUT);
 }
 
 void loop() {
+  Serial.println(sonar.ping_cm());
   do {
     bool sLeft = digitalRead(SENS_LEFT);
     bool sCenter = digitalRead(SENS_CENTER);
