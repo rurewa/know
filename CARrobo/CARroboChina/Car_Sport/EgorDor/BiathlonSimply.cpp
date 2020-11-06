@@ -1,5 +1,5 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
-// Biathlon. Black line movement for China car, biathlon. Egor D. 
+// Egor D. China car. Biathlon, KegelRing Egor D.
 // V 1.0
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
@@ -14,13 +14,14 @@ const int SENS_LEFT   = 14;
 const int SENS_CENTER = 15;
 const int SENS_RIGHT  = 16;
 
-const int SPEED = 150;
+const int SPEED_LEFT = 150;
+const int SPEED_RIGHT = 150;
 
-void turnGo(int speed, int times);
-void turnBack(int speed, int times);
+void turnGo(int speed_left, int speed_right, int times);
+void turnBack(int speed_left, int speed_right, int times);
 void turnStop(int times);
-void turnLeft(int speed, int times);
-void turnRight(int speed, int times);
+void turnLeft(int speed_left, int speed_right, int times);
+void turnRight(int speed_left, int speed_right, int times);
 void sensTest(int times);
 
 void setup() {
@@ -40,32 +41,32 @@ void loop() {
     bool sRight = digitalRead(SENS_RIGHT);
     if ((sLeft == 0) && (sCenter == 1) && (sRight == 0)) { // 010
       Serial.println("Go!");
-      turnGo(SPEED, 10);
+      turnGo(SPEED_LEFT, SPEED_RIGHT, 5);
     }
     else if ((sLeft == 0) && (sCenter == 0) && (sRight == 0)) { // 000
       Serial.println("Go!");
-      turnGo(SPEED, 10);
+      turnGo(SPEED_LEFT, SPEED_RIGHT, 5);
     }
     else if ((sLeft == 1) && (sCenter == 0) && (sRight == 0)) { // 100
       Serial.println("Left!");
-      turnLeft(SPEED, 10);
+      turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
     }
     else if ((sLeft == 1) && (sCenter == 1) && (sRight == 0)) { // 110
       Serial.println("Left!");
-      turnLeft(SPEED, 10);
+      turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
     }
     else if ((sLeft == 0) && (sCenter == 0) && (sRight == 1)) { // 001
       Serial.println("Right!");
-      turnRight(SPEED, 10);
+      turnRight(SPEED_LEFT, SPEED_RIGHT, 5);
     }
     else if ((sLeft == 0) && (sCenter == 1) && (sRight == 1)) { // 011
       Serial.println("Right!");
-      turnRight(SPEED, 10);
+      turnRight(SPEED_LEFT, SPEED_RIGHT, 5);
     }
     else {
       Serial.println("Left!");
-      turnGo(SPEED, 70);
-      turnLeft(SPEED, 100);
+      turnGo(SPEED_LEFT, SPEED_RIGHT, 70);
+      turnLeft(SPEED_LEFT, SPEED_RIGHT, 100);
     }
   }
   while (true);
@@ -83,21 +84,21 @@ void loop() {
   */
 }
 
-void turnGo(int speed, int times) {
-  analogWrite(ENA, speed);
+void turnGo(int speed_left, int speed_right, int times) {
+  analogWrite(ENA, speed_left);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENB, speed);
+  analogWrite(ENB, speed_right);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
   delay(times);
 }
 
-void turnBack(int speed, int times) {
-  analogWrite(ENA, speed);
+void turnBack(int speed_left, int speed_right, int times) {
+  analogWrite(ENA, speed_left);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  analogWrite(ENB, speed);
+  analogWrite(ENB, speed_right);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
   delay(times);
@@ -109,21 +110,21 @@ void turnStop(int times) {
   delay(times);
 }
 
-void turnLeft(int speed, int times) {
-  analogWrite(ENA, speed);
+void turnLeft(int speed_left, int speed_right, int times) {
+  analogWrite(ENA, speed_left);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENB, speed);
+  analogWrite(ENB, speed_right);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
   delay(times);
 }
 
-void turnRight(int speed, int times) {
-  analogWrite(ENA, speed) ;
+void turnRight(int speed_left, int speed_right, int times) {
+  analogWrite(ENA, speed_left) ;
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  analogWrite(ENB, speed);
+  analogWrite(ENB, speed_right);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
   delay(times);
