@@ -1,9 +1,7 @@
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
-// KegelRing for China Robo-car, biathlon. Egor D.
-// V 1.0
-// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <NewPing.h>
+
+const int irSens = 4;
 
 const int ENA = 3;
 const int IN1 = 5;
@@ -15,10 +13,14 @@ const int SENS_LEFT   = 14;
 const int SENS_CENTER = 15;
 const int SENS_RIGHT  = 16;
 
+const int PIN_ECHO_2 = 12;
+const int PIN_TRIG_3 = 13;
+
 const int PIN_ECHO = 17;
 const int PIN_TRIG = 18;
 
-NewPing sonar(PIN_TRIG,PIN_ECHO);
+NewPing sonar2(PIN_TRIG_3, PIN_ECHO_2);
+//NewPing sonar1(PIN_TRIG, PIN_ECHO);
 
 const int SPEED_LEFT = 150;
 const int SPEED_RIGHT = 150;
@@ -41,8 +43,10 @@ void setup() {
   pinMode(PIN_TRIG, OUTPUT);
 }
 void loop() {
-  Serial.println(sonar.ping_cm());
-  do {
+  bool irStat = digitalRead(irSens);
+  Serial.println(irStat);
+  //Serial.println(sonar2.ping_cm());
+  /*do {
     bool sLeft = digitalRead(SENS_LEFT);
     bool sCenter = digitalRead(SENS_CENTER);
     bool sRight = digitalRead(SENS_RIGHT);
@@ -78,6 +82,7 @@ void loop() {
   }
   while (true);
   //sensTest(100); // Для диагностики датчиков отражения
+  */
 }
 
 void turnGo(int speed_left, int speed_right, int times) {
