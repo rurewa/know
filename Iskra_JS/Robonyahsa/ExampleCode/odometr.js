@@ -1,6 +1,5 @@
 var motor = require('@amperka/motor');
-var rightMotor = motor.connect(motor.MotorShield.M2);
-rightMotor.write(-0.85);
+var rightMotor = motor.connect(motor.MotorShield.M2);rightMotor.write(-0.85);
 
 var encoder = require('@amperka/digital-line-sensor').connect(P9);
 var RADIUS = 32;
