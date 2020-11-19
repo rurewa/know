@@ -1,3 +1,8 @@
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
+// Egor D. China car. Biathlon, KegelRing Egor D.
+// V 1.0
+// -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
+#include <Arduino.h>
 #include <Arduino.h>
 #include <NewPing.h>
 
@@ -13,23 +18,24 @@ const int SENS_LEFT   = 14;
 const int SENS_CENTER = 15;
 const int SENS_RIGHT  = 16;
 
-const int PIN_ECHO_2 = 12;
-const int PIN_TRIG_3 = 13;
+const int PIN_ECHO_DOWN = 12;
+const int PIN_TRIG_DOWN = 13;
 
-const int PIN_ECHO = 17;
-const int PIN_TRIG = 18;
+const int PIN_ECHO_UP = 17;
+const int PIN_TRIG_UP = 18;
 
-NewPing sonar2(PIN_TRIG_3, PIN_ECHO_2);
-//NewPing sonar1(PIN_TRIG, PIN_ECHO);
+NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 400);
+NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 400);
 
-const int SPEED_LEFT = 150;
-const int SPEED_RIGHT = 150;
+const int SPEED_LEFT = 165;
+const int SPEED_RIGHT = 165;
 
 void turnGo(int speed_left, int speed_right, int times);
 void turnBack(int speed_left, int speed_right, int times);
 void turnStop(int times);
 void turnLeft(int speed_left, int speed_right, int times);
 void turnRight(int speed_left, int speed_right, int times);
+void turnAngle(int speed_left, int speed_right, int times);
 void sensTest(int times);
 
 void setup() {
@@ -40,51 +46,25 @@ void setup() {
   pinMode(IN3, OUTPUT);
   pinMode(IN4, OUTPUT);
   pinMode(ENB, OUTPUT);
-  pinMode(PIN_TRIG, OUTPUT);
+  pinMode(PIN_TRIG_UP, OUTPUT);
+  pinMode(PIN_TRIG_DOWN, OUTPUT);
 }
 void loop() {
-  bool irStat = digitalRead(irSens);
-  Serial.println(irStat);
-  //Serial.println(sonar2.ping_cm());
-  /*do {
-    bool sLeft = digitalRead(SENS_LEFT);
-    bool sCenter = digitalRead(SENS_CENTER);
-    bool sRight = digitalRead(SENS_RIGHT);
-    if ((sLeft == 0) && (sCenter == 1) && (sRight == 0)) { // 010
-      Serial.println("Go!");
-      turnGo(SPEED_LEFT, SPEED_RIGHT, 5);
-    }
-    else if ((sLeft == 0) && (sCenter == 0) && (sRight == 0)) { // 000
-      Serial.println("Go!");
-      turnGo(SPEED_LEFT, SPEED_RIGHT, 5);
-    }
-    else if ((sLeft == 1) && (sCenter == 0) && (sRight == 0)) { // 100
-      Serial.println("Left!");
-      turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
-    }
-    else if ((sLeft == 1) && (sCenter == 1) && (sRight == 0)) { // 110
-      Serial.println("Left!");
-      turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
-    }
-    else if ((sLeft == 0) && (sCenter == 0) && (sRight == 1)) { // 001
-      Serial.println("Right!");
-      turnRight(SPEED_LEFT, SPEED_RIGHT, 5);
-    }
-    else if ((sLeft == 0) && (sCenter == 1) && (sRight == 1)) { // 011
-      Serial.println("Right!");
-      turnRight(SPEED_LEFT, SPEED_RIGHT, 5);
-    }
-    else {
-      Serial.println("Left!");
-      turnGo(SPEED_LEFT, SPEED_RIGHT, 70);
-      turnLeft(SPEED_LEFT, SPEED_RIGHT, 100);
-    }
-  }
-  while (true);
+  Serial.print("UP: ");
+  Serial.print(sonarUp.ping_cm()); // Диагностика нижнего сонара
+  Serial.print(" DOWN: ");
+  Serial.println(sonarDown.ping_cm()); // Диагностика нижнего сонара
+  delay(100);
+  //bool irStat = digitalRead(irSens);
+  //Serial.println(irStat); / Для диагностика фронтального датчика отражения
+  //bool sLeft = digitalRead(SENS_LEFT);
+  //bool sCenter = digitalRead(SENS_CENTER);
+  //bool sRight = digitalRead(SENS_RIGHT);
+  turnGo(SPEED_LEFT, SPEED_RIGHT, 5);
+  turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
+  turnRight(SPEED_LEFT, SPEED_RIGHT, 5);
   //sensTest(100); // Для диагностики датчиков отражения
-  */
 }
-
 void turnGo(int speed_left, int speed_right, int times) {
   analogWrite(ENA, speed_left);
   digitalWrite(IN1, LOW);
@@ -122,6 +102,16 @@ void turnLeft(int speed_left, int speed_right, int times) {
 }
 
 void turnRight(int speed_left, int speed_right, int times) {
+  analogWrite(ENA, speed_left) ;
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  analogWrite(ENB, speed_right);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, HIGH);
+  delay(times);
+}
+
+void turnAngle(int speed_left, int speed_right, int times) {
   analogWrite(ENA, speed_left) ;
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
