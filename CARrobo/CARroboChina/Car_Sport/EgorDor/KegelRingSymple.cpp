@@ -6,8 +6,6 @@
 #include <Arduino.h>
 #include <NewPing.h>
 
-const int irSens = 4;
-
 const int ENA = 3;
 const int IN1 = 5;
 const int IN2 = 6;
@@ -17,18 +15,18 @@ const int ENB = 9;
 const int SENS_LEFT   = 14;
 const int SENS_CENTER = 15;
 const int SENS_RIGHT  = 16;
-
+// Верхний сонар
 const int PIN_ECHO_DOWN = 12;
 const int PIN_TRIG_DOWN = 13;
-
+// Нижний сонар
 const int PIN_ECHO_UP = 17;
 const int PIN_TRIG_UP = 18;
 
 NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 400);
 NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 400);
 
-const int SPEED_LEFT = 185;
-const int SPEED_RIGHT = 185;
+const int SPEED_LEFT = 185; // Скорость левого мотора
+const int SPEED_RIGHT = 185; // Скорость правого мотора
 
 void turnGo(int speed_left, int speed_right, int times);
 void turnBack(int speed_left, int speed_right, int times);
@@ -37,6 +35,8 @@ void turnLeft(int speed_left, int speed_right, int times);
 void turnRight(int speed_left, int speed_right, int times);
 void turnAngle(int speed_left, int speed_right, int times);
 void sensTest(int times);
+
+const int irSens = 4; // Датчик определения цвета кегли
 
 void setup() {
   Serial.begin(9600);
@@ -51,7 +51,7 @@ void setup() {
 }
 void loop() {
   Serial.print("UP: ");
-  Serial.print(sonarUp.ping_cm()); // Диагностика нижнего сонара
+  Serial.print(sonarUp.ping_cm()); // Диагностика верхнего сонара
   //Serial.print(" DOWN: ");
   //Serial.println(sonarDown.ping_cm()); // Диагностика нижнего сонара
   //bool irStat = digitalRead(irSens);
@@ -74,6 +74,7 @@ void loop() {
     analogWrite(11, 0);
   }
 }
+
 void turnGo(int speed_left, int speed_right, int times) {
   analogWrite(ENA, speed_left);
   digitalWrite(IN1, LOW);
