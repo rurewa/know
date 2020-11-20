@@ -27,8 +27,8 @@ const int PIN_TRIG_UP = 18;
 NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 400);
 NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 400);
 
-const int SPEED_LEFT = 165;
-const int SPEED_RIGHT = 165;
+const int SPEED_LEFT = 185;
+const int SPEED_RIGHT = 185;
 
 void turnGo(int speed_left, int speed_right, int times);
 void turnBack(int speed_left, int speed_right, int times);
@@ -52,18 +52,27 @@ void setup() {
 void loop() {
   Serial.print("UP: ");
   Serial.print(sonarUp.ping_cm()); // Диагностика нижнего сонара
-  Serial.print(" DOWN: ");
-  Serial.println(sonarDown.ping_cm()); // Диагностика нижнего сонара
-  delay(100);
+  //Serial.print(" DOWN: ");
+  //Serial.println(sonarDown.ping_cm()); // Диагностика нижнего сонара
   //bool irStat = digitalRead(irSens);
   //Serial.println(irStat); / Для диагностика фронтального датчика отражения
   //bool sLeft = digitalRead(SENS_LEFT);
   //bool sCenter = digitalRead(SENS_CENTER);
   //bool sRight = digitalRead(SENS_RIGHT);
-  turnGo(SPEED_LEFT, SPEED_RIGHT, 5);
-  turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
-  turnRight(SPEED_LEFT, SPEED_RIGHT, 5);
+  //turnGo(SPEED_LEFT, SPEED_RIGHT, 5);
+  //turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
+  //turnRight(SPEED_LEFT, SPEED_RIGHT, 5);
   //sensTest(100); // Для диагностики датчиков отражения
+
+  if (sonarUp.ping_cm() <= 15) {
+    turnGo(SPEED_LEFT, SPEED_RIGHT, 500);
+    turnStop(500);
+    analogWrite(11, 200);
+  }
+  else {
+    turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
+    analogWrite(11, 0);
+  }
 }
 void turnGo(int speed_left, int speed_right, int times) {
   analogWrite(ENA, speed_left);
