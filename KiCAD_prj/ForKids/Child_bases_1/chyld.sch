@@ -1124,4 +1124,6 @@ Wire Wire Line
 NoConn ~ 5450 3600
 Wire Wire Line
 	5550 3600 5450 3600
+Text Notes 3850 3400 0    50   ~ 0
+Индикатор полярности
 $EndSCHEMATC
