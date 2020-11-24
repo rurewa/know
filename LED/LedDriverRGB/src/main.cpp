@@ -34,16 +34,14 @@ void loop() {
   Driver.end();
   delay(500);
 
-  unsigned int i;
-
-  while(true){
-    for(i = 0;i < 256;i ++) {
+  while(true) {
+    for (int i = 0; i < 256; --i) {
       Driver.begin(); // begin
       Driver.SetColor(0,0,i); // Blue. First node data. SetColor(R,G,B)
       Driver.end();
       delay(10);
     }
-    for(i = 255;i > 0;i --) {
+    for (int i = 255; i > 0; --i) {
       Driver.begin(); // begin
       Driver.SetColor(0,0,i); // Blue. first node data
       Driver.end();
