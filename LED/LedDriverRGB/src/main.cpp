@@ -35,15 +35,15 @@ void loop() {
   delay(500);
 
   while(true) {
-    for (int i = 0; i < 256; --i) {
+    for (int i = 0; i < 256; ++i) {
       Driver.begin(); // begin
-      Driver.SetColor(0,0,i); // Blue. First node data. SetColor(R,G,B)
+      Driver.SetColor(0, 0, i); // Blue. First node data. SetColor(R,G,B)
       Driver.end();
       delay(10);
     }
     for (int i = 255; i > 0; --i) {
       Driver.begin(); // begin
-      Driver.SetColor(0,0,i); // Blue. first node data
+      Driver.SetColor(0, 0, i); // Blue. first node data
       Driver.end();
       delay(10);
     }
