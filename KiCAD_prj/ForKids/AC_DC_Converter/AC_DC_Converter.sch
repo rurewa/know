@@ -1,0 +1,203 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L pspice:DIODE D1
+U 1 1 5FD09007
+P 3800 2500
+F 0 "D1" H 3800 2765 50  0000 C CNN
+F 1 "DIODE" H 3800 2674 50  0000 C CNN
+F 2 "" H 3800 2500 50  0001 C CNN
+F 3 "~" H 3800 2500 50  0001 C CNN
+	1    3800 2500
+	1    0    0    -1  
+$EndComp
+$Comp
+L pspice:DIODE D2
+U 1 1 5FD09292
+P 3800 3100
+F 0 "D2" H 3800 3365 50  0000 C CNN
+F 1 "DIODE" H 3800 3274 50  0000 C CNN
+F 2 "" H 3800 3100 50  0001 C CNN
+F 3 "~" H 3800 3100 50  0001 C CNN
+	1    3800 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L pspice:DIODE D3
+U 1 1 5FD0A16E
+P 3800 3850
+F 0 "D3" H 3800 4115 50  0000 C CNN
+F 1 "DIODE" H 3800 4024 50  0000 C CNN
+F 2 "" H 3800 3850 50  0001 C CNN
+F 3 "~" H 3800 3850 50  0001 C CNN
+	1    3800 3850
+	-1   0    0    -1  
+$EndComp
+$Comp
+L pspice:DIODE D4
+U 1 1 5FD0A174
+P 3800 4450
+F 0 "D4" H 3800 4715 50  0000 C CNN
+F 1 "DIODE" H 3800 4624 50  0000 C CNN
+F 2 "" H 3800 4450 50  0001 C CNN
+F 3 "~" H 3800 4450 50  0001 C CNN
+	1    3800 4450
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5FD0A346
+P 5300 2850
+F 0 "R1" H 5370 2896 50  0000 L CNN
+F 1 "10K" H 5370 2805 50  0000 L CNN
+F 2 "" V 5230 2850 50  0001 C CNN
+F 3 "~" H 5300 2850 50  0001 C CNN
+	1    5300 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D5
+U 1 1 5FD0A775
+P 5300 3350
+F 0 "D5" V 5339 3232 50  0000 R CNN
+F 1 "LED" V 5248 3232 50  0000 R CNN
+F 2 "" H 5300 3350 50  0001 C CNN
+F 3 "~" H 5300 3350 50  0001 C CNN
+	1    5300 3350
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:CP C1
+U 1 1 5FD0B1B8
+P 6050 2850
+F 0 "C1" H 6168 2896 50  0000 L CNN
+F 1 "1000uF" H 6168 2805 50  0000 L CNN
+F 2 "" H 6088 2700 50  0001 C CNN
+F 3 "~" H 6050 2850 50  0001 C CNN
+	1    6050 2850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4000 2500 4550 2500
+Wire Wire Line
+	6050 2500 6050 2700
+Wire Wire Line
+	5300 2700 5300 2500
+Connection ~ 5300 2500
+Wire Wire Line
+	5300 2500 6050 2500
+Wire Wire Line
+	5300 3000 5300 3200
+Wire Wire Line
+	4000 3100 4550 3100
+Wire Wire Line
+	4550 3100 4550 2500
+Connection ~ 4550 2500
+Wire Wire Line
+	4550 2500 5300 2500
+Wire Wire Line
+	6050 3000 6050 3850
+Wire Wire Line
+	6050 4450 5300 4450
+Wire Wire Line
+	5300 3500 5300 4450
+Connection ~ 5300 4450
+Wire Wire Line
+	5300 4450 4500 4450
+Wire Wire Line
+	4000 3850 4500 3850
+Wire Wire Line
+	4500 3850 4500 4450
+Connection ~ 4500 4450
+Wire Wire Line
+	4500 4450 4000 4450
+Wire Wire Line
+	3600 2500 3000 2500
+Wire Wire Line
+	3000 2500 3000 3100
+Wire Wire Line
+	3000 4450 3600 4450
+Wire Wire Line
+	3600 3850 3350 3850
+Wire Wire Line
+	3350 3850 3350 3100
+Wire Wire Line
+	3350 3100 3600 3100
+$Comp
+L Connector:Screw_Terminal_01x01 J1
+U 1 1 5FD112F3
+P 2300 3100
+F 0 "J1" H 2218 2875 50  0000 C CNN
+F 1 "IN" H 2218 2966 50  0000 C CNN
+F 2 "" H 2300 3100 50  0001 C CNN
+F 3 "~" H 2300 3100 50  0001 C CNN
+	1    2300 3100
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x01 J2
+U 1 1 5FD11E44
+P 2300 3850
+F 0 "J2" H 2218 3625 50  0000 C CNN
+F 1 "IN" H 2218 3716 50  0000 C CNN
+F 2 "" H 2300 3850 50  0001 C CNN
+F 3 "~" H 2300 3850 50  0001 C CNN
+	1    2300 3850
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2500 3850 3350 3850
+Connection ~ 3350 3850
+Wire Wire Line
+	2500 3100 3000 3100
+Connection ~ 3000 3100
+Wire Wire Line
+	3000 3100 3000 4450
+Wire Wire Line
+	6650 3100 6600 3100
+Wire Wire Line
+	6600 3100 6600 2500
+Wire Wire Line
+	6600 2500 6050 2500
+Connection ~ 6050 2500
+$Comp
+L Connector:Screw_Terminal_01x01 J3
+U 1 1 5FD1364F
+P 6850 3100
+F 0 "J3" H 6768 2875 50  0000 C CNN
+F 1 "+" H 6768 2966 50  0000 C CNN
+F 2 "" H 6850 3100 50  0001 C CNN
+F 3 "~" H 6850 3100 50  0001 C CNN
+	1    6850 3100
+	1    0    0    1   
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x01 J4
+U 1 1 5FD16B30
+P 6850 3850
+F 0 "J4" H 6768 3625 50  0000 C CNN
+F 1 "Screw_Terminal_01x01" H 6768 3716 50  0000 C CNN
+F 2 "" H 6850 3850 50  0001 C CNN
+F 3 "~" H 6850 3850 50  0001 C CNN
+	1    6850 3850
+	1    0    0    1   
+$EndComp
+Wire Wire Line
+	6650 3850 6050 3850
+Connection ~ 6050 3850
+Wire Wire Line
+	6050 3850 6050 4450
+$EndSCHEMATC
