@@ -200,4 +200,51 @@ Wire Wire Line
 Connection ~ 6050 3850
 Wire Wire Line
 	6050 3850 6050 4450
+$Comp
+L Device:Battery_Cell BT?
+U 1 1 5FD9B0ED
+P 1800 5700
+F 0 "BT?" H 1918 5750 50  0000 L CNN
+F 1 "Battery_Cell" H 1918 5705 50  0001 L CNN
+F 2 "" V 1800 5760 50  0001 C CNN
+F 3 "~" V 1800 5760 50  0001 C CNN
+	1    1800 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:LED D?
+U 1 1 5FD9B6C0
+P 2200 5300
+F 0 "D?" H 2193 5045 50  0000 C CNN
+F 1 "LED" H 2193 5136 50  0000 C CNN
+F 2 "" H 2200 5300 50  0001 C CNN
+F 3 "~" H 2200 5300 50  0001 C CNN
+	1    2200 5300
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 5FD9BD10
+P 2200 5900
+F 0 "R?" V 1993 5900 50  0000 C CNN
+F 1 "R" V 2084 5900 50  0000 C CNN
+F 2 "" V 2130 5900 50  0001 C CNN
+F 3 "~" H 2200 5900 50  0001 C CNN
+	1    2200 5900
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1800 5500 1800 5300
+Wire Wire Line
+	1800 5300 2050 5300
+Wire Wire Line
+	1800 5800 1800 5900
+Wire Wire Line
+	1800 5900 2050 5900
+Wire Wire Line
+	2350 5900 2450 5900
+Wire Wire Line
+	2450 5900 2450 5300
+Wire Wire Line
+	2450 5300 2350 5300
 $EndSCHEMATC
