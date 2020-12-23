@@ -1,0 +1,99 @@
+EESchema Schematic File Version 4
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Device:R R2
+U 1 1 5FDB39FD
+P 3300 3800
+F 0 "R2" H 3400 3800 50  0000 C CNN
+F 1 "1" H 3300 3800 50  0000 C CNN
+F 2 "" V 3230 3800 50  0001 C CNN
+F 3 "~" H 3300 3800 50  0001 C CNN
+	1    3300 3800
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5FD9FCC4
+P 2950 3800
+F 0 "R1" H 2850 3800 50  0000 C CNN
+F 1 "5" H 2950 3800 50  0000 C CNN
+F 2 "" V 2880 3800 50  0001 C CNN
+F 3 "~" H 2950 3800 50  0001 C CNN
+	1    2950 3800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 3650 2950 3550
+Wire Wire Line
+	2950 3550 3300 3550
+Wire Wire Line
+	3300 3550 3300 3650
+Wire Wire Line
+	2950 3950 2950 4100
+Wire Wire Line
+	2950 4100 3300 4100
+Wire Wire Line
+	3300 4100 3300 3950
+$Comp
+L power:+9V #PWR01
+U 1 1 5FDBE27D
+P 2950 3100
+F 0 "#PWR01" H 2950 2950 50  0001 C CNN
+F 1 "+9V" H 2965 3273 50  0000 C CNN
+F 2 "" H 2950 3100 50  0001 C CNN
+F 3 "" H 2950 3100 50  0001 C CNN
+	1    2950 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 3100 2950 3550
+Connection ~ 2950 3550
+$Comp
+L power:Earth #PWR02
+U 1 1 5FDBEB16
+P 2950 4550
+F 0 "#PWR02" H 2950 4300 50  0001 C CNN
+F 1 "Earth" H 2950 4400 50  0001 C CNN
+F 2 "" H 2950 4550 50  0001 C CNN
+F 3 "~" H 2950 4550 50  0001 C CNN
+	1    2950 4550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2950 4550 2950 4100
+Connection ~ 2950 4100
+$Comp
+L Device:R R3
+U 1 1 5FDBF3C3
+P 3650 3800
+F 0 "R3" H 3750 3800 50  0000 C CNN
+F 1 "20" H 3550 3800 50  0000 C CNN
+F 2 "" V 3580 3800 50  0001 C CNN
+F 3 "~" H 3650 3800 50  0001 C CNN
+	1    3650 3800
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3650 3650 3650 3550
+Wire Wire Line
+	3650 3550 3300 3550
+Connection ~ 3300 3550
+Wire Wire Line
+	3300 4100 3650 4100
+Wire Wire Line
+	3650 4100 3650 3950
+Connection ~ 3300 4100
+$EndSCHEMATC
