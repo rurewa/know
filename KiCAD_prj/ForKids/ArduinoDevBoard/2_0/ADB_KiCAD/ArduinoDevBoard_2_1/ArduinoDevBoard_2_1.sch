@@ -154,18 +154,14 @@ $EndComp
 $Comp
 L Device:R R8
 U 1 1 5DFDE4CA
-P 1600 3700
-F 0 "R8" H 1670 3746 50  0000 L CNN
-F 1 "4.7K" H 1670 3655 50  0000 L CNN
-F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 1530 3700 50  0001 C CNN
-F 3 "~" H 1600 3700 50  0001 C CNN
-	1    1600 3700
+P 1700 3700
+F 0 "R8" H 1770 3746 50  0000 L CNN
+F 1 "4.7K" H 1770 3655 50  0000 L CNN
+F 2 "Resistor_THT:R_Axial_DIN0411_L9.9mm_D3.6mm_P12.70mm_Horizontal" V 1630 3700 50  0001 C CNN
+F 3 "~" H 1700 3700 50  0001 C CNN
+	1    1700 3700
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1750 3450 1600 3450
-Wire Wire Line
-	1600 3450 1600 3550
 $Comp
 L power:+5V #PWR019
 U 1 1 5DFDF39A
@@ -177,13 +173,10 @@ F 3 "" H 1450 3450 50  0001 C CNN
 	1    1450 3450
 	0    -1   -1   0   
 $EndComp
-Wire Wire Line
-	1450 3450 1600 3450
-Connection ~ 1600 3450
 Text GLabel 1500 3350 0    50   BiDi ~ 0
 D2
 Wire Wire Line
-	1750 3350 1500 3350
+	1750 3350 1600 3350
 $Comp
 L power:Earth #PWR020
 U 1 1 5DFE0064
@@ -341,19 +334,6 @@ Wire Wire Line
 	9550 3050 9450 3050
 Wire Wire Line
 	9550 2950 9450 2950
-$Comp
-L power:Earth #PWR021
-U 1 1 5E01E177
-P 1600 3950
-F 0 "#PWR021" H 1600 3700 50  0001 C CNN
-F 1 "Earth" H 1600 3800 50  0001 C CNN
-F 2 "" H 1600 3950 50  0001 C CNN
-F 3 "~" H 1600 3950 50  0001 C CNN
-	1    1600 3950
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1600 3950 1600 3850
 $Comp
 L Device:LED D1
 U 1 1 5E023966
@@ -1455,4 +1435,20 @@ F 3 "" H 9050 1650 50  0001 C CNN
 	1    9050 1650
 	1    0    0    -1  
 $EndComp
+Wire Wire Line
+	1450 3450 1700 3450
+Wire Wire Line
+	1700 3550 1700 3450
+Connection ~ 1700 3450
+Wire Wire Line
+	1700 3450 1750 3450
+Wire Wire Line
+	1700 3850 1700 3900
+Wire Wire Line
+	1700 3900 1600 3900
+Wire Wire Line
+	1600 3900 1600 3350
+Connection ~ 1600 3350
+Wire Wire Line
+	1600 3350 1500 3350
 $EndSCHEMATC
