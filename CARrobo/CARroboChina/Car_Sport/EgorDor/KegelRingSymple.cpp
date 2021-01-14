@@ -6,6 +6,8 @@
 #include <Arduino.h>
 #include <NewPing.h>
 
+const int zoomer = 11;
+
 const int ENA = 3;
 const int IN1 = 5;
 const int IN2 = 6;
@@ -15,12 +17,12 @@ const int ENB = 9;
 const int SENS_LEFT   = 14;
 const int SENS_CENTER = 15;
 const int SENS_RIGHT  = 16;
-// Верхний сонар
-const int PIN_ECHO_DOWN = 12;
-const int PIN_TRIG_DOWN = 13;
 // Нижний сонар
-const int PIN_ECHO_UP = 17;
-const int PIN_TRIG_UP = 18;
+const int PIN_ECHO_DOWN = 12; // 12
+const int PIN_TRIG_DOWN = 13; // 13
+// Верхний сонар
+const int PIN_ECHO_UP = 17; // 17
+const int PIN_TRIG_UP = 18;  // 18
 
 NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 400);
 NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 400);
@@ -50,28 +52,36 @@ void setup() {
   pinMode(PIN_TRIG_DOWN, OUTPUT);
 }
 void loop() {
-  Serial.print("UP: ");
-  Serial.print(sonarUp.ping_cm()); // Диагностика верхнего сонара
-  //Serial.print(" DOWN: ");
+  //Serial.print("DOWN: ");
   //Serial.println(sonarDown.ping_cm()); // Диагностика нижнего сонара
-  //bool irStat = digitalRead(irSens);
-  //Serial.println(irStat); / Для диагностика фронтального датчика отражения
+ 
+  //bool irStat = digitalRead(irSens); // Белый-0 Чёрный-1
+  //Serial.println(irStat); // Для диагностика фронтального датчика отражения
   //bool sLeft = digitalRead(SENS_LEFT);
   //bool sCenter = digitalRead(SENS_CENTER);
   //bool sRight = digitalRead(SENS_RIGHT);
-  //turnGo(SPEED_LEFT, SPEED_RIGHT, 5);
-  //turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
-  //turnRight(SPEED_LEFT, SPEED_RIGHT, 5);
+  //Serial.print(sLeft); // Белый-0 Чёрный-1
+  //Serial.print(sCenter);
+  //Serial.println(sRight);
+  turnGo(SPEED_LEFT, SPEED_RIGHT, 9000);
+  turnStop(500);
+  turnLeft(SPEED_LEFT, SPEED_RIGHT, 1970);
+  turnGo(SPEED_LEFT, SPEED_RIGHT, 9000);
+  turnStop(500);
+  turnRight(SPEED_LEFT, SPEED_RIGHT, 2000);
+  turnStop(500);
+  //turnBack(SPEED_LEFT, SPEED_RIGHT, 9000);
+ // turnStop(500);
   //sensTest(100); // Для диагностики датчиков отражения
 
   if (sonarUp.ping_cm() <= 15) {
-    turnGo(SPEED_LEFT, SPEED_RIGHT, 500);
+    turnLeft(SPEED_LEFT, SPEED_RIGHT, 500);
     turnStop(500);
-    analogWrite(11, 200);
+    analogWrite(zoomer, 200); // 0-255 тональность звука
   }
   else {
     turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
-    analogWrite(11, 0);
+    analogWrite(zoomer, 0);
   }
 }
 
