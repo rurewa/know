@@ -27,8 +27,8 @@ const int PIN_TRIG_UP = 18;  // 18
 NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 400);
 NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 400);
 
-const int SPEED_LEFT = 185; // Скорость левого мотора
-const int SPEED_RIGHT = 185; // Скорость правого мотора
+const int SPEED_LEFT = 225; // Скорость левого мотора
+const int SPEED_RIGHT = 225; // Скорость правого мотора
 
 void turnGo(int speed_left, int speed_right, int times);
 void turnBack(int speed_left, int speed_right, int times);
@@ -50,38 +50,26 @@ void setup() {
   pinMode(ENB, OUTPUT);
   pinMode(PIN_TRIG_UP, OUTPUT);
   pinMode(PIN_TRIG_DOWN, OUTPUT);
+  pinMode(zoomer, OUTPUT);
 }
-void loop() {
-  //Serial.print("DOWN: ");
-  //Serial.println(sonarDown.ping_cm()); // Диагностика нижнего сонара
- 
-  //bool irStat = digitalRead(irSens); // Белый-0 Чёрный-1
-  //Serial.println(irStat); // Для диагностика фронтального датчика отражения
-  //bool sLeft = digitalRead(SENS_LEFT);
-  //bool sCenter = digitalRead(SENS_CENTER);
-  //bool sRight = digitalRead(SENS_RIGHT);
-  //Serial.print(sLeft); // Белый-0 Чёрный-1
-  //Serial.print(sCenter);
-  //Serial.println(sRight);
-  turnGo(SPEED_LEFT, SPEED_RIGHT, 9000);
-  turnStop(500);
-  turnLeft(SPEED_LEFT, SPEED_RIGHT, 1970);
-  turnGo(SPEED_LEFT, SPEED_RIGHT, 9000);
-  turnStop(500);
-  turnRight(SPEED_LEFT, SPEED_RIGHT, 2000);
-  turnStop(500);
-  //turnBack(SPEED_LEFT, SPEED_RIGHT, 9000);
- // turnStop(500);
-  //sensTest(100); // Для диагностики датчиков отражения
 
-  if (sonarUp.ping_cm() <= 15) {
-    turnLeft(SPEED_LEFT, SPEED_RIGHT, 500);
-    turnStop(500);
-    analogWrite(zoomer, 200); // 0-255 тональность звука
+void loop() {
+  int distance = sonarDown.ping_cm();
+
+  if (distance < 30) { // Если дистанция до кегли меньше 30 см.
+    delay(5); // Немного ждём (для стабилизации)
+    analogWrite(zoomer, 75); // Включаем сигнал. 0-255 тональность звука
+    Serial.print(distance); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
+    Serial.println(" TurnGo!"); // Отправляем сообщение в Монитор порта (для диагностики)
+    turnStop(100); // Останавливаем движение
+    turnLeft(SPEED_LEFT, SPEED_RIGHT, 50); // Поворачиваем влево
   }
-  else {
-    turnLeft(SPEED_LEFT, SPEED_RIGHT, 5);
-    analogWrite(zoomer, 0);
+  else { // Если расстояние до ближайшей кегли больше 30 сантиметров, то
+    delay(5); // Немного ждём (для стабилизации)
+    analogWrite(zoomer, 0); // Выключаем сигнал.
+    Serial.print(distance); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
+    Serial.println(" TurnLeft!"); // Отправляем сообщение в Монитор порта (для диагностики)
+    turnLeft(SPEED_LEFT, SPEED_RIGHT, 5); // Поворачиваем влево
   }
 }
 
@@ -153,6 +141,29 @@ void sensTest(int times) {
   Serial.println(sRight = digitalRead(SENS_RIGHT));
   delay(times);
 }
+
+/* // Диагностика нижнего сонара
+  Serial.print("DOWN: ");
+  Serial.println(sonarDown.ping_cm());
+  */
+  /*// Для диагностики фронтального датчика отражения
+  bool irStat = digitalRead(irSens); // Белый-0 Чёрный-1
+  Serial.println(irStat);
+  */
+
+  /* // Диагностика моторов
+  turnGo(SPEED_LEFT, SPEED_RIGHT, 9000);
+  turnStop(500);
+  turnLeft(SPEED_LEFT, SPEED_RIGHT, 1970);
+  turnGo(SPEED_LEFT, SPEED_RIGHT, 9000);
+  turnStop(500);
+  turnRight(SPEED_LEFT, SPEED_RIGHT, 2000);
+  turnStop(500);
+  turnBack(SPEED_LEFT, SPEED_RIGHT, 9000);
+  turnStop(500);
+  */
+
+  //sensTest(100); // Для диагностики датчиков отражения
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // END FILE
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
