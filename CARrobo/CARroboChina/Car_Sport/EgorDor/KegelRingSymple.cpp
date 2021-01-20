@@ -6,7 +6,7 @@
 #include <Arduino.h>
 #include <NewPing.h>
 
-const int zoomer = 11;
+const int voice = 11;
 
 const int ENA = 3;
 const int IN1 = 5;
@@ -50,26 +50,31 @@ void setup() {
   pinMode(ENB, OUTPUT);
   pinMode(PIN_TRIG_UP, OUTPUT);
   pinMode(PIN_TRIG_DOWN, OUTPUT);
-  pinMode(zoomer, OUTPUT);
+  pinMode(voice, OUTPUT);
 }
 
 void loop() {
-  int distance = sonarDown.ping_cm();
 
-  if (distance < 30) { // Если дистанция до кегли меньше 30 см.
-    delay(5); // Немного ждём (для стабилизации)
-    analogWrite(zoomer, 75); // Включаем сигнал. 0-255 тональность звука
-    Serial.print(distance); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
-    Serial.println(" TurnGo!"); // Отправляем сообщение в Монитор порта (для диагностики)
-    turnStop(100); // Останавливаем движение
-    turnLeft(SPEED_LEFT, SPEED_RIGHT, 50); // Поворачиваем влево
-  }
-  else { // Если расстояние до ближайшей кегли больше 30 сантиметров, то
-    delay(5); // Немного ждём (для стабилизации)
-    analogWrite(zoomer, 0); // Выключаем сигнал.
-    Serial.print(distance); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
-    Serial.println(" TurnLeft!"); // Отправляем сообщение в Монитор порта (для диагностики)
-    turnLeft(SPEED_LEFT, SPEED_RIGHT, 5); // Поворачиваем влево
+  // Функция, которая осуществляет цикличный поворот робота влево
+  // и, в случае обнаружения спереди препятствия, даёт звуковой сигнал
+  while (true) {
+    int distance = sonarDown.ping_cm();
+
+    if (distance < 30) { // Если дистанция до кегли меньше 30 см.
+      delay(5); // Немного ждём (для стабилизации)
+      analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
+      Serial.print(distance); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
+      Serial.println(" TurnGo!"); // Отправляем сообщение в Монитор порта (для диагностики)
+      turnStop(100); // Останавливаем движение
+      turnLeft(SPEED_LEFT, SPEED_RIGHT, 50); // Поворачиваем влево
+    }
+    else { // Если расстояние до ближайшей кегли больше 30 сантиметров, то
+      delay(5); // Немного ждём (для стабилизации)
+      analogWrite(voice, 0); // Выключаем сигнал.
+      Serial.print(distance); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
+      Serial.println(" TurnLeft!"); // Отправляем сообщение в Монитор порта (для диагностики)
+      turnLeft(SPEED_LEFT, SPEED_RIGHT, 5); // Поворачиваем влево
+    }
   }
 }
 
