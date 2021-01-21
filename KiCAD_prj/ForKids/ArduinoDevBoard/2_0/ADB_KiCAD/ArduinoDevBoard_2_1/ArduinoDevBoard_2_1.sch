@@ -173,8 +173,6 @@ F 3 "" H 1450 3450 50  0001 C CNN
 	1    1450 3450
 	0    -1   -1   0   
 $EndComp
-Text GLabel 1500 3350 0    50   BiDi ~ 0
-D2
 Wire Wire Line
 	1750 3350 1600 3350
 $Comp
@@ -553,8 +551,8 @@ Text Notes 1900 6300 0    50   ~ 0
 Мотор
 Text Notes 1950 1150 0    50   ~ 0
 Стабилизатор напряжения
-Text Notes 1550 3100 0    50   ~ 0
-Датчик t\nDS18B20
+Text Notes 1200 3150 0    50   ~ 0
+Датчик t - LM35
 $Comp
 L Connector:Screw_Terminal_01x02 J8
 U 1 1 5DFE5568
@@ -1319,51 +1317,51 @@ VIN
 $Comp
 L Connector:Conn_01x04_Female J13
 U 1 1 60046ECC
-P 3500 7000
-F 0 "J13" H 3528 6976 50  0000 L CNN
-F 1 "Conn_01x04_Female" H 3528 6885 50  0001 L CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 3500 7000 50  0001 C CNN
-F 3 "~" H 3500 7000 50  0001 C CNN
-	1    3500 7000
-	1    0    0    -1  
+P 3050 7050
+F 0 "J13" H 3078 7026 50  0000 L CNN
+F 1 "Conn_01x04_Female" H 3078 6935 50  0001 L CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 3050 7050 50  0001 C CNN
+F 3 "~" H 3050 7050 50  0001 C CNN
+	1    3050 7050
+	-1   0    0    -1  
 $EndComp
 $Comp
 L power:Earth #PWR0101
 U 1 1 60048ECB
-P 2950 7300
-F 0 "#PWR0101" H 2950 7050 50  0001 C CNN
-F 1 "Earth" H 2950 7150 50  0001 C CNN
-F 2 "" H 2950 7300 50  0001 C CNN
-F 3 "~" H 2950 7300 50  0001 C CNN
-	1    2950 7300
-	1    0    0    -1  
+P 3600 7350
+F 0 "#PWR0101" H 3600 7100 50  0001 C CNN
+F 1 "Earth" H 3600 7200 50  0001 C CNN
+F 2 "" H 3600 7350 50  0001 C CNN
+F 3 "~" H 3600 7350 50  0001 C CNN
+	1    3600 7350
+	-1   0    0    -1  
 $EndComp
 $Comp
 L power:+5V #PWR0102
 U 1 1 60049990
-P 3200 7200
-F 0 "#PWR0102" H 3200 7050 50  0001 C CNN
-F 1 "+5V" V 3250 7250 50  0000 L CNN
-F 2 "" H 3200 7200 50  0001 C CNN
-F 3 "" H 3200 7200 50  0001 C CNN
-	1    3200 7200
-	0    -1   -1   0   
+P 3350 7250
+F 0 "#PWR0102" H 3350 7100 50  0001 C CNN
+F 1 "+5V" V 3400 7300 50  0000 L CNN
+F 2 "" H 3350 7250 50  0001 C CNN
+F 3 "" H 3350 7250 50  0001 C CNN
+	1    3350 7250
+	0    1    -1   0   
 $EndComp
 Wire Wire Line
-	3200 7200 3300 7200
+	3350 7250 3250 7250
 Wire Wire Line
-	3300 7100 2950 7100
+	3250 7150 3600 7150
 Wire Wire Line
-	2950 7100 2950 7300
-Text GLabel 3050 6900 0    50   Input ~ 0
+	3600 7150 3600 7350
+Text GLabel 3500 6950 2    50   Input ~ 0
 RX
 Wire Wire Line
-	3050 6900 3300 6900
-Text GLabel 3050 7000 0    50   Output ~ 0
+	3500 6950 3250 6950
+Text GLabel 3500 7050 2    50   Output ~ 0
 TX
 Wire Wire Line
-	3050 7000 3300 7000
-Text Notes 3100 6800 0    50   ~ 0
+	3500 7050 3250 7050
+Text Notes 3450 6850 2    50   ~ 0
 Bluetooth
 Wire Notes Line
 	9550 4250 9550 5400
@@ -1451,4 +1449,6 @@ Wire Wire Line
 Connection ~ 1600 3350
 Wire Wire Line
 	1600 3350 1500 3350
+Text GLabel 1500 3350 0    50   Output ~ 0
+A6
 $EndSCHEMATC
