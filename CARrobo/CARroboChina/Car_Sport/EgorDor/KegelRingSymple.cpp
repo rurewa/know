@@ -25,21 +25,25 @@ const int PIN_ECHO_UP = 17; // 17
 const int PIN_TRIG_UP = 18;  // 18
 
 NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 400);
-NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 100);
+NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 50); // 50 - это максимальная дальность сонара
 
-const int SPEED_LEFT = 225; // Скорость левого мотора
-const int SPEED_RIGHT = 225; // Скорость правого мотора
+const int SPEED_LEFT_TURN = 235; // Скорость левого мотора
+const int SPEED_RIGHT_TURN = 235; // Скорость правого мотора
+
+const int SPEED_LEFT_MOVE = 205; // Скорость левого мотора
+const int SPEED_RIGHT_MOVE = 165; // Скорость правого мотора
 
 void turnGo(int speed_left, int speed_right, int times);
 void turnBack(int speed_left, int speed_right, int times);
 void turnStop(int times);
-void turnLeft(int speed_left, int speed_right, int times);
-void turnRight(int speed_left, int speed_right, int times);
-void turnAngle(int speed_left, int speed_right, int times);
+void turnLeft(int speed_left_turn, int speed_right_turn, int times);
+void turnRight(int speed_left_turn, int speed_right_turn, int times);
 void sensTest(int times);
 void voiceMove(); // Алгоритм проверки обнаружения перпятствия со звуковым сигналом
 
 const int irSens = 4; // Датчик определения цвета кегли
+
+bool flag = false;
 
 void setup() {
   Serial.begin(9600);
@@ -56,84 +60,90 @@ void setup() {
 
 void loop() {
   //sensTest(10);
-  bool flag = false;
+  int distance = sonarDown.ping_cm(); // Запись данных из сонара
   bool sLeft = 0; bool sCenter = 0; bool sRight = 0; // Черная 1, белый 0
   sLeft = digitalRead(SENS_LEFT); sCenter = digitalRead(SENS_CENTER); sRight = digitalRead(SENS_RIGHT);
 
-  if (sLeft == 1 && sCenter == 1 && sRight == 1) { // 111
-    turnBack(SPEED_LEFT, SPEED_RIGHT, 1300);
-    analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
-    sensTest(0);
-    flag = true;
-    if (flag == true) {
-      turnStop(500);
-      turnBack(SPEED_LEFT, SPEED_RIGHT, 100);
-      turnStop(500);
-      turnGo(SPEED_LEFT, SPEED_RIGHT, 500);
-      flag = false;
-    }
-  }
-  else if (sLeft == 1 && sCenter == 0 && sRight == 0) { // 100. Сделать короткий поворот вправо
-    turnBack(SPEED_LEFT, SPEED_RIGHT, 1300);
-    analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
-    sensTest(0);
-    flag = true;
-    if (flag == true) {
-      turnStop(500);
-      turnBack(SPEED_LEFT, SPEED_RIGHT, 100);
-      turnStop(500);
-      turnGo(SPEED_LEFT, SPEED_RIGHT, 500);
-      flag = false;
-    }
-  }
-  else if (sLeft == 0 && sCenter == 1 && sRight == 0) { // 010
-    turnBack(SPEED_LEFT, SPEED_RIGHT, 1300);
-    analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
-    sensTest(0);
-    flag = true;
-    if (flag == true) {
-      turnStop(500);
-      turnBack(SPEED_LEFT, SPEED_RIGHT, 100);
-      turnStop(500);
-      turnGo(SPEED_LEFT, SPEED_RIGHT, 500);
-      flag = false;
-    }
-  }
-  else if (sLeft == 0 && sCenter == 0 && sRight == 1) { // 001. Сделать короткий поворот влево
-    turnBack(SPEED_LEFT, SPEED_RIGHT, 1300);
-    analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
-    sensTest(0);
-    flag = true;
-    if (flag == true) {
-      turnStop(500);
-      turnBack(SPEED_LEFT, SPEED_RIGHT, 100);
-      turnStop(500);
-      turnGo(SPEED_LEFT, SPEED_RIGHT, 500);
-      flag = false;
-    }
+  if (distance > 30) {
+    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
   }
   else {
-    turnGo(SPEED_LEFT, SPEED_RIGHT, 50); // 000
-    analogWrite(voice, 0); // Включаем сигнал. 0-255 тональность звука
-    sensTest(0);
+    turnStop(500);
+    if (sLeft == 1 && sCenter == 1 && sRight == 1) { // 111
+      turnBack(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 1300);
+      //analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
+      sensTest(0);
+      flag = true;
+      if (flag == true) {
+        turnStop(500);
+        turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
+        turnStop(500);
+        turnGo(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 500);
+        flag = false;
+      }
+    }
+    else if (sLeft == 1 && sCenter == 0 && sRight == 0) { // 100. Сделать короткий поворот вправо
+      turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 1300);
+      //analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
+      sensTest(0);
+      flag = true;
+      if (flag == true) {
+        turnStop(500);
+        turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
+        turnStop(500);
+        turnGo(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 500);
+        flag = false;
+      }
+    }
+    else if (sLeft == 0 && sCenter == 1 && sRight == 0) { // 010
+      turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 1300);
+      //analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
+      sensTest(0);
+      flag = true;
+      if (flag == true) {
+        turnStop(500);
+        turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
+        turnStop(500);
+        turnGo(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 500);
+        flag = false;
+      }
+    }
+    else if (sLeft == 0 && sCenter == 0 && sRight == 1) { // 001. Сделать короткий поворот влево
+      turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 1300);
+      //analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
+      sensTest(0);
+      flag = true;
+      if (flag == true) {
+        turnStop(500);
+        turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
+        turnStop(500);
+        turnGo(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 500);
+        flag = false;
+      }
+    }
+    else {
+      turnGo(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 350); // 000
+      //analogWrite(voice, 0); // Включаем сигнал. 0-255 тональность звука
+      sensTest(0);
+    }
   }
 }
 
-void turnGo(int speed_left, int speed_right, int times) {
-  analogWrite(ENA, speed_left);
+void turnGo(int speed_left_move, int speed_right_move, int times) {
+  analogWrite(ENA, speed_left_move);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENB, speed_right);
+  analogWrite(ENB, speed_right_move);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
   delay(times);
 }
 
-void turnBack(int speed_left, int speed_right, int times) {
-  analogWrite(ENA, speed_left);
+void turnBack(int speed_left_move, int speed_right_move, int times) {
+  analogWrite(ENA, speed_left_move);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  analogWrite(ENB, speed_right);
+  analogWrite(ENB, speed_right_move);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
   delay(times);
@@ -145,31 +155,21 @@ void turnStop(int times) {
   delay(times);
 }
 
-void turnLeft(int speed_left, int speed_right, int times) {
-  analogWrite(ENA, speed_left);
+void turnLeft(int speed_left_turn, int speed_right_turn, int times) {
+  analogWrite(ENA, speed_left_turn);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
-  analogWrite(ENB, speed_right);
+  analogWrite(ENB, speed_right_turn);
   digitalWrite(IN3, HIGH);
   digitalWrite(IN4, LOW);
   delay(times);
 }
 
-void turnRight(int speed_left, int speed_right, int times) {
-  analogWrite(ENA, speed_left) ;
+void turnRight(int speed_left_turn, int speed_right_turn, int times) {
+  analogWrite(ENA, speed_left_turn) ;
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
-  analogWrite(ENB, speed_right);
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
-  delay(times);
-}
-
-void turnAngle(int speed_left, int speed_right, int times) {
-  analogWrite(ENA, speed_left) ;
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-  analogWrite(ENB, speed_right);
+  analogWrite(ENB, speed_right_turn);
   digitalWrite(IN3, LOW);
   digitalWrite(IN4, HIGH);
   delay(times);
@@ -187,7 +187,7 @@ void sensTest(int times) {
   Serial.println(sRight = digitalRead(SENS_RIGHT));
   delay(times);
 }
-
+void turnAngle(int speed_left, int speed_right, int times);
 void voiceMove() {
   // Функция, которая осуществляет цикличный поворот робота влево
   // и, в случае обнаружения спереди препятствия, даёт звуковой сигнал
@@ -199,14 +199,14 @@ void voiceMove() {
     //Serial.print(distance); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
     //Serial.println(" TurnGo!"); // Отправляем сообщение в Монитор порта (для диагностики)
     turnStop(350); // Останавливаем движение
-    turnLeft(SPEED_LEFT, SPEED_RIGHT, 100); // Поворачиваем влево
+    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100); // Поворачиваем влево
   }
   else { // Если расстояние до ближайшей кегли больше 30 сантиметров, то
     delay(5); // Немного ждём (для стабилизации)
     analogWrite(voice, 0); // Выключаем сигнал.
     Serial.print(distance); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
     Serial.println(" TurnLeft!"); // Отправляем сообщение в Монитор порта (для диагностики)
-    turnLeft(SPEED_LEFT, SPEED_RIGHT, 5); // Поворачиваем влево
+    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 5); // Поворачиваем влево
   }
 }
 
