@@ -25,13 +25,13 @@ const int PIN_ECHO_UP = 17; // 17
 const int PIN_TRIG_UP = 18;  // 18
 
 NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 400);
-NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 50); // 50 - это максимальная дальность сонара
+NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 45); // 50 - это максимальная дальность сонара
 
-const int SPEED_LEFT_TURN = 235; // Скорость левого мотора
-const int SPEED_RIGHT_TURN = 235; // Скорость правого мотора
+const int SPEED_LEFT_TURN = 255; // Скорость левого мотора
+const int SPEED_RIGHT_TURN = 255; // Скорость правого мотора
 
-const int SPEED_LEFT_MOVE = 205; // Скорость левого мотора
-const int SPEED_RIGHT_MOVE = 165; // Скорость правого мотора
+const int SPEED_LEFT_MOVE = 195; // Скорость левого мотора
+const int SPEED_RIGHT_MOVE = 155; // Скорость правого мотора
 
 void turnGo(int speed_left, int speed_right, int times);
 void turnBack(int speed_left, int speed_right, int times);
@@ -42,8 +42,6 @@ void sensTest(int times);
 void voiceMove(); // Алгоритм проверки обнаружения перпятствия со звуковым сигналом
 
 const int irSens = 4; // Датчик определения цвета кегли
-
-bool flag = false;
 
 void setup() {
   Serial.begin(9600);
@@ -63,12 +61,20 @@ void loop() {
   int distance = sonarDown.ping_cm(); // Запись данных из сонара
   bool sLeft = 0; bool sCenter = 0; bool sRight = 0; // Черная 1, белый 0
   sLeft = digitalRead(SENS_LEFT); sCenter = digitalRead(SENS_CENTER); sRight = digitalRead(SENS_RIGHT);
+  static bool flag = false; // Флаг для, чтобы при движении назад он не считал квадрат в центре поля
 
   if (distance > 30) {
+    turnStop(250);
     turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
+    if (distance > 30) {
+      turnStop(250);
+    }
   }
   else {
     turnStop(500);
+    if (distance < 30 && distance > 0) {
+      turnStop(250);
+    }
     if (sLeft == 1 && sCenter == 1 && sRight == 1) { // 111
       turnBack(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 1300);
       //analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
@@ -122,7 +128,7 @@ void loop() {
       }
     }
     else {
-      turnGo(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 350); // 000
+      turnGo(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 400); // 000
       //analogWrite(voice, 0); // Включаем сигнал. 0-255 тональность звука
       sensTest(0);
     }
