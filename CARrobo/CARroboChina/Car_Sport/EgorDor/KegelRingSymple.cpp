@@ -56,6 +56,7 @@ void setup() {
 
 void loop() {
   //sensTest(10);
+  bool flag = false;
   bool sLeft = 0; bool sCenter = 0; bool sRight = 0; // Черная 1, белый 0
   sLeft = digitalRead(SENS_LEFT); sCenter = digitalRead(SENS_CENTER); sRight = digitalRead(SENS_RIGHT);
 
@@ -63,36 +64,52 @@ void loop() {
     turnBack(SPEED_LEFT, SPEED_RIGHT, 1300);
     analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
     sensTest(0);
-    if (sLeft == 1 && sCenter == 1 && sRight == 1) {
-      turnStop(2000);
-      turnBack(SPEED_LEFT, SPEED_RIGHT, 250);
+    flag = true;
+    if (flag == true) {
+      turnStop(500);
+      turnBack(SPEED_LEFT, SPEED_RIGHT, 100);
+      turnStop(500);
+      turnGo(SPEED_LEFT, SPEED_RIGHT, 500);
+      flag = false;
     }
   }
   else if (sLeft == 1 && sCenter == 0 && sRight == 0) { // 100. Сделать короткий поворот вправо
     turnBack(SPEED_LEFT, SPEED_RIGHT, 1300);
     analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
     sensTest(0);
-    if (sLeft == 1 && sCenter == 0 && sRight == 0) {
-      turnStop(2000);
-      turnBack(SPEED_LEFT, SPEED_RIGHT, 250);
+    flag = true;
+    if (flag == true) {
+      turnStop(500);
+      turnBack(SPEED_LEFT, SPEED_RIGHT, 100);
+      turnStop(500);
+      turnGo(SPEED_LEFT, SPEED_RIGHT, 500);
+      flag = false;
     }
   }
   else if (sLeft == 0 && sCenter == 1 && sRight == 0) { // 010
     turnBack(SPEED_LEFT, SPEED_RIGHT, 1300);
     analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
     sensTest(0);
-    if (sLeft == 0 && sCenter == 1 && sRight == 0) {
-      turnStop(2000);
-      turnBack(SPEED_LEFT, SPEED_RIGHT, 250);
+    flag = true;
+    if (flag == true) {
+      turnStop(500);
+      turnBack(SPEED_LEFT, SPEED_RIGHT, 100);
+      turnStop(500);
+      turnGo(SPEED_LEFT, SPEED_RIGHT, 500);
+      flag = false;
     }
   }
   else if (sLeft == 0 && sCenter == 0 && sRight == 1) { // 001. Сделать короткий поворот влево
     turnBack(SPEED_LEFT, SPEED_RIGHT, 1300);
     analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
     sensTest(0);
-    if (sLeft == 0 && sCenter == 0 && sRight == 1) {
-      turnStop(2000);
-      turnBack(SPEED_LEFT, SPEED_RIGHT, 250);
+    flag = true;
+    if (flag == true) {
+      turnStop(500);
+      turnBack(SPEED_LEFT, SPEED_RIGHT, 100);
+      turnStop(500);
+      turnGo(SPEED_LEFT, SPEED_RIGHT, 500);
+      flag = false;
     }
   }
   else {
