@@ -6,14 +6,14 @@
 #include <Arduino.h>
 #include <NewPing.h>
 
-const int voice = 11;
+const int VOICE = 11;
 
-const int ENA = 3;
+const int ENA = 9;
 const int IN1 = 5;
 const int IN2 = 6;
 const int IN3 = 7;
 const int IN4 = 8;
-const int ENB = 9;
+const int ENB = 3;
 const int SENS_LEFT   = 14;
 const int SENS_CENTER = 15;
 const int SENS_RIGHT  = 16;
@@ -29,19 +29,25 @@ NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 45); // 50 - это максималь
 
 const int SPEED_LEFT_TURN = 255; // Скорость левого мотора
 const int SPEED_RIGHT_TURN = 255; // Скорость правого мотора
+// Из-за разницы в скорости моторов, приходится это компенсировать с помощью ШИМ
+const int SPEED_RIGHT_MOVE = 125; // Скорость левого мотора
+const int SPEED_LEFT_MOVE = 155; // Скорость правого мотора
 
-const int SPEED_LEFT_MOVE = 195; // Скорость левого мотора
-const int SPEED_RIGHT_MOVE = 155; // Скорость правого мотора
+// Функции движения
+void go(int speed_left_move, int speed_right_move, int times); // Движение вперёд
+void backMove(int speed_left_move, int speed_right_move, int times); // Движение назад
+void turnStop(int times); // Стоп
+void turnLeft(int speed_left_turn, int speed_right_turn, int times); // Движение влево
+void turnRight(int speed_left_turn, int speed_right_turn, int times); // Движение Вправо
+void backMoveFlag(bool flag); // Джвижение назад не обращая внимания на квадрат в центре
+void sensTest(int times); // Тест нижних датчиков отражения
+void VOICEMove(); // Алгоритм проверки обнаружения перпятствия со звуковым сигналом
 
-void turnGo(int speed_left, int speed_right, int times);
-void turnBack(int speed_left, int speed_right, int times);
-void turnStop(int times);
-void turnLeft(int speed_left_turn, int speed_right_turn, int times);
-void turnRight(int speed_left_turn, int speed_right_turn, int times);
-void sensTest(int times);
-void voiceMove(); // Алгоритм проверки обнаружения перпятствия со звуковым сигналом
+const int IR_SENS = 4; // Датчик определения цвета кегли. Пока не используется
 
-const int irSens = 4; // Датчик определения цвета кегли
+static int sensState = 0;
+
+//static bool flag = false; // Флаг для того, чтобы при движении назад он не считал квадрат в центре поля
 
 void setup() {
   Serial.begin(9600);
@@ -53,89 +59,46 @@ void setup() {
   pinMode(ENB, OUTPUT);
   pinMode(PIN_TRIG_UP, OUTPUT);
   pinMode(PIN_TRIG_DOWN, OUTPUT);
-  pinMode(voice, OUTPUT);
+  pinMode(VOICE, OUTPUT);
+  delay(250); // Задержка для стабилизации
 }
 
 void loop() {
   //sensTest(10);
   int distance = sonarDown.ping_cm(); // Запись данных из сонара
-  bool sLeft = 0; bool sCenter = 0; bool sRight = 0; // Черная 1, белый 0
+  static bool sLeft = 0; static bool sCenter = 0; static bool sRight = 0; // Черная 1, белый 0
   sLeft = digitalRead(SENS_LEFT); sCenter = digitalRead(SENS_CENTER); sRight = digitalRead(SENS_RIGHT);
-  static bool flag = false; // Флаг для, чтобы при движении назад он не считал квадрат в центре поля
+  if (sLeft == 1 && sCenter == 1 && sRight == 1) { sensState = 1; } // 111
+  if (sLeft == 1 && sCenter == 0 && sRight == 0) { sensState = 2; } // 100
+  if (sLeft == 0 && sCenter == 1 && sRight == 0) { sensState = 3; } // 010
+  if (sLeft == 0 && sCenter == 0 && sRight == 1) { sensState = 4; } // 001
+  if (sLeft == 0 && sCenter == 1 && sRight == 1) { sensState = 5; } // 011
+  if (sLeft == 1 && sCenter == 1 && sRight == 0) { sensState = 6; } // 110
 
-  if (distance > 30) {
-    turnStop(250);
-    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
-    if (distance > 30) {
-      turnStop(250);
+  if (distance < 30) {
+    go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 1400);
+    while (sensState == 1 || sensState == 2 || sensState == 3 || sensState == 4 || sensState == 5 || sensState == 6) {
+      backMove(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 1400);
+      break;
     }
   }
   else {
-    turnStop(500);
-    if (distance < 30 && distance > 0) {
-      turnStop(250);
-    }
-    if (sLeft == 1 && sCenter == 1 && sRight == 1) { // 111
-      turnBack(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 1300);
-      //analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
-      sensTest(0);
-      flag = true;
-      if (flag == true) {
-        turnStop(500);
-        turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
-        turnStop(500);
-        turnGo(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 500);
-        flag = false;
-      }
-    }
-    else if (sLeft == 1 && sCenter == 0 && sRight == 0) { // 100. Сделать короткий поворот вправо
-      turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 1300);
-      //analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
-      sensTest(0);
-      flag = true;
-      if (flag == true) {
-        turnStop(500);
-        turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
-        turnStop(500);
-        turnGo(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 500);
-        flag = false;
-      }
-    }
-    else if (sLeft == 0 && sCenter == 1 && sRight == 0) { // 010
-      turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 1300);
-      //analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
-      sensTest(0);
-      flag = true;
-      if (flag == true) {
-        turnStop(500);
-        turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
-        turnStop(500);
-        turnGo(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 500);
-        flag = false;
-      }
-    }
-    else if (sLeft == 0 && sCenter == 0 && sRight == 1) { // 001. Сделать короткий поворот влево
-      turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 1300);
-      //analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
-      sensTest(0);
-      flag = true;
-      if (flag == true) {
-        turnStop(500);
-        turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
-        turnStop(500);
-        turnGo(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 500);
-        flag = false;
-      }
-    }
-    else {
-      turnGo(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 400); // 000
-      //analogWrite(voice, 0); // Включаем сигнал. 0-255 тональность звука
-      sensTest(0);
-    }
+    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
+    turnStop(250);
   }
 }
 
-void turnGo(int speed_left_move, int speed_right_move, int times) {
+void backMoveFlag(bool flag) {
+  flag = true;
+  if (flag == true) {
+    backMove(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 1500);
+    turnStop(500);
+    go(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 500);
+    flag = false;
+  }
+}
+
+void go(int speed_left_move, int speed_right_move, int times) {
   analogWrite(ENA, speed_left_move);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
@@ -145,7 +108,7 @@ void turnGo(int speed_left_move, int speed_right_move, int times) {
   delay(times);
 }
 
-void turnBack(int speed_left_move, int speed_right_move, int times) {
+void backMove(int speed_left_move, int speed_right_move, int times) {
   analogWrite(ENA, speed_left_move);
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
@@ -193,15 +156,16 @@ void sensTest(int times) {
   Serial.println(sRight = digitalRead(SENS_RIGHT));
   delay(times);
 }
-void turnAngle(int speed_left, int speed_right, int times);
-void voiceMove() {
+
+void voiceMove() { // Функция предназначени для тестирования сонара и моторов одновременно
+  bool sLeft = 0; bool sCenter = 0; bool sRight = 0;
   // Функция, которая осуществляет цикличный поворот робота влево
   // и, в случае обнаружения спереди препятствия, даёт звуковой сигнал
   int distance = sonarDown.ping_cm();
 
   if (distance < 25) { // Если дистанция до кегли меньше 30 см.
     //delay(5); // Немного ждём (для стабилизации)
-    analogWrite(voice, 75); // Включаем сигнал. 0-255 тональность звука
+    analogWrite(VOICE, 75); // Включаем сигнал. 0-255 тональность звука
     //Serial.print(distance); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
     //Serial.println(" TurnGo!"); // Отправляем сообщение в Монитор порта (для диагностики)
     turnStop(350); // Останавливаем движение
@@ -209,19 +173,69 @@ void voiceMove() {
   }
   else { // Если расстояние до ближайшей кегли больше 30 сантиметров, то
     delay(5); // Немного ждём (для стабилизации)
-    analogWrite(voice, 0); // Выключаем сигнал.
-    Serial.print(distance); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
+    analogWrite(VOICE, 0); // Выключаем сигнал.
+    Serial.print(sLeft == 0 && sCenter == 1 && sRight == 0); // Выводим в Монитор порта расстояние доп репятствия с нижнего сонара (для диагностики)
     Serial.println(" TurnLeft!"); // Отправляем сообщение в Монитор порта (для диагностики)
     turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 5); // Поворачиваем влево
   }
 }
+/*
+  void backMove(bool flag) { // backMove(false);
+  turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 1300);
+  sensTest(0);
+  flag = true;
+  if (flag == true) {
+    turnStop(500);
+    turnBack(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100);
+    turnStop(500);
+    turnGo(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 500);
+    flag = false;
+  }
+}
+*/
+/* // Новая реализация логики движения робота
+int sensStat = 0;
+if (sLeft == 1 && sCenter == 1 && sRight == 1) { sensStat = 1; } // 111
+if (sLeft == 1 && sCenter == 0 && sRight == 0) { sensStat = 2; } // 100
+if (sLeft == 0 && sCenter == 1 && sRight == 0) { sensStat = 3; } // 010
+if (sLeft == 0 && sCenter == 0 && sRight == 1) { sensStat = 4; } // 001
+if (sLeft == 0 && sCenter == 1 && sRight == 1) { sensStat = 5; } // 011
+if (sLeft == 1 && sCenter == 1 && sRight == 0) { sensStat = 6; } // 110
+if (sLeft == 0 && sCenter == 0 && sRight == 0) { sensStat = 7; } // 000
+switch (sensStat)
+{
+case 1:
+  backMove();
+  break;
+case 2:
+  backMove();
+  break;
+case 3:
+  backMove();
+  break;
+case 4:
+  backMove();
+  break;
+case 5:
+  backMove();
+  break;
+case 6:
+  backMove();
+  break;
+default:
+  turnGo(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 400); // 000
+  sensTest(0);
+  break;
+}
+*/
+
 
 /* // Диагностика нижнего сонара
   Serial.print("DOWN: ");
   Serial.println(sonarDown.ping_cm());
   */
   /*// Для диагностики фронтального датчика отражения
-  bool irStat = digitalRead(irSens); // Белый-0 Чёрный-1
+  bool irStat = digitalRead(IR_SENS); // Белый-0 Чёрный-1
   Serial.println(irStat);
   */
 
