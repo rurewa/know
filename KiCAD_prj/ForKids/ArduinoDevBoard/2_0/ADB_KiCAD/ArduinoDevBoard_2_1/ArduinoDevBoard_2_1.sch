@@ -35,7 +35,7 @@ F 3 "~" H 2600 4050 50  0001 C CNN
 	1    2600 4050
 	-1   0    0    -1  
 $EndComp
-Text GLabel 1550 6750 0    50   BiDi ~ 0
+Text GLabel 1550 6750 0    50   Output ~ 0
 D3
 $Comp
 L power:Earth #PWR014
@@ -462,7 +462,7 @@ L Connector:Screw_Terminal_01x02 J8
 U 1 1 5DFE5568
 P 4800 1450
 F 0 "J8" H 4880 1442 50  0000 L CNN
-F 1 "OUT POWER" H 4880 1351 50  0000 L CNN
+F 1 "VIN <= 12V" H 4880 1351 50  0000 L CNN
 F 2 "Connector_Phoenix_MC:PhoenixContact_MCV_1,5_2-G-3.5_1x02_P3.50mm_Vertical" H 4800 1450 50  0001 C CNN
 F 3 "~" H 4800 1450 50  0001 C CNN
 	1    4800 1450
