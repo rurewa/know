@@ -45,6 +45,8 @@ void sensTest(int times); // Тест нижних датчиков отраже
 
 const int IR_SENS = 4; // Датчик определения цвета кегли. Пока не используется
 
+bool flagState = false; // Флаг состояния
+
 void setup() {
   Serial.begin(9600); // Монтор порта: для диагностики и тестирования
   pinMode(ENA, OUTPUT);
@@ -60,11 +62,50 @@ void setup() {
 }
 
 void loop() {
-  //sensTest(10); // Тест нажних датчиков отражения
+  int distance = sonarDown.ping_cm(); // Запись данных из сонара
+  static int sensState = 0; // Флаг состояния нижних датчиков отражения
+  static bool sLeft = 0, sCenter = 0, sRight = 0; // Нижние датчики отражения. Черная 1 (не светит), белый 0 (светит)
+  // Запись в датчики отражения
+  sLeft = digitalRead(SENS_LEFT); sCenter = digitalRead(SENS_CENTER); sRight = digitalRead(SENS_RIGHT);
+  // Черная 1, белый 0
+  if (sLeft == 1 && sCenter == 1 && sRight == 1) { sensState = 1; } // Состояние 111
+  if (sLeft == 1 && sCenter == 0 && sRight == 0) { sensState = 2; } // Состояние 100
+  if (sLeft == 0 && sCenter == 1 && sRight == 0) { sensState = 3; } // Состояние 010
+  if (sLeft == 0 && sCenter == 0 && sRight == 1) { sensState = 4; } // Состояние 001
+  if (sLeft == 0 && sCenter == 1 && sRight == 1) { sensState = 5; } // Состояние 011
+  if (sLeft == 1 && sCenter == 1 && sRight == 0) { sensState = 6; } // Состояние 110
+  if (sLeft == 0 && sCenter == 0 && sRight == 0) { sensState = 7; } // Состояние 000
+  if (sensState == 1 || sensState == 2 || sensState == 3 || sensState == 4 || sensState == 5 || sensState == 6) {
+    flagState = true; // Если сработал хоть один нижний датчик отражения
+  } else { flagState = false; } // Если ни один из нижних датчиков отражения не сработал, флаг false
+
+  // Проверка расстояния до кегли
+  if (distance > 0 && distance < 40) { // Если больше 0 и меньше 40 см.
+    delay(250); // Задержка для стабилизации
+    if (distance < 40) { // Дополнительная проверка расстояния до кегли
+      delay(250);
+      go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 2000); // Двигаемся к кегле с целью её вытолкнуть за круг
+      moveStop(350);
+      backMove(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 2000); // Движемся назад
+      // Если сработал хоть один нижний датчик отражения, то возвращаемся в квадрат
+      flagState = true;
+      do { analogWrite(VOICE, 100); go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 100); break; } while (flagState == true);
+    }
+  }
+  else { // Если кегля не обнаружена
+    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 50); // Вращаемся на месте влево - ищем кеглю
+    moveStop(400); // Задержка для стабилизации
+    analogWrite(VOICE, 0);
+  }
+  //Serial.println(distance); // Диагностика сонара
+}
+
+void autoroute1() {
   int distance = sonarDown.ping_cm(); // Запись данных из сонара
   static int sensState = 0; // Флаг состояния нижних датчиков отражения
   static bool sLeft = 0, sCenter = 0, sRight = 0; // Нижние датчики отражения. Черная 1, белый 0
   // Запись в датчики отражения
+  //static bool flagState = false; // Флаг состояния
   sLeft = digitalRead(SENS_LEFT); sCenter = digitalRead(SENS_CENTER); sRight = digitalRead(SENS_RIGHT);
   // Черная 1, белый 0
   if (sLeft == 1 && sCenter == 1 && sRight == 1) { sensState = 1; } // Состояние 111
@@ -81,17 +122,29 @@ void loop() {
       go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 2000); // Двигаемся к кегле с целью её вытолкнуть за круг
       //backMove(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 2000); // Движемся назад
       // Если сработал хоть один нижний датчик отражения, то возвращаемся в квадрат
-      if (sensState == 1 || sensState == 2 || sensState == 3 || sensState == 4 || sensState == 5 || sensState == 6) {
+      while (sensState == 1 || sensState == 2 || sensState == 3 || sensState == 4 || sensState == 5 || sensState == 6) {
+        //flagState = true;
         backMove(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 2000); // Движемся назад
-        //break; // Выходим из цикла
       }
     }
   }
   else { // Если кегля не обнаружена
-    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 50); // Вращаемся на месте влево - ищем кеглю
+    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100); // Вращаемся на месте влево - ищем кеглю
     moveStop(250); // Задержка для стабилизации
   }
-  //Serial.println(distance); // Диагностика сонара
+}
+
+void aitoroute2() {
+  if (flagState == false) {
+    go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 200); // Двигаемся к кегле с целью её вытолкнуть за круг
+    analogWrite(VOICE, 0);
+  }
+  else {
+    backMove(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 2000); // Движемся назад
+    moveStop(250); // Задержка для стабилизации
+    flagState = true;
+    do { analogWrite(VOICE, 100); go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 200); break; } while (flagState == true);
+  }
 }
 
 void go(int speed_left_move, int speed_right_move, int times) {
