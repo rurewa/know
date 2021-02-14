@@ -1,6 +1,6 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // Рука робота. 8 - указательный, 9 - средний, 10 - большой.
-// V 1.2
+// V 1.3
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <Wire.h>
@@ -14,7 +14,7 @@ const int FREQUENCY = 60;
 int pulseWidth(int angle);
 
 void setup() {
-  //Serial.begin(9600);
+  Serial.begin(9600);
   pwm.begin();
   pwm.setPWMFreq(FREQUENCY);
   // Разгибаем пальцы ладони в начале программы
@@ -25,30 +25,29 @@ void setup() {
 }
 
 void loop() {
-  // Сгибаем пальцы
-  for (int i = 0; i < 110; ++i) {
+  int axisX = map (analogRead(A0), 0, 1023, 0, 127);
+  pwm.setPWM(0, 0, pulseWidth(axisX));
+  Serial.println(axisX);
+  /*
+  // Сгибаем все пальцы
+  for (int i = 0; i < 120; ++i) {
+    pwm.setPWM(0, 0, pulseWidth(i));
+    pwm.setPWM(1, 0, pulseWidth(i));
     pwm.setPWM(8, 0, pulseWidth(i));
     pwm.setPWM(9, 0, pulseWidth(i));
     pwm.setPWM(10, 0, pulseWidth(i));
     delay(15);
   }
-  // Разгибаем пальцы
-  for (int i = 110; i >= 0; --i) {
+  // Разгибаем все пальцы
+  for (int i = 115; i >= 0; --i) {
+    pwm.setPWM(0, 0, pulseWidth(i));
+    pwm.setPWM(1, 0, pulseWidth(i));
     pwm.setPWM(8, 0, pulseWidth(i));
     pwm.setPWM(9, 0, pulseWidth(i));
     pwm.setPWM(10, 0, pulseWidth(i));
     delay(15);
   }
-  // Указываем
-    pwm.setPWM(8, 0, pulseWidth(0));
-    pwm.setPWM(9, 0, pulseWidth(110));
-    pwm.setPWM(10, 0, pulseWidth(110));
-    delay(2000);
-  // Показываем большой палец
-    pwm.setPWM(8, 0, pulseWidth(110));
-    pwm.setPWM(9, 0, pulseWidth(110));
-    pwm.setPWM(10, 0, pulseWidth(0));
-    delay(2000);
+  */
 }
 
 int pulseWidth(int angle) {
