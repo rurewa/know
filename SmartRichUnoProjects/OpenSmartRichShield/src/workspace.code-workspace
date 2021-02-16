@@ -1,11 +1,8 @@
 {
 	"folders": [
 		{
-			"path": "../../../../Documents/PlatformIO/Projects/OpenSmartRichShield"
-		},
-		{
-			"name": "OpenSmartRichShield",
-			"path": ".."
+			"name": "EgorCarRobot",
+			"path": "../../../../Documents/PlatformIO/Projects/EgorCarRobot"
 		}
 	],
 	"settings": {}
