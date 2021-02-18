@@ -112,17 +112,6 @@ Connection ~ 1250 1200
 Wire Wire Line
 	1250 1200 1250 1250
 $Comp
-L Device:Speaker LS1
-U 1 1 5F978E6E
-P 3250 1700
-F 0 "LS1" H 3300 1900 50  0000 C CNN
-F 1 "Speaker" H 3250 1400 50  0000 C CNN
-F 2 "" H 3250 1500 50  0001 C CNN
-F 3 "~" H 3240 1650 50  0001 C CNN
-	1    3250 1700
-	-1   0    0    -1  
-$EndComp
-$Comp
 L Transistor_BJT:PN2222A Q3
 U 1 1 5F97A5C8
 P 3550 2350
@@ -170,7 +159,6 @@ F 3 "" H 3450 1100 50  0001 C CNN
 	1    3450 1100
 	1    0    0    -1  
 $EndComp
-NoConn ~ 4900 2350
 $Comp
 L Switch:SW_DPST_x2 SW2
 U 2 1 5F982AE3
@@ -1033,8 +1021,6 @@ Wire Wire Line
 	3450 1100 3450 1250
 Wire Wire Line
 	3450 1250 4900 1250
-Connection ~ 3450 1250
-NoConn ~ 4900 1250
 $Comp
 L Transistor_BJT:PN2222A Q10
 U 1 1 5F97805F
@@ -1315,13 +1301,33 @@ Wire Wire Line
 Wire Wire Line
 	3750 2350 4450 2350
 Wire Wire Line
-	3450 1250 3450 1700
-Wire Wire Line
-	3450 1800 3450 2150
-Wire Wire Line
 	2800 7000 2800 7350
 Wire Notes Line
 	2200 6800 2200 7150
 Wire Notes Line
 	2200 7150 2800 7150
+Wire Wire Line
+	4900 2350 4900 1250
+Connection ~ 3450 1250
+Wire Wire Line
+	3450 1700 3450 1250
+$Comp
+L Device:Speaker LS1
+U 1 1 5F978E6E
+P 3250 1700
+F 0 "LS1" H 3300 1900 50  0000 C CNN
+F 1 "Speaker" H 3250 1400 50  0000 C CNN
+F 2 "" H 3250 1500 50  0001 C CNN
+F 3 "~" H 3240 1650 50  0001 C CNN
+	1    3250 1700
+	-1   0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 1800 3800 1800
+Wire Wire Line
+	3450 2150 3450 2050
+Wire Wire Line
+	3450 2050 3800 2050
+Wire Notes Line
+	3800 1800 3800 2050
 $EndSCHEMATC
