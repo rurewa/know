@@ -854,8 +854,6 @@ F 3 "~" H 1900 1250 50  0001 C CNN
 	1    1900 1250
 	1    0    0    -1  
 $EndComp
-Text Notes 7250 1050 0    197  ~ 39
-Arduino Dev Board 2.1
 Wire Wire Line
 	5100 5700 5200 5700
 Wire Wire Line
@@ -1356,4 +1354,6 @@ Wire Wire Line
 	6050 3650 6200 3650
 NoConn ~ 5650 3850
 NoConn ~ 9050 1750
+Text Notes 7250 1250 0    197  ~ 39
+Arduino Dev Board 2.1\nмодуль "Весна"
 $EndSCHEMATC
