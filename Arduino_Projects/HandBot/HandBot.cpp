@@ -18,36 +18,38 @@ void setup() {
   pwm.begin();
   pwm.setPWMFreq(FREQUENCY);
   // Разгибаем пальцы ладони в начале программы
-  pwm.setPWM(0, 0, pulseWidth(0));
-  pwm.setPWM(1, 0, pulseWidth(0));
-  pwm.setPWM(8, 0, pulseWidth(0));
-  pwm.setPWM(9, 0, pulseWidth(0));
-  pwm.setPWM(10, 0, pulseWidth(0));
+  pwm.setPWM(0, 0, pulseWidth(10));
+  pwm.setPWM(1, 0, pulseWidth(10));
+  pwm.setPWM(8, 0, pulseWidth(10));
+  pwm.setPWM(9, 0, pulseWidth(10));
+  pwm.setPWM(10, 0, pulseWidth(10));
   delay(250);
 }
 
 void loop() {
-  int axisX_1 = map (analogRead(A0), 0, 1023, 0, 127);
+
+  int axisX_1 = map (analogRead(A0), 0, 1023, -20, 127);
   pwm.setPWM(0, 0, pulseWidth(axisX_1));
   Serial.println(axisX_1);
-    
-  int axisX_2 = map (analogRead(A1), 0, 1023, 0, 127);
+
+  int axisX_2 = map (analogRead(A1), 0, 1023, -20, 127);
   pwm.setPWM(1, 0, pulseWidth(axisX_2));
   Serial.println(axisX_2);
 
-  int axisX_3 = map (analogRead(A2), 0, 1023, 0, 127);
+  int axisX_3 = map (analogRead(A2), 0, 1023, -20, 127);
   pwm.setPWM(8, 0, pulseWidth(axisX_3));
   Serial.println(axisX_3);
 
-  int axisX_4 = map (analogRead(A3), 0, 1023, 0, 127);
+  int axisX_4 = map (analogRead(A3), 0, 1023, -20, 127);
   pwm.setPWM(9, 0, pulseWidth(axisX_4));
   Serial.println(axisX_4);
-  
-  int axisX_5 = map (analogRead(A7), 0, 1023, 0, 127);
+
+  int axisX_5 = map (analogRead(A7), 0, 1023, -20, 127);
   pwm.setPWM(10, 0, pulseWidth(axisX_5));
   Serial.println(axisX_5);
-  /*
+
   // Сгибаем все пальцы
+  /*
   for (int i = 0; i < 120; ++i) {
     pwm.setPWM(0, 0, pulseWidth(i));
     pwm.setPWM(1, 0, pulseWidth(i));
