@@ -40,15 +40,26 @@ const int PIN_TRIG = 15;
 NewPing sonar(PIN_TRIG, PIN_ECHO, 400); // Объект Сонара HC-SR04
 
 // Функция Сонара
+void sonarFunc();
 // Функция 8х8 светодиодной матрицы
+void ledMatrix();
 // Функция 1602 экрана
+void displey1602();
 // Функция динамика
+void voice();
 // Функция датчика t
+void temerature();
 // Функция группы светодиодов
+void ledsGroup();
 // Функция RGB-светодиода
 // Функция потенциометра
+void potValue();
 // Функция мотора
+void motor();
 // Функция кнопок
+void buttons();
+
+const int MOTOR_PWM = 3;
 
 void setup() {
   Serial.begin(9600);
@@ -59,7 +70,7 @@ void setup() {
   // ----------------------------------------------------------------------
   // Экран 1602
   lcd.init(); // Инициализация LCD
-  //lcd.backlight();// Включаем подсветку дисплея
+  lcd.backlight();// Включаем подсветку дисплея
   lcd.begin(16, 2);  // Задаем размерность экрана
   //------------------------------------------------------------------------
   // Светодиодная матрица 8х8
@@ -76,16 +87,21 @@ void setup() {
   // Сонар HC-SR04
   pinMode(PIN_TRIG, OUTPUT);
   //------------------------------------------------------------------------
+  pinMode(MOTOR_PWM, OUTPUT);
 }
 
 void loop() {
-  // ----------------------------------------------------------------
-  // Проверка мотора
-  /*
-  int motorPWM = 3;
-  analogWrite (motorPWM, 85);
-  */
-  // ----------------------------------------------------------------
+  //sonarFunc();
+  //temerature();
+  //ledMatrix();
+  //voice();
+  //displey1602();
+  //ledsGroup();
+  //potValue();
+  motor();
+  //buttons();
+}
+void temerature() {
   // Датчик температуры
   // вызов sensor.requestTemperatures (), чтобы отправить запрос глобальной
   // температуры всем устройствам на шине
@@ -94,18 +110,34 @@ void loop() {
   Serial.println("DONE");
   Serial.print("Temperature for Device 1 is:: ");
   Serial.print(sensors.getTempCByIndex(0)); // Why "byIndex"?
-  // ------------------------------------------------------------------
+}
+
+void displey1602() {
   // Проверка экрана 1602
   lcd.clear(); // Очищаем экран перед получением нового значения
   lcd.setCursor(0, 0); // курсор на 4-й символ 1-й строки
   lcd.print("Temperature:"); // Тест на 1-й строке экрана
   lcd.setCursor(2, 1); // курсор на 7-й символ 2-й строки
   lcd.print(sensors.getTempCByIndex(0)); // Значение t на 2-й строке экрана
+}
 
-  // -------------------------------------------------------------------
+void voice() {
+  // Проверка динамика
+  digitalWrite(4, HIGH);
+  delay(500);
+  digitalWrite(4, LOW);
+  delay(500);
+}
+
+void sonarFunc() {
+  // Проверка сонара
+  Serial.print("Sonar: ");
+  Serial.println(sonar.ping_cm());
+}
+
+void ledMatrix() {
   // Проверка 8х8 светодиодной матрицы
   //lc.setLed(0, 3, 4, true);
-  /*
   lc.setRow(0, 0, B11111111);
   lc.setRow(0, 1, B11111111);
   lc.setRow(0, 2, B11100111);
@@ -114,14 +146,30 @@ void loop() {
   lc.setRow(0, 5, B11111111);
   lc.setRow(0, 6, B11111111);
   lc.setRow(0, 7, B11111111);
-  */
-  // Проверка сонара
-  /*
-  Serial.print("Sonar: ");
-  Serial.println(sonar.ping_cm());
-  */
+}
+
+void ledsGroup() {
+  // Проверка группы светодиодов
+  for (int i = 8; i <= 12; ++i) {
+    digitalWrite(i, !digitalRead(i));
+    delay(150);
+  }
+}
+
+void potValue() {
+  // Проверка потенциометра
+  int pot = A7;
+  int val = analogRead(pot);
+  Serial.println(val);
+}
+
+void motor() {
+  // Проверка мотора
+  analogWrite (MOTOR_PWM, 254);
+}
+
+void buttons() {
   // Проверка кнопок
-  /*
   bool button1 = digitalRead(13);
   bool button2 = digitalRead(16);
   bool button3 = digitalRead(17);
@@ -134,29 +182,6 @@ void loop() {
   Serial.print("Button 3: ");
   Serial.println(button3);
   delay(20);
-  */
-  // Проверка потенциометра
-  /*
-  int pot = A7;
-  int val = analogRead(pot);
-  Serial.println(val);
-  */
-  // ----------------------------------
-  // Проверка группы светодиодов
-  /*
-  for (int i = 8; i <= 12; ++i) {
-    digitalWrite(i, !digitalRead(i));
-    delay(150);
-  }
-  */
-  // ----------------------------------
-  // Проверка динамика
-  /*
-  digitalWrite(4, HIGH);
-  delay(500);
-  digitalWrite(4, LOW);
-  delay(500);
-  */
 }
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // END FILE
