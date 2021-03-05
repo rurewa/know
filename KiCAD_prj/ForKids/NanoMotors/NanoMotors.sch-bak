@@ -526,8 +526,6 @@ Text GLabel 7310 2940 2    50   Input ~ 0
 D8
 Wire Wire Line
 	7310 2740 7210 2740
-Text GLabel 7310 3040 2    50   Input ~ 0
-D9
 Wire Wire Line
 	7310 2840 7210 2840
 Wire Wire Line
@@ -1191,5 +1189,6 @@ Wire Wire Line
 Connection ~ 4255 6075
 Wire Wire Line
 	4255 6075 4780 6075
-NoConn ~ 7310 3145
+NoConn ~ 7310 3140
+NoConn ~ 7310 3040
 $EndSCHEMATC

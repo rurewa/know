@@ -1171,7 +1171,7 @@ Wire Notes Line
 	1750 3150 5525 3150
 Text Notes 4465 4840 0    118  ~ 24
 Драйвер мотора
-Text GLabel 4480 6840 3    50   Output ~ 0
+Text GLabel 4255 6285 3    50   Output ~ 0
 D10
 Wire Wire Line
 	4480 6840 4480 6675
@@ -1182,7 +1182,7 @@ Wire Wire Line
 Wire Wire Line
 	4095 6675 4480 6675
 Connection ~ 4480 6675
-Text GLabel 4255 6285 3    50   Output ~ 0
+Text GLabel 4480 6840 3    50   Output ~ 0
 D9
 Wire Wire Line
 	4255 6285 4255 6075
