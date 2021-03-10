@@ -1,6 +1,6 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 // All tests for Arduino Dev Boards V.2
-// V 1.1
+// V 1.2
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <OneWire.h> // Для работы датчика t dc18b20
@@ -44,7 +44,7 @@ void sonarFunc();
 // Функция 8х8 светодиодной матрицы
 void ledMatrix();
 // Функция 1602 экрана
-void displey1602();
+void display1602();
 // Функция динамика
 void voice();
 // Функция датчика t
@@ -96,11 +96,12 @@ void loop() {
   //temerature();
   //ledMatrix();
   //voice();
-  //displey1602();
+  //display1602();
   //ledsGroup();
   //potValue();
   //motor();
-  buttons();
+  //buttons();
+  rgbLed();
 }
 void temerature() {
   // Датчик температуры
@@ -113,7 +114,7 @@ void temerature() {
   Serial.print(sensors.getTempCByIndex(0)); // Why "byIndex"?
 }
 
-void displey1602() {
+void display1602() {
   // Проверка экрана 1602
   lcd.clear(); // Очищаем экран перед получением нового значения
   lcd.setCursor(0, 0); // курсор на 4-й символ 1-й строки
