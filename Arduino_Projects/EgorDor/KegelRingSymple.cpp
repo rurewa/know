@@ -2,7 +2,7 @@
 // Egor D. China car. Biathlon, KegelRing Egor D.
 // Что нужно переделать и доделать:
 // Исправить повторное (ошибочное) нахождение кегли.
-// V 1.1
+// V 1.2
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <NewPing.h> // Библиотека сонара
@@ -29,11 +29,15 @@ const int PIN_TRIG_UP = 18;  // 18
 NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 100);
 NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 100);
 // Настройка скорости моторов при поворотах
-const int SPEED_LEFT_TURN = 235; // Скорость левого мотора
-const int SPEED_RIGHT_TURN = 255; // Скорость правого мотора
 // Из-за разницы в скорости моторов приходится это компенсировать с помощью ШИМ
-const int SPEED_RIGHT_MOVE = 145; // Скорость левого мотора
-const int SPEED_LEFT_MOVE = 175; // Скорость правого мотора
+const int SPEED_LEFT_TURN = 255; // Скорость левого мотора
+const int SPEED_RIGHT_TURN = 225; // Скорость правого мотор
+// Настройка скорости моторов при движении вперёд
+const int SPEED_RIGHT_MOVE = 247; // Скорость левого мотора
+const int SPEED_LEFT_MOVE = 255; // Скорость правого мотора
+// Настройка скорости моторов при движении назад
+const int SPEED_LEFT_BACK_MOVE = 255; // Скорость правого мотор
+const int SPEED_RIGHT_BACK_NOVE = 245; // Скорость правого мотора
 // Функции движения
 void go(int speed_left_move, int speed_right_move, int times); // Движение вперёд
 void backMove(int speed_left_move, int speed_right_move, int times); // Движение назад
@@ -66,7 +70,7 @@ void loop() {
   static bool sLeft = 0, sCenter = 0, sRight = 0; // Нижние датчики отражения. Черная 1 (не светит), белый 0 (светит)
   // Запись в датчики отражения
   sLeft = digitalRead(SENS_LEFT); sCenter = digitalRead(SENS_CENTER); sRight = digitalRead(SENS_RIGHT);
-  // Черная 1, белый 0
+  // Черный 1, белый 0
   if (sLeft == 1 && sCenter == 1 && sRight == 1) { sensState = 1; } // Состояние 111
   if (sLeft == 1 && sCenter == 0 && sRight == 0) { sensState = 2; } // Состояние 100
   if (sLeft == 0 && sCenter == 1 && sRight == 0) { sensState = 3; } // Состояние 010
@@ -79,72 +83,25 @@ void loop() {
   } else { flagState = false; } // Если ни один из нижних датчиков отражения не сработал, флаг false
 
   // Проверка расстояния до кегли
-  if (distance > 0 && distance < 55) { // Если больше 0 и меньше 40 см.
-    delay(250); // Задержка для стабилизации
-    if (distance < 55) { // Дополнительная проверка расстояния до кегли
+  if (distance > 5 && distance < 65) { // Если больше 0 и меньше 40 см.
+    delay(350); // Задержка для стабилизации
+    if (distance > 5 && distance < 65) { // Дополнительная проверка расстояния до кегли
       delay(250);
-      go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 1700); // Двигаемся к кегле с целью её вытолкнуть за круг
+      go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 1100); // Двигаемся к кегле с целью её вытолкнуть за круг
       moveStop(350);
-      backMove(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 1700); // Движемся назад
-      turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100); // Вращаемся на месте влево - ищем кеглю
+      backMove(SPEED_LEFT_BACK_MOVE, SPEED_RIGHT_BACK_NOVE, 1100); // Движемся назад
+      turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 150); // Поворот влево
       // Если сработал хоть один нижний датчик отражения, то возвращаемся в квадрат
       flagState = true;
       do { analogWrite(VOICE, 100); go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 100); break; } while (flagState == true);
     }
   }
   else { // Если кегля не обнаружена
-    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 50); // Вращаемся на месте влево - ищем кеглю
+    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 70); // Вращаемся на месте влево - ищем кеглю
     moveStop(400); // Задержка для стабилизации
     analogWrite(VOICE, 0);
   }
   //Serial.println(distance); // Диагностика сонара
-}
-
-void autoroute1() {
-  int distance = sonarDown.ping_cm(); // Запись данных из сонара
-  static int sensState = 0; // Флаг состояния нижних датчиков отражения
-  static bool sLeft = 0, sCenter = 0, sRight = 0; // Нижние датчики отражения. Черная 1, белый 0
-  // Запись в датчики отражения
-  //static bool flagState = false; // Флаг состояния
-  sLeft = digitalRead(SENS_LEFT); sCenter = digitalRead(SENS_CENTER); sRight = digitalRead(SENS_RIGHT);
-  // Черная 1, белый 0
-  if (sLeft == 1 && sCenter == 1 && sRight == 1) { sensState = 1; } // Состояние 111
-  if (sLeft == 1 && sCenter == 0 && sRight == 0) { sensState = 2; } // Состояние 100
-  if (sLeft == 0 && sCenter == 1 && sRight == 0) { sensState = 3; } // Состояние 010
-  if (sLeft == 0 && sCenter == 0 && sRight == 1) { sensState = 4; } // Состояние 001
-  if (sLeft == 0 && sCenter == 1 && sRight == 1) { sensState = 5; } // Состояние 011
-  if (sLeft == 1 && sCenter == 1 && sRight == 0) { sensState = 6; } // Состояние 110
-  // Проверка расстояния до кегли
-  if (distance > 0 && distance < 55) { // Если больше 0 и меньше 40 см.
-    delay(250); // Задержка для стабилизации
-    if (distance < 55) { // Дополнительная проверка расстояния до кегли
-      delay(250);
-      go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 2000); // Двигаемся к кегле с целью её вытолкнуть за круг
-      //backMove(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 2000); // Движемся назад
-      // Если сработал хоть один нижний датчик отражения, то возвращаемся в квадрат
-      while (sensState == 1 || sensState == 2 || sensState == 3 || sensState == 4 || sensState == 5 || sensState == 6) {
-        //flagState = true;
-        backMove(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 2000); // Движемся назад
-      }
-    }
-  }
-  else { // Если кегля не обнаружена
-    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN, 100); // Вращаемся на месте влево - ищем кеглю
-    moveStop(250); // Задержка для стабилизации
-  }
-}
-
-void aitoroute2() {
-  if (flagState == false) {
-    go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 200); // Двигаемся к кегле с целью её вытолкнуть за круг
-    analogWrite(VOICE, 0);
-  }
-  else {
-    backMove(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 2000); // Движемся назад
-    moveStop(250); // Задержка для стабилизации
-    flagState = true;
-    do { analogWrite(VOICE, 100); go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 200); break; } while (flagState == true);
-  }
 }
 
 void go(int speed_left_move, int speed_right_move, int times) {
