@@ -2,7 +2,7 @@
 // Egor D. China car. Biathlon, KegelRing Egor D.
 // Что нужно переделать и доделать:
 // Исправить повторное (ошибочное) нахождение кегли.
-// V 1.3
+// V 1.4
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <NewPing.h> // Библиотека сонара
@@ -52,7 +52,7 @@ void sensTest(int times); // Тест нижних датчиков отраже
 const int IR_SENS = 4; // Датчик определения цвета кегли. Пока не используется
 
 void setup() {
-  Serial.begin(9600); // Монтор порта: для диагностики и тестирования
+  Serial.begin(9600); // Монитор порта: для диагностики и тестирования
   pinMode(ENA, OUTPUT);
   pinMode(IN1, OUTPUT);
   pinMode(IN2, OUTPUT);
@@ -70,8 +70,9 @@ void loop() {
   static bool sLeft = 0, sCenter = 0, sRight = 0; // Нижние датчики отражения. Черная 1 (не светит), белый 0 (светит)
   // Запись в датчики отражения
   sLeft = digitalRead(SENS_LEFT); sCenter = digitalRead(SENS_CENTER); sRight = digitalRead(SENS_RIGHT); // Черный 1, белый 0
+  turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN);
   // Проверка расстояния до кегли
-  if (distance >= 5 && distance <= 65) { // Если больше 5 и меньше 65 см.
+  if (distance >= 5 && distance <= 50) { // Если больше 5 и меньше 65 см.
     if (sLeft == true && sCenter == true && sRight == true) {
       backMove(SPEED_LEFT_BACK_MOVE, SPEED_RIGHT_BACK_NOVE, distanceToPinsBack); // Движемся назад
     }
