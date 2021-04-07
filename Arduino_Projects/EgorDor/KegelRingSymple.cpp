@@ -2,7 +2,7 @@
 // Egor D. China car. Biathlon, KegelRing Egor D.
 // Что нужно переделать и доделать:
 // Исправить повторное (ошибочное) нахождение кегли.
-// V 1.5
+// V 1.6
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <NewPing.h> // Библиотека сонара
@@ -26,7 +26,7 @@ const int PIN_TRIG_DOWN = 13; // 13
 const int PIN_ECHO_UP = 17; // 17
 const int PIN_TRIG_UP = 18;  // 18
 // Объекты сонаров. 45 - это максимальная дальность сонара
-NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 70);
+NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 100);
 NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 100);
 // Настройка скорости моторов при поворотах
 // Из-за разницы в скорости моторов приходится это компенсировать с помощью ШИМ
@@ -39,8 +39,8 @@ const int SPEED_LEFT_MOVE = 190; // Скорость правого мотора
 const int SPEED_LEFT_BACK_MOVE = 200; // Скорость правого мотор
 const int SPEED_RIGHT_BACK_NOVE = 155; // Скорость правого мотора
 // Расстояние поля до кегли
-const int distanceToPinsGo = 1500;
-const int distanceToPinsBack = 1600;
+const int distanceToPinsGo = 1600;
+const int distanceToPinsBack = 1700;
 // Функции движения
 void go(int speed_left_move, int speed_right_move, int times); // Движение вперёд
 void backMove(int speed_left_move, int speed_right_move, int times); // Движение назад
@@ -85,6 +85,12 @@ void loop() {
         moveStop(250);
         backMove(SPEED_LEFT_BACK_MOVE, SPEED_RIGHT_BACK_NOVE, distanceToPinsBack); // Движемся назад
         moveStop(250);
+        while (distance < 70) {
+          analogWrite(VOICE, 155);
+          turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN);
+          delay(400);
+          break;
+        }
         break;
       }
     }
