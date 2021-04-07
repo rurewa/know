@@ -2,7 +2,7 @@
 // Egor D. China car. Biathlon, KegelRing Egor D.
 // Что нужно переделать и доделать:
 // Исправить повторное (ошибочное) нахождение кегли.
-// V 1.6
+// V 1.7
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <NewPing.h> // Библиотека сонара
@@ -88,7 +88,7 @@ void loop() {
         while (distance < 70) {
           analogWrite(VOICE, 155);
           turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN);
-          delay(400);
+          delay(450);
           break;
         }
         break;
