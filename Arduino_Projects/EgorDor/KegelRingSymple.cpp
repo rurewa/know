@@ -2,7 +2,7 @@
 // Egor D. China car. Biathlon, KegelRing Egor D.
 // Что нужно переделать и доделать:
 // Исправить повторное (ошибочное) нахождение кегли.
-// V 1.4
+// V 1.7
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- //
 #include <Arduino.h>
 #include <NewPing.h> // Библиотека сонара
@@ -26,7 +26,7 @@ const int PIN_TRIG_DOWN = 13; // 13
 const int PIN_ECHO_UP = 17; // 17
 const int PIN_TRIG_UP = 18;  // 18
 // Объекты сонаров. 45 - это максимальная дальность сонара
-NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 70);
+NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 100);
 NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 100);
 // Настройка скорости моторов при поворотах
 // Из-за разницы в скорости моторов приходится это компенсировать с помощью ШИМ
@@ -39,8 +39,8 @@ const int SPEED_LEFT_MOVE = 190; // Скорость правого мотора
 const int SPEED_LEFT_BACK_MOVE = 200; // Скорость правого мотор
 const int SPEED_RIGHT_BACK_NOVE = 155; // Скорость правого мотора
 // Расстояние поля до кегли
-const int distanceToPinsGo = 1900;
-const int distanceToPinsBack = 2200;
+const int distanceToPinsGo = 1600;
+const int distanceToPinsBack = 1700;
 // Функции движения
 void go(int speed_left_move, int speed_right_move, int times); // Движение вперёд
 void backMove(int speed_left_move, int speed_right_move, int times); // Движение назад
@@ -49,7 +49,7 @@ void turnLeft(int speed_left_turn, int speed_right_turn); // Движение в
 void turnRight(int speed_left_turn, int speed_right_turn); // Движение Вправо
 void sensTest(int times); // Тест нижних датчиков отражения
 
-const int IR_SENS = 4; // Датчик определения цвета кегли. Пока не используется
+//const int IR_SENS = 4; // Датчик определения цвета кегли. Пока не используется
 
 void setup() {
   Serial.begin(9600); // Монитор порта: для диагностики и тестирования
@@ -72,23 +72,31 @@ void loop() {
   sLeft = digitalRead(SENS_LEFT); sCenter = digitalRead(SENS_CENTER); sRight = digitalRead(SENS_RIGHT); // Черный 1, белый 0
   turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN);
   // Проверка расстояния до кегли
-  if (distance >= 5 && distance <= 50) { // Если больше 5 и меньше 65 см.
+  if (distance >= 5 && distance <= 55) { // Дистанция обнаружения
+    //analogWrite(VOICE, 155);
     if (sLeft == true && sCenter == true && sRight == true) {
       backMove(SPEED_LEFT_BACK_MOVE, SPEED_RIGHT_BACK_NOVE, distanceToPinsBack); // Движемся назад
     }
     else {
-      delay(250);
+      //delay(250);
       // Чтобы избежать ложных срабатываний запускаем цикл
       while (true) {
         go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, distanceToPinsGo); // Двигаемся к кегле с целью её вытолкнуть за круг
         moveStop(250);
         backMove(SPEED_LEFT_BACK_MOVE, SPEED_RIGHT_BACK_NOVE, distanceToPinsBack); // Движемся назад
+        moveStop(250);
+        while (distance < 70) {
+          analogWrite(VOICE, 155);
+          turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN);
+          delay(450);
+          break;
+        }
         break;
       }
     }
   }
   else { // Если кегля не обнаружена
-    turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN); // Вращаемся на месте влево - ищем кеглю
+    //turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN); // Вращаемся на месте влево - ищем кеглю
     analogWrite(VOICE, 0);
   }
   //Serial.println(distance); // Диагностика сонара
