@@ -1,6 +1,6 @@
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 // Простой алгоритм счётчика нажатий 2-х кнопок
-// V 1.1
+// V 1.2
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=//
 #include <Arduino.h>
 #include "Button_Simple.h"
@@ -16,7 +16,10 @@ const int LIMIT_DOWN = 0;
 const int LEDS[5] = {8, 9, 10, 11, 12};
 
 void setup() {
-  Serial.begin(9600);
+Serial.begin(9600);
+  //lcd.init(); // Инициализация LCD
+  //lcd.backlight();// Включаем подсветку дисплея
+  //lcd.begin(16, 2);  // Задаем размерность экрана
   // Настраиваем светодиоды на управление
   for (int i = 0; i <= 4; ++i) {
     pinMode(LEDS[i], OUTPUT);
@@ -24,6 +27,9 @@ void setup() {
 }
 
 void loop() {
+  //lcd.clear(); // Очищаем экран перед получением нового значения
+  //lcd.setCursor(0, 0); // курсор на 4-й символ 1-й строки
+  //lcd.setCursor(2, 1); // курсор на 7-й символ 2-й строки
   static int click13 = 0; // Состояние режима кнопки 1/0
   static int click17 = 0; // Состояние режима кнопки 1/0
   button13.scan(); // Инициализация библиотеки
@@ -43,14 +49,14 @@ void loop() {
   while (COUNT <= LIMIT_DOWN) { COUNT = LIMIT_DOWN; break; } // Ограничение декремента
   Serial.println(COUNT); // Для д
   for (int i = 0; i <= 4; ++i) {
-    digitalWrite(LEDS[COUNT], HIGH);
+    digitalWrite(LEDS[COUNT -1], HIGH);
     for (int i = 0; i <= 4; ++i) {
       digitalWrite(LEDS[COUNT - 1], LOW);
     }
     for (int i = 0; i <= 4; ++i) {
     digitalWrite(LEDS[COUNT - 1], HIGH);
     for (int i = 0; i <= 4; ++i) {
-      digitalWrite(LEDS[COUNT], LOW);
+      digitalWrite(LEDS[COUNT -1], LOW);
     }
   }
  }
