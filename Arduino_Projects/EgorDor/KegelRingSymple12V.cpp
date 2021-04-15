@@ -30,17 +30,17 @@ NewPing sonarDown(PIN_TRIG_DOWN, PIN_ECHO_DOWN, 100);
 NewPing sonarUp(PIN_TRIG_UP, PIN_ECHO_UP, 100);
 // Настройка скорости моторов при поворотах
 // Из-за разницы в скорости моторов приходится это компенсировать с помощью ШИМ
-const int SPEED_LEFT_TURN = 95; // Скорость левого мотора (50)
-const int SPEED_RIGHT_TURN = 80; // Скорость правого мотор
+const int SPEED_LEFT_TURN = 110; // Скорость левого мотора (50)
+const int SPEED_RIGHT_TURN = 110; // Скорость правого мотор
 // Настройка скорости моторов при движении вперёд
-const int SPEED_RIGHT_MOVE = 110; // Скорость левого мотора (10)
-const int SPEED_LEFT_MOVE = 100; // Скорость правого мотора
+const int SPEED_RIGHT_MOVE = 170; // Скорость левого мотора (10)
+const int SPEED_LEFT_MOVE = 90; // Скорость правого мотора
 // Настройка скорости моторов при движении назад
-const int SPEED_LEFT_BACK_MOVE = 103; // Скорость правого мотор (45)
-const int SPEED_RIGHT_BACK_NOVE = 110; // Скорость правого мотора
+const int SPEED_LEFT_BACK_MOVE = 105; // Скорость правого мотор
+const int SPEED_RIGHT_BACK_NOVE = 155; // Скорость правого мотора
 // Расстояние поля до кегли
-const int distanceToPinsGo = 900;
-const int distanceToPinsBack = 950;
+const int distanceToPinsGo = 1150;
+const int distanceToPinsBack = 1200;
 // Функции движения
 void go(int speed_left_move, int speed_right_move, int times); // Движение вперёд
 void backMove(int speed_left_move, int speed_right_move, int times); // Движение назад
@@ -66,9 +66,9 @@ void setup() {
 }
 
 void loop() {
-  //go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, 20000); // Тест равномерности сторон движения
-  //backMove(SPEED_LEFT_BACK_MOVE, SPEED_RIGHT_BACK_NOVE, 20000); // Тест равномерности сторон движения
-  //turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN); // Тест равномерности сторон движения
+  //go(SPEED_LEFT_MOVE, SPEED_RIGHT_MOVE, distanceToPinsGo);
+  //backMove(SPEED_LEFT_BACK_MOVE, SPEED_RIGHT_BACK_NOVE, distanceToPinsBack);
+  //turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN);
   int distance = sonarDown.ping_cm(); // Запись данных из сонара
   static bool sLeft = 0, sCenter = 0, sRight = 0; // Нижние датчики отражения. Черная 1 (не светит), белый 0 (светит)
   // Запись в датчики отражения
@@ -99,6 +99,7 @@ void loop() {
     }
   }
   else { // Если кегля не обнаружена
+    //turnLeft(SPEED_LEFT_TURN, SPEED_RIGHT_TURN); // Вращаемся на месте влево - ищем кеглю
     analogWrite(VOICE, 0);
   }
   //Serial.println(distance); // Диагностика сонара
