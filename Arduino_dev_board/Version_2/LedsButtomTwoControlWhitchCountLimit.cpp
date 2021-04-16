@@ -9,7 +9,7 @@ Button_Simple button13(13); // Пин кнопки
 Button_Simple button17(17); // Пин кнопки
 
 // Верхний и нижний лимиты счётчика
-const int LIMIT_UP = 4;
+const int LIMIT_UP = 5;
 const int LIMIT_DOWN = 0;
 
 // Определяем группу ячеек в массиве
