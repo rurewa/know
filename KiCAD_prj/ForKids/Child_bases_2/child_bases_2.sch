@@ -1010,11 +1010,9 @@ Text Notes 3900 3100 0    118  ~ 0
 Text Notes 2700 5100 0    118  ~ 0
 #7
 Text Notes 8450 6400 0    118  ~ 0
-#9
+#8. Мультивибратор 
 Text Notes 1400 7400 0    118  ~ 0
 Сигнализация
-Text Notes 8800 6400 0    118  ~ 0
-Мультивибратор
 Wire Wire Line
 	3450 1100 3450 1250
 Wire Wire Line
@@ -1239,7 +1237,7 @@ Connection ~ 5350 7450
 Wire Wire Line
 	5350 7450 5700 7450
 Text Notes 5750 5050 0    118  ~ 0
-#8. Триггер
+#9. Триггер
 Wire Wire Line
 	4300 6000 4650 6000
 Wire Wire Line
