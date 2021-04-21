@@ -19,7 +19,7 @@ const int PIN_ECHO = 17;
 const int PIN_TRIG = 18;
 
 NewPing sonar(PIN_TRIG,PIN_ECHO);
-
+// Разница в скорости левой и правой стороны ~ 30
 const int SPEED_LEFT = 70;
 const int SPEED_RIGHT = 100;
 
@@ -44,24 +44,27 @@ void setup() {
 
 void loop() {
   //Serial.println(sonar.ping_cm());
+  //moveTest();
   do {
     bool sLeft = digitalRead(SENS_LEFT);
     bool sCenter = digitalRead(SENS_CENTER);
-    //bool sRight = digitalRead(SENS_RIGHT);
+    //bool sRight = digitalRead(SENS_RIGHT); // Дополнительный датчик отражения
     if ((sLeft == false) && (sCenter == true)) { // 01 Вправо!
-      turnRight(SPEED_LEFT, SPEED_RIGHT, 170);
-      moveGo(SPEED_LEFT, SPEED_RIGHT, 40);
+      turnRight(SPEED_LEFT, SPEED_RIGHT, 180);
+      moveGo(SPEED_LEFT, SPEED_RIGHT, 45);
     }
-    else if ((sLeft == false) && (sCenter == false)) { // 00 Вперёд!
-      moveGo(SPEED_LEFT, SPEED_RIGHT, 90);
-    }
-    else { // 10 Влево!
+    else if ((sLeft == true) && (sCenter == false)) { // 10 Влево!
       turnLeft(SPEED_LEFT, SPEED_RIGHT, 150);
-      moveGo(SPEED_LEFT, SPEED_RIGHT, 65);
+      moveGo(SPEED_LEFT, SPEED_RIGHT, 60); // 65
+    }
+    else if ((sLeft == true) && (sCenter == true)) { // 11 Вперёд!
+      moveGo(SPEED_LEFT, SPEED_RIGHT, 35);
+    }
+    else { // 00 Вперёд!
+      moveGo(SPEED_LEFT, SPEED_RIGHT, 35);
     }
   }
   while (true);
-
   //sensTest(100); // Для диагностики датчиков отражения
 }
 
