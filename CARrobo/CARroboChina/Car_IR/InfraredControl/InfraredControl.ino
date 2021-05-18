@@ -1,32 +1,26 @@
 #include "IRremote.h"
 
-const int FORWARD = 0xFF9867;
-const int BACKWARD = 0xFF38C7;
-const int LEFT = 0xFF30CF;
-const int RIGHT = 0xFF7A85;
+int walk = 0;
 
-IRrecv irrecv(17);
-
+IRrecv irrecv(A3);
 decode_results results;
 
-int RightMotorSpeed = 155;
-int LeftMotorSpeed = 155;
+const int RightMotorSpeed = 255;
+const int LeftMotorSpeed = 255;
 
-int RightMotorPin = 9;
-int RightMotorIn1 = 7;
-int RightMotorIn2 = 6;
-int LeftMotorPin /*= 3;
-int LeftMotorIn1 = 5;
-int LeftMotorIn2 = 4;
+const int RightMotorPin = 9;
+const int RightMotorIn1 = 7;
+const int RightMotorIn2 = 6;
+const int LeftMotorPin = 3;
+const int LeftMotorIn1 = 5;
+const int LeftMotorIn2 = 4;
+
+unsigned long timer = 0;
 
 void setup()
 {
   Serial.begin(9600);
   irrecv.enableIRIn();
-  
-  analogWrite (RightMotorPin, RightMotorSpeed);
-  analogWrite (LeftMotorPin, LeftMotorSpeed);
-  
   pinMode (RightMotorIn1, OUTPUT);
   pinMode (RightMotorIn2, OUTPUT);
   pinMode (LeftMotorIn1, OUTPUT);
@@ -36,35 +30,82 @@ void loop() {
   if (irrecv.decode(&results))
   {
     Serial.println(results.value, HEX);
-    irrecv.resume(); 
-  }
-  /*if (irrecv.decode(&results))
-  {
     switch (results.value) {
-      case FORWARD: // - вперёд,
-        digitalWrite (RightMotorIn1, LOW);
-        digitalWrite (RightMotorIn2, HIGH);
-        digitalWrite (LeftMotorIn1, LOW);
-        digitalWrite (LeftMotorIn2, HIGH);
+      case 0xFF9867: // - вперёд,
+        forward ();
+        walk = 1;
         break;
-      case BACKWARD: // - назад,
-        digitalWrite (RightMotorIn1, HIGH);
-        digitalWrite (RightMotorIn2, LOW);
-        digitalWrite (LeftMotorIn1, HIGH);
-        digitalWrite (LeftMotorIn2, LOW);
+      case 0xFF38C7: // - назад,
+        backward ();
+        walk = 2;
         break;
-      case LEFT: // - влево,
-        digitalWrite (RightMotorIn1, HIGH);
-        digitalWrite (RightMotorIn2, LOW);
-        digitalWrite (LeftMotorIn1, LOW);
-        digitalWrite (LeftMotorIn2, HIGH);
+      case 0xFF30CF: // - влево,
+        left ();
+        walk = 3;
         break;
-      case RIGHT: // - вправо
-        digitalWrite (RightMotorIn1, LOW);
-        digitalWrite (RightMotorIn2, HIGH);
-        digitalWrite (LeftMotorIn1, HIGH);
-        digitalWrite (LeftMotorIn2, LOW);
+      case 0xFF7A85: // - вправо
+        right ();
+        walk = 4;
+        break;
+      case 0xFFFFFFFF: // - повтор последней команды
+        if (walk == 1) {
+          forward ();
+        }
+        if (walk == 2) {
+          backward ();
+        }
+        if (walk == 3) {
+          left ();
+        }
+        if (walk == 4) {
+          right ();
+        }
         break;
     }
-  }*/
+    irrecv.resume();
+  }
+  delay (100);
+  digitalWrite (RightMotorIn1, LOW);
+  digitalWrite (RightMotorIn2, LOW);
+  digitalWrite (LeftMotorIn1, LOW);
+  digitalWrite (LeftMotorIn2, LOW);
+  analogWrite (RightMotorPin, 0);
+  analogWrite (LeftMotorPin, 0);
+}
+
+
+void forward () {
+  analogWrite (RightMotorPin, RightMotorSpeed);
+  analogWrite (LeftMotorPin, LeftMotorSpeed);
+  digitalWrite (RightMotorIn1, LOW);
+  digitalWrite (RightMotorIn2, HIGH);
+  digitalWrite (LeftMotorIn1, LOW);
+  digitalWrite (LeftMotorIn2, HIGH);
+}
+
+void backward () {
+  analogWrite (RightMotorPin, RightMotorSpeed);
+  analogWrite (LeftMotorPin, LeftMotorSpeed);
+  digitalWrite (RightMotorIn1, HIGH);
+  digitalWrite (RightMotorIn2, LOW);
+  digitalWrite (LeftMotorIn1, HIGH);
+  digitalWrite (LeftMotorIn2, LOW);
+}
+
+void left () {
+  analogWrite (RightMotorPin, RightMotorSpeed);
+  analogWrite (LeftMotorPin, LeftMotorSpeed);
+  digitalWrite (RightMotorIn1, HIGH);
+  digitalWrite (RightMotorIn2, LOW);
+  digitalWrite (LeftMotorIn1, LOW);
+  digitalWrite (LeftMotorIn2, HIGH);
+}
+
+void right () {
+  analogWrite (RightMotorPin, RightMotorSpeed);
+  analogWrite (LeftMotorPin, LeftMotorSpeed);
+  digitalWrite (RightMotorIn1, LOW);
+  digitalWrite (RightMotorIn2, HIGH);
+  digitalWrite (LeftMotorIn1, HIGH);
+  digitalWrite (LeftMotorIn2, LOW);
 }
