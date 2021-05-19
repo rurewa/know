@@ -162,6 +162,7 @@ void potValue() {
   // Проверка потенциометра
   int pot = A7;
   int val = analogRead(pot);
+  // int val = map(analogRead(A7), 1024, 0, 255, 0);
   Serial.println(val);
 }
 
