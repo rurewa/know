@@ -1,0 +1,15 @@
+const int ledYellow = 7;
+const int ledBlue = 6;
+const int ledGreen = 5;
+const int ledRed = 4;
+const int buttonK1 = 9;
+const int buttonK2 = 8;
+int knob = A0; // Potenciometer
+int temperatureSens = A1;
+int buzzer = 3;
+int irSensor = 2;
+int dht11 = 12; // Humidity sensor (влажность)
+int ldr = A2; // Photo resist
+int voltageSensor = A3;
+// uint8_t Clk=10, uint8_t Data=11;
+}

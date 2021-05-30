@@ -1,0 +1,1 @@
+Find the 01 and 02 folder and put them into your TF card (should not larger than 32GB). 
