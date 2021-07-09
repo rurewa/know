@@ -1,0 +1,51 @@
+###########################################################################
+
+attiny24at16.name=ATtiny24 @ 16 MHz  (external crystal; BOD disabled)
+
+attiny24at16.upload.tool=avrdude
+
+attiny24at16.upload.maximum_size=2048
+attiny24at16.upload.maximum_data_size=128
+
+# Ext. Crystal Osc.; Frequency 8.0-    MHz; Start-up time PWRDWN/RESET: 16K CK/14 CK + 65 ms;  [CKSEL=1111 SUT=11]
+# Brown-out detection disabled; [BODLEVEL=111]
+# Preserve EEPROM memory through the Chip Erase cycle; [EESAVE=0]
+# Serial program downloading (SPI) enabled; [SPIEN=0]
+
+attiny24at16.bootloader.low_fuses=0xFF
+attiny24at16.bootloader.high_fuses=0xD7
+attiny24at16.bootloader.extended_fuses=0xFF
+
+attiny24at16.bootloader.path=C:\Users\evgenij.sapunov\Documents\Arduino\hardware\tiny\avr\bootloaders
+attiny24at16.bootloader.file=\empty\empty24at16.hex
+attiny24at16.bootloader.tool=arduino:avrdude
+
+attiny24at16.build.mcu=attiny24
+attiny24at16.build.f_cpu=16000000L
+attiny24at16.build.core=tiny
+
+###########################################################################
+
+attiny24at1.name=ATtiny24 @ 1 MHz  (internal crystal; BOD disabled)
+
+attiny24at1.upload.tool=avrdude
+
+attiny24at1.upload.maximum_size=2048
+attiny24at1.upload.maximum_data_size=128
+
+# Int. RC Osc. 8 MHz dev. by 8.
+# Brown-out detection disabled; [BODLEVEL=111]
+# Preserve EEPROM memory through the Chip Erase cycle; [EESAVE=0]
+# Serial program downloading (SPI) enabled; [SPIEN=0]
+
+attiny24at1.bootloader.low_fuses=0x62
+attiny24at1.bootloader.high_fuses=0xD7
+attiny24at1.bootloader.extended_fuses=0xFF
+
+attiny24at1.bootloader.path=C:\Users\evgenij.sapunov\Documents\Arduino\hardware\tiny\avr\bootloaders
+attiny24at1.bootloader.file=\empty\empty24at16.hex
+attiny24at1.bootloader.tool=arduino:avrdude
+
+attiny24at1.build.mcu=attiny24
+attiny24at1.build.f_cpu=1000000L
+attiny24at1.build.core=tiny

@@ -1,0 +1,48 @@
+menu.freq=Frequency
+ 
+attiny13.name=ATtiny13 (ATtiny13a)
+attiny13.upload.using=arduino:arduinoisp
+attiny13.upload.maximum_size=1024
+attiny13.maximum_data_size=64
+attiny13.upload.speed=19200
+attiny13.bootloader.tool=arduino:avrdude
+attiny13.bootloader.high_fuses=0xFF
+attiny13.bootloader.unlock_bits=0xFF
+attiny13.bootloader.lock_bits=0xFF
+attiny13.build.mcu=attiny13
+attiny13.upload.tool=avrdude
+attiny13.build.core=core13
+attiny13.upload.verbose=true
+attiny13.build.board=AVR_ATTINY13
+
+# Frequency menu:
+
+## 128 KHz
+
+attiny13.menu.freq.f128000=128 KHz
+attiny13.menu.freq.f128000.bootloader.low_fuses=0x7b
+attiny13.menu.freq.f128000.build.f_cpu=128000L
+
+## 600 KHz
+
+attiny13.menu.freq.f600000=600 KHz
+attiny13.menu.freq.f600000.bootloader.low_fuses=0x69
+attiny13.menu.freq.f600000.build.f_cpu=600000L
+
+## 1.2 MHz
+
+attiny13.menu.freq.f1200000=1.2 MHz
+attiny13.menu.freq.f1200000.bootloader.low_fuses=0x6a
+attiny13.menu.freq.f1200000.build.f_cpu=1200000L
+
+## 4.8 MHz
+
+attiny13.menu.freq.f4800000=4.8 MHz
+attiny13.menu.freq.f4800000.bootloader.low_fuses=0x79
+attiny13.menu.freq.f4800000.build.f_cpu=4800000L
+
+## 9.6 MHz
+
+attiny13.menu.freq.f9000000=9.6 MHz
+attiny13.menu.freq.f9000000.bootloader.low_fuses=0x7A
+attiny13.menu.freq.f9000000.build.f_cpu=9600000L
